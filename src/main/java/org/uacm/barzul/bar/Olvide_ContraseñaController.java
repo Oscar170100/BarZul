@@ -38,6 +38,7 @@ public class Olvide_ContraseñaController implements Initializable {
 
     @FXML
     private void recuperarPass(ActionEvent event) {
+        SceneManager.cambiarVentana(event, "Login.fxml");
     }
     
 }
