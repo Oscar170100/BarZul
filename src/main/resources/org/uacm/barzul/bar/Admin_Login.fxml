@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.Admin_LoginController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="-6.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #893F45;">
+         <children>
+            <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
+               <children>
+                  <Label layoutX="281.0" layoutY="19.0" text="Control  de inventario" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Nirmala UI" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fitHeight="139.0" fitWidth="126.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../../Downloads/Logo.png" />
+               </image>
+            </ImageView>
+            <GridPane layoutX="13.0" layoutY="144.0" prefHeight="378.0" prefWidth="182.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesas" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnInventario" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #808080;" text="Inventario" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEmpleados" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Empleados" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnPedidos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Pedidos" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnPagos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Pagos" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <TableView layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="583.0">
+               <columns>
+                  <TableColumn prefWidth="198.0" text="Producto " />
+                  <TableColumn prefWidth="136.0" text="Tipo" />
+                  <TableColumn prefWidth="129.0" text="Precio " />
+                  <TableColumn prefWidth="119.0" text="Cantidad" />
+               </columns>
+            </TableView>
+            <Button alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #b8d567;" text="Agregar producto " textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar producto" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="443.0" layoutY="513.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #74c8b9;" text="Editar producto " textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLogout" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="100.0" text="Cerrar Sesión" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
