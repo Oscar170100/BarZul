@@ -20,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -74,6 +76,9 @@ public class Empleado_LoginController implements Initializable {
     private TableColumn<Producto, Void> accionesCuenta;
     @FXML
     private Button btnPago;
+    
+    //
+    Alert alertInfo = new Alert(AlertType.INFORMATION);
 
     /**
      * Initializes the controller class.
@@ -267,7 +272,7 @@ public class Empleado_LoginController implements Initializable {
         }
         
         // Muestra el total en formato con 2 decimales
-        totalCuenta.setText(String.format("$ %.2f", total));
+        totalCuenta.setText(String.format("%.2f", total));
     }
     
     // Metodo para cargar los productos desde el archivo
@@ -322,14 +327,31 @@ public class Empleado_LoginController implements Initializable {
     private void pagar(ActionEvent event) {
         
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Pagos.fxml"));
             Parent root = loader.load();
+            
+            // Enviando datos hacia la ventada d
+            PagosController controller = loader.getController();
+            
+            // Evaluamos que el total no sea 0 o este vacio
+            String text = totalCuenta.getText();
+            if (text == null || text.isEmpty()) {
+                // Si el total de la cuenta es 0 o esta vacio, lanza la alerta
+                alertInfo.setHeaderText("Advertencia");
+                alertInfo.setTitle("Advertencia");
+                alertInfo.setContentText("Campo Vacio");
+                alertInfo.showAndWait();
+            }
+            
+            float totalPago = Float.parseFloat(text);
+            controller.setDatos(totalPago);
             
             // Crear una nueva ventana
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Metodo de Pago");
             
-            stage.show();
+            stage.showAndWait();
             
         } catch (Exception e) {
             e.printStackTrace();

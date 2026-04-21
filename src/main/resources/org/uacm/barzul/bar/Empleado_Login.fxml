@@ -70,11 +70,11 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="totalCuenta" layoutX="734.0" layoutY="512.0" prefHeight="53.0" prefWidth="121.0">
+                  <TextField fx:id="totalCuenta" layoutX="750.0" layoutY="512.0" prefHeight="53.0" prefWidth="121.0" style="-fx-alignment: center;">
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Label layoutX="629.0" layoutY="512.0" text="Total: " textFill="#f5f5f5">
+                  <Label layoutX="629.0" layoutY="512.0" text="Total: $" textFill="#f5f5f5">
                      <font>
                         <Font size="36.0" />
                      </font>
