@@ -64,7 +64,7 @@
                   </ImageView>
                   <ImageView fitHeight="323.0" fitWidth="315.0" layoutX="-14.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../../../Desktop/Bar/src/main/resources/org/uacm/Imagenes/Logo.png" />
+                        <Image url="@../../Imagenes/Logo.png" />
                      </image>
                   </ImageView>
                   <Separator layoutX="267.0" layoutY="101.0" orientation="VERTICAL" prefHeight="473.0" prefWidth="78.0" />
