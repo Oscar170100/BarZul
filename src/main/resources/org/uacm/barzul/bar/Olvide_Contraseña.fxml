@@ -31,39 +31,39 @@
                               <Font name="Franklin Gothic Medium" size="48.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="94.0" fitWidth="118.0" layoutX="120.0" layoutY="157.0" opacity="0.95" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="121.0" fitWidth="123.0" layoutX="91.0" layoutY="130.0" opacity="0.95" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Imagenes/empleado.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="55.0" layoutY="267.0" prefHeight="57.0" prefWidth="157.0" text="Usuario">
+                        <Label layoutX="55.0" layoutY="255.0" prefHeight="57.0" prefWidth="157.0" text="Usuario">
                            <font>
-                              <Font name="Franklin Gothic Medium" size="24.0" />
+                              <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
                         <TextField fx:id="txtUser" layoutX="55.0" layoutY="312.0" prefHeight="39.0" prefWidth="224.0" promptText="Número de Empleado">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </TextField>
                         <Button fx:id="btnRecuperarPass" layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" text="Recuperar">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </Button>
-                        <Label layoutX="55.0" layoutY="363.0" prefHeight="57.0" prefWidth="157.0" text="Telefono">
+                        <Label layoutX="55.0" layoutY="357.0" prefHeight="57.0" prefWidth="157.0" text="Telefono">
                            <font>
-                              <Font name="Franklin Gothic Medium" size="24.0" />
+                              <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
                         <TextField fx:id="txtUser1" layoutX="55.0" layoutY="408.0" prefHeight="39.0" prefWidth="224.0" promptText="Tu número de telefono">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </TextField>
                         <Button fx:id="btnRecuperarPass1" layoutX="180.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" text="Atras">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Arial" size="16.0" />
                            </font>
                         </Button>
                      </children>
