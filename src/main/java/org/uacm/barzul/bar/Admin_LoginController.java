@@ -63,5 +63,22 @@ public class Admin_LoginController implements Initializable {
             e.getMessage();
         }
     }
+
+    @FXML
+    private void eliminarPRod(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEliminarProd.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+    }
     
 }

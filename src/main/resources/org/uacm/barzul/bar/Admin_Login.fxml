@@ -89,7 +89,7 @@
                   <Font name="Cambria" size="14.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar producto" textAlignment="CENTER">
+            <Button alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" onAction="#eliminarPRod" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar producto" textAlignment="CENTER">
                <font>
                   <Font name="Cambria" size="14.0" />
                </font>

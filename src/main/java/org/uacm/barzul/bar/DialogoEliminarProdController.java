@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -18,18 +17,8 @@ import javafx.stage.Stage;
  *
  * @author oscar
  */
-public class DialogoAddPRodController implements Initializable {
+public class DialogoEliminarProdController implements Initializable {
 
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtTipo;
-    @FXML
-    private TextField txtPrecio;
-    @FXML
-    private TextField txtDisponibilidad;
-    @FXML
-    private Button btnAceptar;
     @FXML
     private Button btnCancelar;
 
@@ -39,6 +28,7 @@ public class DialogoAddPRodController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
 
     @FXML
