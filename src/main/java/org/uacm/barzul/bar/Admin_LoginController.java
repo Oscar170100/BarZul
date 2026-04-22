@@ -8,8 +8,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -28,6 +32,8 @@ public class Admin_LoginController implements Initializable {
     private Button btnPagos;
     @FXML
     private Button btnLogout;
+    @FXML
+    private Button btnAddProd;
 
     /**
      * Initializes the controller class.
@@ -40,6 +46,22 @@ public class Admin_LoginController implements Initializable {
     @FXML
     private void logout(ActionEvent event) {
         SceneManager.cambiarVentana(event, "Login.fxml");
+    }
+
+    @FXML
+    private void agregarProducto(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoAddPRod.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Agregar Producto");
+            stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
     }
     
 }
