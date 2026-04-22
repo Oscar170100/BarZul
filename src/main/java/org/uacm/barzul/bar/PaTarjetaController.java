@@ -22,8 +22,6 @@ import javafx.scene.control.TextField;
 public class PaTarjetaController implements Initializable {
 
     @FXML
-    private Button btnRegre;
-    @FXML
     private TextField txtNumeroTarjeta;
     @FXML
     private TextField txtMesExpiracion;
@@ -46,9 +44,6 @@ public class PaTarjetaController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void aceptarDatos(ActionEvent event) {
-    }
 
     @FXML
     private void manejarAceptar(ActionEvent event) {

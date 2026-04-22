@@ -31,10 +31,6 @@ public class PaEfectivoController implements Initializable {
     private Button btnAceptar;
     @FXML
     private Button btnCancelar;
-    @FXML
-    private Button btnRegre;
-    @FXML
-    private ImageView imgLogo;
 
     /**
      * Initializes the controller class.
@@ -52,8 +48,5 @@ public class PaEfectivoController implements Initializable {
     private void manejarCancelar(ActionEvent event) {
     }
 
-    @FXML
-    private void aceptarDatos(ActionEvent event) {
-    }
     
 }

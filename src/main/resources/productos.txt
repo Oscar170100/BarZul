@@ -1,5 +1,5 @@
 Cerveza,80.0,2
 Hamburguesa,120.0,1
-Regresco,60.0,3
+Refresco,60.0,3
 Chetos,20.0,5
 Modelo,25.0,4
