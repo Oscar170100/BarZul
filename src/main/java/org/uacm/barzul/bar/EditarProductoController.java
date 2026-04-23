@@ -6,30 +6,14 @@ package org.uacm.barzul.bar;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author maris
+ * @author josel
  */
-public class EdIProductoController implements Initializable {
-
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtTipo;
-    @FXML
-    private TextField txtPrecio;
-    @FXML
-    private TextField txtDisponibilidad;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
+public class EditarProductoController implements Initializable {
 
     /**
      * Initializes the controller class.

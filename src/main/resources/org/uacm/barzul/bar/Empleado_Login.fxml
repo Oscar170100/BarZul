@@ -23,17 +23,20 @@
                <children>
                   <Pane prefHeight="80.0" prefWidth="907.0" style="-fx-background-color: #3D2B1F;">
                      <children>
-                        <Label layoutX="403.0" layoutY="14.0" text="Mesas" textFill="#f5f5f5">
+                        <Button fx:id="btnLogout" layoutX="771.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="107.0" text="Cerrar Sesión">
                            <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="btnLogout" layoutX="778.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="100.0" text="Cerrar Sesión" />
-                        <ImageView fitHeight="143.0" fitWidth="145.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
+                        <ImageView fitHeight="160.0" fitWidth="165.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Imagenes/Logo.png" />
                            </image>
                         </ImageView>
+                        <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Arial" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                   <GridPane layoutX="14.0" layoutY="172.0" prefHeight="366.0" prefWidth="121.0">
@@ -48,11 +51,26 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #AB8729;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <Button fx:id="btnPago" mnemonicParsing="false" onAction="#pagar" prefHeight="40.0" prefWidth="100.0" text="Pagar" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #AB8729;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnPago" mnemonicParsing="false" onAction="#pagar" prefHeight="40.0" prefWidth="100.0" text="Pagar" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Button>
                      </children>
                   </GridPane>
                   <Separator layoutX="133.0" layoutY="101.0" orientation="VERTICAL" prefHeight="486.0" prefWidth="21.0" />
@@ -74,20 +92,20 @@
                   </TableView>
                   <Label layoutX="639.0" layoutY="111.0" text="Resumen de cuenta" textFill="#f5f5f5">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Arial" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="totalCuenta" layoutX="750.0" layoutY="512.0" prefHeight="53.0" prefWidth="121.0" style="-fx-alignment: center;">
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Label layoutX="629.0" layoutY="512.0" text="Total: $" textFill="#f5f5f5">
+                  <Label layoutX="625.0" layoutY="518.0" text="Total: $" textFill="#f5f5f5">
                      <font>
-                        <Font size="36.0" />
+                        <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                   <TextField layoutX="242.0" layoutY="112.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
-                  <Label layoutX="162.0" layoutY="112.0" text="Buscar" textFill="#f5f5f5">
+                  <Label layoutX="162.0" layoutY="112.0" text="Buscar:" textFill="#f5f5f5">
                      <font>
                         <Font size="24.0" />
                      </font>
