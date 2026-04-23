@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.Admin_LoginController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="-6.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #893F45;">
+      <AnchorPane id="AnchorPane" layoutX="-6.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #cec09b;">
          <children>
             <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
                <children>
@@ -25,7 +25,7 @@
                         <Font name="Nirmala UI" size="36.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="143.0" fitWidth="145.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="160.0" fitWidth="175.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Imagenes/Logo.png" />
                      </image>
@@ -45,33 +45,26 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesas" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Cambria" size="14.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="btnInventario" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #808080;" text="Inventario" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="btnEmpleados" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Empleados" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Cambria" size="14.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnPedidos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Pedidos" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                  <Button fx:id="btnPedidos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Ventas" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnPagos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Pagos" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="Cambria" size="14.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
                   </Button>
                </children>
@@ -86,20 +79,23 @@
             </TableView>
             <Button fx:id="btnAddProd" alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #b8d567;" text="Agregar producto " textAlignment="CENTER">
                <font>
-                  <Font name="Cambria" size="14.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Button>
             <Button fx:id="btnEliminar" alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" onAction="#eliminarProd" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar producto" textAlignment="CENTER">
                <font>
-                  <Font name="Cambria" size="14.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Button>
             <Button alignment="CENTER" layoutX="443.0" layoutY="513.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #74c8b9;" text="Editar producto " textAlignment="CENTER">
                <font>
-                  <Font name="Cambria" size="14.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnLogout" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="100.0" text="Cerrar Sesión" />
+            <Button fx:id="btnLogout" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="106.0" text="Cerrar Sesión">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Button>
             <Separator layoutX="145.0" layoutY="97.0" orientation="VERTICAL" prefHeight="501.0" prefWidth="68.0" />
          </children>
       </AnchorPane>
