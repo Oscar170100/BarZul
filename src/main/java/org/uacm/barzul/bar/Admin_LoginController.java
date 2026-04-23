@@ -29,8 +29,6 @@ public class Admin_LoginController implements Initializable {
     @FXML
     private Button btnPedidos;
     @FXML
-    private Button btnPagos;
-    @FXML
     private Button btnLogout;
     @FXML
     private Button btnAddProd;

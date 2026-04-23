@@ -15,9 +15,9 @@
          <children>
             <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="335.0">
                <children>
-                  <Pane prefHeight="607.0" prefWidth="335.0" style="-fx-background-color: #889c9B;">
+                  <Pane prefHeight="607.0" prefWidth="335.0" style="-fx-background-color: #F2DA91;">
                      <children>
-                        <Pane prefHeight="94.0" prefWidth="335.0" style="-fx-background-color: #3B3936;">
+                        <Pane prefHeight="94.0" prefWidth="335.0" style="-fx-background-color: #747F7F;">
                            <children>
                               <Label layoutX="23.0" layoutY="29.0" text="Recuperar Contraseña" textAlignment="CENTER" textFill="#f2f0ec">
                                  <font>
@@ -46,7 +46,7 @@
                               <Font name="Arial" size="16.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="btnRecuperarPass" layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" text="Recuperar">
+                        <Button fx:id="btnRecuperarPass" layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" style="-fx-background-color: #b8d567;" text="Recuperar">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
@@ -61,7 +61,7 @@
                               <Font name="Arial" size="16.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="btnRecuperarPass1" layoutX="180.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" text="Atras">
+                        <Button fx:id="btnRecuperarPass1" layoutX="180.0" layoutY="496.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" style="-fx-background-color: #e95356;" text="Atras">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
