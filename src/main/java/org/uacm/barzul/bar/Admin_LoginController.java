@@ -34,6 +34,9 @@ public class Admin_LoginController implements Initializable {
     private Button btnLogout;
     @FXML
     private Button btnAddProd;
+    private Button btnCancelar;
+    @FXML
+    private Button btnEliminar;
 
     /**
      * Initializes the controller class.
@@ -58,6 +61,24 @@ public class Admin_LoginController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Agregar Producto");
             stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+    }
+
+    private void cerrarDialogo(ActionEvent event) {
+        ((Stage) btnCancelar.getScene().getWindow()).close();
+    }
+
+    @FXML
+    private void eliminarProd(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoElimarProd.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
