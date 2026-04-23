@@ -6,7 +6,11 @@ package org.uacm.barzul.bar;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -15,6 +19,9 @@ import javafx.fxml.Initializable;
  */
 public class DialogoEliminarProdController implements Initializable {
 
+    @FXML
+    private Button btnCancelar;
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +29,10 @@ public class DialogoEliminarProdController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private void cerrarDialogo(ActionEvent event) {
+        ((Stage) btnCancelar.getScene().getWindow()).close();
+    }
     
 }

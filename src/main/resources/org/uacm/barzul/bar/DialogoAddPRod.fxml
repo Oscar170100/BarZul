@@ -37,7 +37,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="284.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
+      <Button fx:id="btnCancelar" layoutX="284.0" layoutY="230.0" mnemonicParsing="false" onAction="#cerrarDialogo" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

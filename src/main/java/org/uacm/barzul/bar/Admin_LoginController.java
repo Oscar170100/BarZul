@@ -32,7 +32,7 @@ public class Admin_LoginController implements Initializable {
     private Button btnLogout;
     @FXML
     private Button btnAddProd;
-    private Button btnCancelar;
+    
     @FXML
     private Button btnEliminar;
 
@@ -65,18 +65,17 @@ public class Admin_LoginController implements Initializable {
         }
     }
 
-    private void cerrarDialogo(ActionEvent event) {
-        ((Stage) btnCancelar.getScene().getWindow()).close();
-    }
-
     @FXML
     private void eliminarProd(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoElimarProd.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEliminarProd.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Eliminar Producto");
+            stage.showAndWait();
+            
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
