@@ -33,10 +33,17 @@ public class VentasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        // Boton Logout
+        btnLogout.setOnAction(eh ->{
+            SceneManager.cambiarVentana(eh, "Login.fxml");
+        });
+        
+        // Boton Inventario
+        btnInventario.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Admin_Login.fxml");
+        });
     }    
 
-    @FXML
-    private void logout(ActionEvent event) {
-    }
     
 }

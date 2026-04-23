@@ -27,14 +27,16 @@ public class Admin_LoginController implements Initializable {
     @FXML
     private Button btnEmpleados;
     @FXML
-    private Button btnPedidos;
-    @FXML
     private Button btnLogout;
     @FXML
     private Button btnAddProd;
     
     @FXML
     private Button btnEliminar;
+    @FXML
+    private Button btnVentas;
+    @FXML
+    private Button btnEditarProd;
 
     /**
      * Initializes the controller class.
@@ -42,12 +44,17 @@ public class Admin_LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        // Boton para Cerrar Sesion
+        btnLogout.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Login.fxml");
+        });
+        
+        // Boton para cambiar de escena al inventario
+        btnVentas.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Ventas.fxml");
+        });
     }    
-
-    @FXML
-    private void logout(ActionEvent event) {
-        SceneManager.cambiarVentana(event, "Login.fxml");
-    }
 
     @FXML
     private void agregarProducto(ActionEvent event) {
@@ -59,6 +66,23 @@ public class Admin_LoginController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Agregar Producto");
             stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+    }
+    
+    @FXML
+    private void editarProd(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EdIProducto.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Editar Producto");
+            stage.showAndWait();
+            
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
