@@ -19,7 +19,7 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <AnchorPane id="AnchorPane" layoutX="-15.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="917.0" style="-fx-background-color: #893F45;">
+            <AnchorPane id="AnchorPane" layoutX="-15.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #893F45;">
                <children>
                   <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
                      <children>
