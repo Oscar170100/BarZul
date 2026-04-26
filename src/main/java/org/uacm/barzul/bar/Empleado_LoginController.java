@@ -86,7 +86,7 @@ public class Empleado_LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        
         // Da valores a las colimnas, nombre, precio, cantidad
         productoNom.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNombre())
         );
@@ -180,8 +180,8 @@ public class Empleado_LoginController implements Initializable {
         });
         
         // Llamando al archivo para llenar la tabla productos
-        cargarDatos();
-                
+        //cargarDatos();
+        productos.setItems(ProductoController.getConexion().getListaProductos());
     }    
     
     
@@ -209,7 +209,7 @@ public class Empleado_LoginController implements Initializable {
         
         // Si no existe el producto en la cuenta
         // Agrega producto y con cantidad 1
-        listaCuenta.add(new Producto(producto.getNombre(), producto.getPrecio(), 1));
+        listaCuenta.add(new Producto(producto.getNombre(), producto.getTipo(), producto.getPrecio(), 1));
         
         // Refresca la tabla
         tablaProdCuenta.refresh();
@@ -298,11 +298,12 @@ public class Empleado_LoginController implements Initializable {
                 
                 // Extrae los valores para las variables 
                 String nombre = partes[0];
-                float precio = Float.parseFloat(partes[1]);
-                int cantidad = Integer.parseInt(partes[2]);
+                String tipo = partes[1];
+                float precio = Float.parseFloat(partes[2]);
+                int cantidad = Integer.parseInt(partes[3]);
                 
                 // Crea un objeto de typo Producto con los valores y lo agrega a la lista temporal
-                lista.add(new Producto(nombre, precio, cantidad));
+                lista.add(new Producto(nombre, tipo, precio, cantidad));
                 
             }
             

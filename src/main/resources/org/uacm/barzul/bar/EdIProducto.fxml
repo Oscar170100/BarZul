@@ -16,24 +16,24 @@
                </font>
             </Label>
             <TextField fx:id="txtNombre" layoutX="210.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="28.0" layoutY="84.0" text=" Tipo de Producto:" textFill="#232323">
+            <Label layoutX="28.0" layoutY="87.0" text=" Tipo de Producto:" textFill="#232323">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="txtTipo" layoutX="210.0" layoutY="84.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="71.0" layoutY="138.0" text="Precio:" textFill="#232323">
+            <Label layoutX="28.0" layoutY="138.0" text="Precio:" textFill="#232323">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="txtPrecio" layoutX="210.0" layoutY="135.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="62.0" layoutY="187.0" text="Cantidad:" textFill="#232323">
+            <Label layoutX="28.0" layoutY="187.0" text="Cantidad:" textFill="#232323">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtDisponibilidad" layoutX="210.0" layoutY="184.0" prefHeight="25.0" prefWidth="230.0" />
+            <TextField fx:id="txtCantidad" layoutX="210.0" layoutY="184.0" prefHeight="25.0" prefWidth="230.0" />
             <Button fx:id="btnAceptar" layoutX="141.0" layoutY="227.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: #b8d567;" text="Guardar cambios">
                <font>
                   <Font name="Arial" size="14.0" />

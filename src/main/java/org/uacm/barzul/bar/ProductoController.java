@@ -44,7 +44,7 @@ public class ProductoController {
     }    
     
     // Actualiza producto
-    public void actualizarProd(String nombre, float precio, int cantidad) {
+    public void actualizarProd(String nombre, String tipo, float precio, int cantidad) {
         
         // Lista de productos
         for (Producto producto : listaProductos) {
@@ -53,6 +53,7 @@ public class ProductoController {
             if (producto.getNombre().equals(nombre)) {
                 
                 producto.setNombre(nombre);
+                producto.setTipo(tipo);
                 producto.setCantidad(cantidad);
                 producto.setPrecio(precio);
                 
@@ -85,7 +86,6 @@ public class ProductoController {
             if (productos.getNombre().equals(nombreProd)) {
                 return productos;
             }
-
             
         }
         // Si no encuentra nada, returna null
@@ -97,11 +97,14 @@ public class ProductoController {
         
         Producto producto = prodBusqueda(nombreProd);
         
+        // si existe el producto, lo quita
         if (producto != null) {
             listaProductos.remove(nombreProd);
         }
         
     }
+    
+    //
     
     
     

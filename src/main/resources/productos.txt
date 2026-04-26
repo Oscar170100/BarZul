@@ -1,5 +1,5 @@
-Cerveza,80.0,2
-Hamburguesa,120.0,1
-Refresco,60.0,3
-Chetos,20.0,5
-Modelo,25.0,4
+Cerveza,Bebida,80.0,2
+Hamburguesa,Comida,120.0,1
+Refresco,Bebida,60.0,3
+Chetos,Botana,20.0,5
+Modelo,Bebida,25.0,4

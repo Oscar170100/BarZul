@@ -69,12 +69,12 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="583.0">
+            <TableView fx:id="tbProductos" layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="583.0">
                <columns>
-                  <TableColumn prefWidth="198.0" text="Producto " />
-                  <TableColumn prefWidth="136.0" text="Tipo" />
-                  <TableColumn prefWidth="129.0" text="Precio " />
-                  <TableColumn prefWidth="119.0" text="Cantidad" />
+                  <TableColumn fx:id="nomProd" prefWidth="198.0" text="Producto " />
+                  <TableColumn fx:id="tipoProd" prefWidth="136.0" text="Tipo" />
+                  <TableColumn fx:id="precioProd" prefWidth="129.0" text="Precio " />
+                  <TableColumn fx:id="cantidadProd" prefWidth="119.0" text="Cantidad" />
                </columns>
             </TableView>
             <Button fx:id="btnAddProd" alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #b8d567;" text="Agregar producto " textAlignment="CENTER">

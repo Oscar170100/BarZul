@@ -11,12 +11,14 @@ package modelo;
 public class Producto {
     
     private String nombre;
-    private int cantidad;
+    private String tipo;
     private float precio;
+    private int cantidad;
     
     // Metodo Constructor
-    public Producto(String nombre, float precio, int cantidad) {
+    public Producto(String nombre, String tipo, float precio, int cantidad) {
         this.nombre = nombre;
+        this.tipo = tipo;
         this.precio = precio;
         this.cantidad = cantidad;
     }
@@ -27,6 +29,13 @@ public class Producto {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     public float getPrecio() {
