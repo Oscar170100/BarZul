@@ -39,11 +39,11 @@ public class PaEfectivoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        btnAceptar.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Ticket.fxml");
+        });
     }    
 
-    @FXML
-    private void manejarAceptar(ActionEvent event) {
-    }
 
     @FXML
     private void manejarCancelar(ActionEvent event) {

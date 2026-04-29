@@ -41,6 +41,8 @@ public class PagosController implements Initializable {
             ((Stage) btnRegresar.getScene().getWindow()).close();
         });
         
+        // Recibe los valores del total a pagar de la cuenta
+        
     }    
 
     @FXML

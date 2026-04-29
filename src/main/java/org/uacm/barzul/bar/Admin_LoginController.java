@@ -136,6 +136,7 @@ public class Admin_LoginController implements Initializable {
                 stage.setTitle("Editar Producto");
                 stage.showAndWait();
                 
+                // Recarga la lista una vez realizada la acción
                 tbProductos.setItems(ProductoController.getConexion().getListaProductos());
 
                 tbProductos.refresh();

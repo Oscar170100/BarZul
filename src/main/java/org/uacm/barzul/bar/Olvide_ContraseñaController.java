@@ -62,6 +62,20 @@ public class Olvide_ContraseñaController implements Initializable {
         
         Alert alertInfo = new Alert(AlertType.INFORMATION);
         
+        if (lblUser.getText() == "") {
+            alertInfo.setTitle("Alerta");
+            alertInfo.setHeaderText("Atención");
+            alertInfo.setContentText("El campo de usuario esta vacio");
+            alertInfo.showAndWait();
+        }
+        
+        if (lblTel.getText() == "") {
+            alertInfo.setTitle("Alerta");
+            alertInfo.setHeaderText("Atención");
+            alertInfo.setContentText("El campo de Telefono esta vacio");
+            alertInfo.showAndWait();
+        }
+        
         if(respPreg.getText().equals("Hola")) {
             
             nuevoPassword = generarPass();
@@ -70,6 +84,8 @@ public class Olvide_ContraseñaController implements Initializable {
             alertInfo.setHeaderText("Contraseña Reestablecida");
             alertInfo.setContentText("Su nueva contraseña es: " + nuevoPassword);
             alertInfo.showAndWait();
+            
+            
             
             SceneManager.cambiarVentana(event, "Login.fxml");
             
@@ -90,7 +106,7 @@ public class Olvide_ContraseñaController implements Initializable {
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder();
         
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 3; i++) {
             int index = random.nextInt(caracteres.length());
             password.append(caracteres.charAt(index));
         }

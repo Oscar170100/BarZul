@@ -137,6 +137,7 @@ public class Empleado_LoginController implements Initializable {
                             agregarAlPedido( getTableView().getItems().get(getIndex()) )
                     );
 
+                    // Se deshabilita el boton de + Si no hay inventario
                     btnPlus.setDisable(producto.getCantidad() <= 0);
 
                     // Dandode indicacion de donde va a ir el boton de + y agrega el centrado
@@ -173,7 +174,6 @@ public class Empleado_LoginController implements Initializable {
                     setGraphic(box);
                     
                 }
-                
                 
             }
             
@@ -275,6 +275,8 @@ public class Empleado_LoginController implements Initializable {
         totalCuenta.setText(String.format("%.2f", total));
     }
     
+    
+    // QUITAR PARA EVITAR REGAÑOS DEL PROFE, POR NO SABER QUE HACE
     // Metodo para cargar los productos desde el archivo
     private void cargarDatos() {
         
