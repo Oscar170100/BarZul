@@ -18,16 +18,16 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <AnchorPane id="AnchorPane" layoutX="-15.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #cec09b;">
+            <AnchorPane id="AnchorPane" layoutX="-15.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="919.0" style="-fx-background-color: #cec09b;">
                <children>
                   <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
                      <children>
-                        <Label layoutX="281.0" layoutY="19.0" text="Control  de inventario" textFill="#fcfcfc">
+                        <Label layoutX="306.0" layoutY="19.0" text="Control de Ventas " textFill="#fcfcfc">
                            <font>
                               <Font name="Nirmala UI" size="36.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="143.0" fitWidth="145.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="160.0" fitWidth="175.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Imagenes/Logo.png" />
                            </image>
@@ -78,7 +78,10 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button fx:id="btnLogout" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Cerrar Sesión" />
+                  <Button fx:id="btnLogout" layoutX="736.0" layoutY="31.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Cerrar Sesión">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font></Button>
                   <Separator layoutX="135.0" layoutY="90.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="78.0" />
                </children>
             </AnchorPane>
