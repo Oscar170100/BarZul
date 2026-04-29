@@ -23,9 +23,9 @@ public class VentasController implements Initializable {
     @FXML
     private Button btnEmpleados;
     @FXML
-    private Button btnPedidos;
-    @FXML
     private Button btnLogout;
+    @FXML
+    private Button btnVentas;
 
     /**
      * Initializes the controller class.
@@ -38,11 +38,18 @@ public class VentasController implements Initializable {
         btnLogout.setOnAction(eh ->{
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
-        
+
         // Boton Inventario
         btnInventario.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Admin_Login.fxml");
         });
+
+        // Boton Empleados
+        btnEmpleados.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Empleados.fxml");
+        });
+        
+
     }    
 
     

@@ -72,6 +72,11 @@ public class Admin_LoginController implements Initializable {
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
         
+        // Boton para cambiar de escena a los Empleados
+        btnEmpleados.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Empleados.fxml");
+        }); 
+        
         // Boton para cambiar de escena al inventario
         btnVentas.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Ventas.fxml");

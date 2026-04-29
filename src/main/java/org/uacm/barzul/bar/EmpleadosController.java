@@ -51,6 +51,18 @@ public class EmpleadosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        btnLogout.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Login.fxml");
+        });
+        
+        btnInventario.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Admin_Login.fxml");
+        });
+        
+        btnVentas.setOnAction(eh -> {
+            SceneManager.cambiarVentana(eh, "Ventas.fxml");
+        });
     }    
 
     @FXML
