@@ -14,13 +14,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.Admin_LoginController">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="org.uacm.barzul.bar.EmpleadosController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="-6.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #cec09b;">
+      <AnchorPane id="AnchorPane" layoutX="1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="908.0" style="-fx-background-color: #cec09b;">
          <children>
             <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
                <children>
-                  <Label layoutX="281.0" layoutY="19.0" text="Control  de inventario" textFill="#fcfcfc">
+                  <Label layoutX="272.0" layoutY="19.0" text="Registro de Empleados" textFill="#fcfcfc">
                      <font>
                         <Font name="Nirmala UI" size="36.0" />
                      </font>
@@ -46,12 +47,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnInventario" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #808080;" text="Inventario" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button fx:id="btnInventario" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Inventario" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnEmpleados" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Empleados" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Button fx:id="btnEmpleados" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #808080;" text="Empleados" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -63,25 +64,25 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="tbProductos" layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="583.0">
+            <TableView fx:id="tbEmpleados" layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="627.0">
                <columns>
-                  <TableColumn fx:id="nomProd" prefWidth="198.0" text="Producto " />
-                  <TableColumn fx:id="tipoProd" prefWidth="136.0" text="Tipo" />
-                  <TableColumn fx:id="precioProd" prefWidth="129.0" text="Precio " />
-                  <TableColumn fx:id="cantidadProd" prefWidth="119.0" text="Cantidad" />
+                  <TableColumn fx:id="NumEmpleado" prefWidth="95.0" text="Num. Empleado" />
+                  <TableColumn fx:id="Nombre" prefWidth="256.0" text="Nombre" />
+                  <TableColumn fx:id="edad" prefWidth="138.0" text="Edad" />
+                  <TableColumn fx:id="Experienza" prefWidth="137.0" text="Experiencia" />
                </columns>
             </TableView>
-            <Button fx:id="btnAddProd" alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #b8d567;" text="Agregar producto " textAlignment="CENTER">
+            <Button fx:id="btnAgreEmple" alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" onAction="#agregarEmpleado" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #b8d567;" text="Agregar Empleado" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnEliminar" alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" onAction="#eliminarProd" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar producto" textAlignment="CENTER">
+            <Button fx:id="btnEliminar" alignment="CENTER" layoutX="653.0" layoutY="513.0" mnemonicParsing="false" onAction="#eliminarEmpleado" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e95356;" text="Eliminar Emplaedo" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnEditarProd" alignment="CENTER" layoutX="443.0" layoutY="513.0" mnemonicParsing="false" onAction="#editarProd" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #74c8b9;" text="Editar producto " textAlignment="CENTER">
+            <Button fx:id="btnEditarInfo" alignment="CENTER" layoutX="443.0" layoutY="513.0" mnemonicParsing="false" onAction="#editarInfo" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #74c8b9;" text="Editar Informacion " textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -89,7 +90,8 @@
             <Button fx:id="btnLogout" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" text="Cerrar Sesión">
                <font>
                   <Font name="Arial" size="14.0" />
-               </font></Button>
+               </font>
+            </Button>
             <Separator layoutX="145.0" layoutY="97.0" orientation="VERTICAL" prefHeight="501.0" prefWidth="68.0" />
          </children>
       </AnchorPane>

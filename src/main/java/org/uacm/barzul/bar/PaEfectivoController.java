@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -46,7 +47,10 @@ public class PaEfectivoController implements Initializable {
 
     @FXML
     private void manejarCancelar(ActionEvent event) {
+        cerrarVentana();
     }
 
-    
+    private void cerrarVentana(){
+          ((Stage) btnCancelar.getScene().getWindow()).close();
+    }
 }
