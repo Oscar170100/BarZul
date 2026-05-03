@@ -20,7 +20,7 @@
                      <children>
                         <Pane prefHeight="94.0" prefWidth="335.0" style="-fx-background-color: #2E2E2E;">
                            <children>
-                              <Label layoutX="23.0" layoutY="29.0" text="Recuperar Contraseña" textAlignment="CENTER" textFill="#f2f0ec">
+                              <Label layoutX="23.0" layoutY="29.0" text="Recuperar Contraseña" textAlignment="CENTER" textFill="#e0e0e0">
                                  <font>
                                     <Font name="Nirmala UI" size="30.0" />
                                  </font>
@@ -32,7 +32,7 @@
                               <Font name="Franklin Gothic Medium" size="48.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="86.0" fitWidth="98.0" layoutX="112.0" layoutY="94.0" opacity="0.95" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="94.0" fitWidth="106.0" layoutX="112.0" layoutY="94.0" opacity="0.95" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Imagenes/empleado.png" />
                            </image>
@@ -44,7 +44,7 @@
                         </Label>
                         <TextField fx:id="lblUser" layoutX="55.0" layoutY="213.0" prefHeight="39.0" prefWidth="224.0" promptText="Número de Empleado">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </TextField>
                         <Label layoutX="56.0" layoutY="265.0" prefHeight="39.0" prefWidth="224.0" text="Telefono">
@@ -54,7 +54,7 @@
                         </Label>
                         <TextField fx:id="lblTel" layoutX="55.0" layoutY="296.0" prefHeight="39.0" prefWidth="224.0" promptText="Tu número de telefono">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </TextField>
                         <Label layoutX="51.0" layoutY="344.0" prefHeight="39.0" prefWidth="234.0" text="Pregunta de seguridad">
@@ -65,17 +65,17 @@
                         <ComboBox fx:id="cBox" layoutX="50.0" layoutY="383.0" prefHeight="39.0" prefWidth="224.0" />
                         <TextField fx:id="respPreg" layoutX="50.0" layoutY="444.0" prefHeight="39.0" prefWidth="224.0" promptText="Tu Respuesta">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="btnRecuperarPass" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="141.0" text="Recuperar">
+                        <Button fx:id="btnRecuperarPass" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" onAction="#recuperarPass" prefHeight="39.0" prefWidth="115.0" text="Recuperar">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnAtras" layoutX="180.0" layoutY="520.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="141.0" text="Atras">
+                        <Button fx:id="btnAtras" layoutX="180.0" layoutY="520.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="115.0" text="Atras">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </Button>
                      </children>

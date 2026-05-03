@@ -8,7 +8,7 @@ package modelo;
  *
  * @author oscar
  */
-public class Producto {
+public class Producto implements java.io.Serializable  {
     
     private String nombre;
     private String tipo;

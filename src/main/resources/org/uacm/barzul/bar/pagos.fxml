@@ -10,20 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #29AB87;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.PagosController">
+<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="642.0" style="-fx-background-color: #2E8B57;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.PagosController">
    <children>
-      <Pane layoutX="1.0" prefHeight="80.0" prefWidth="640.0" style="-fx-background-color: #3D2B1F;">
+      <Pane prefHeight="86.0" prefWidth="642.0" style="-fx-background-color: #3D2B1F;">
          <children>
-            <Label layoutX="186.0" layoutY="14.0" text="Metodo de pago" textFill="#fffbfb">
+            <Label layoutX="186.0" layoutY="14.0" text="Metodo de pago" textFill="#e0e0e0">
                <font>
                   <Font name="Nirmala UI" size="36.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="166.0" layoutX="-9.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Imagenes/Logo.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
       <VBox alignment="CENTER" layoutX="113.0" layoutY="91.0" spacing="20" style="-fx-padding: 30;">
@@ -43,7 +38,7 @@
                         </Button>
                         <Label text="Efectivo" textFill="#f8f8f8">
                            <font>
-                              <Font name="Cambria" size="18.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
                      </children>
@@ -61,7 +56,7 @@
                         </Button>
                         <Label text="Tarjeta" textFill="#f8f8f8">
                            <font>
-                              <Font name="Cambria" size="18.0" />
+                              <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
                      </children>
@@ -70,9 +65,9 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="btnRegresar" layoutX="55.0" layoutY="342.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Regresar">
+      <Button fx:id="btnRegresar" layoutX="504.0" layoutY="290.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Regresar">
          <font>
-            <Font name="Cambria" size="18.0" />
+            <Font name="Arial" size="18.0" />
          </font>
       </Button>
    </children>

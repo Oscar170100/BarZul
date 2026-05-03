@@ -19,20 +19,20 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="-4.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="907.0">
          <children>
-            <Pane prefHeight="606.0" prefWidth="907.0" style="-fx-background-color: #29AB87;">
+            <Pane prefHeight="606.0" prefWidth="907.0" style="-fx-background-color: #2E8B57;">
                <children>
-                  <Pane prefHeight="80.0" prefWidth="907.0" style="-fx-background-color: #3D2B1F;">
+                  <Pane prefHeight="89.0" prefWidth="907.0" style="-fx-background-color: #3D2B1F;">
                      <children>
                         <Button fx:id="btnLogout" layoutX="771.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="107.0" text="Cerrar Sesión">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Button>
-                        <ImageView fitHeight="160.0" fitWidth="165.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="170.0" fitWidth="168.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Imagenes/Logo.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="WHITESMOKE">
+                        <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="#e0e0e0">
                            <font>
                               <Font name="Arial" size="40.0" />
                            </font>
@@ -55,7 +55,7 @@
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #AB8729;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #009688;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Button>
@@ -90,7 +90,7 @@
                         <TableColumn fx:id="accionesCuenta" prefWidth="68.0" text="Acciones" />
                     </columns>
                   </TableView>
-                  <Label layoutX="639.0" layoutY="111.0" text="Resumen de cuenta" textFill="#f5f5f5">
+                  <Label layoutX="639.0" layoutY="111.0" text="Resumen de cuenta" textFill="#e0e0e0">
                      <font>
                         <Font name="Arial" size="24.0" />
                      </font>
@@ -99,15 +99,15 @@
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Label layoutX="625.0" layoutY="518.0" text="Total: $" textFill="#f5f5f5">
+                  <Label layoutX="625.0" layoutY="518.0" text="Total: $" textFill="#e0e0e0">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="242.0" layoutY="112.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
-                  <Label layoutX="162.0" layoutY="112.0" text="Buscar:" textFill="#f5f5f5">
+                  <TextField layoutX="243.0" layoutY="107.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
+                  <Label layoutX="154.0" layoutY="111.0" text="Buscar:" textFill="#e0e0e0">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Arial" size="24.0" />
                      </font>
                   </Label>
                </children>

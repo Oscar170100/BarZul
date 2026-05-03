@@ -14,7 +14,7 @@
          </font>
       </Label>
       <TextField fx:id="txtNombre" layoutX="135.0" layoutY="32.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="28.0" layoutY="84.0" text="Tipo:">
+      <Label layoutX="35.0" layoutY="84.0" text="Marca:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -26,7 +26,7 @@
          </font>
       </Label>
       <TextField fx:id="txtPrecio" layoutX="135.0" layoutY="130.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="24.0" layoutY="182.0" text="Cantidad:">
+      <Label layoutX="24.0" layoutY="181.0" text="Cantidad:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

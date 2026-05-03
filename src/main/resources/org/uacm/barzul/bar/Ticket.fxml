@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="355.0" style="-fx-background-color: #cec09b;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.TicketController">
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="355.0" style="-fx-background-color: #CEC09B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.TicketController">
    <children>
       <Label layoutX="99.0" layoutY="43.0" text="Bar zully ">
          <font>
@@ -30,7 +30,10 @@
             <TableColumn fx:id="celPrecio" prefWidth="110.0" text="Precio " />
         </columns>
       </TableView>
-      <TextField fx:id="txtTotal" layoutX="223.0" layoutY="416.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="txtTotal" layoutX="223.0" layoutY="416.0" prefHeight="25.0" prefWidth="112.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></TextField>
       <Label layoutX="24.0" layoutY="421.0" text="TOTAL:">
          <font>
             <Font name="Arial" size="14.0" />
@@ -66,8 +69,14 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Text fx:id="lblNumtiket" layoutX="80.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0" />
-      <Text layoutX="136.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0" />
+      <Text fx:id="lblNumtiket" layoutX="80.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font></Text>
+      <Text layoutX="136.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font></Text>
       <Label layoutX="52.0" layoutY="14.0" text="¡Gracias por su compra! ">
          <font>
             <Font name="Nirmala UI" size="24.0" />
