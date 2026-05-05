@@ -23,13 +23,20 @@ import javafx.stage.Window;
  */
 public class PaTarjetaController implements Initializable {
 
-    @FXML private TextField txtNumeroTarjeta;
-    @FXML private TextField txtMesExpiracion;
-    @FXML private TextField txtAnioExpiracion;
-    @FXML private PasswordField txtCodigoSeguridad;
-    @FXML private Label lblTotal;
-    @FXML private Button btnAceptar;
-    @FXML private Button btnCancelar;
+    @FXML
+    private TextField txtNumeroTarjeta;
+    @FXML
+    private TextField txtMesExpiracion;
+    @FXML
+    private TextField txtAnioExpiracion;
+    @FXML
+    private PasswordField txtCodigoSeguridad;
+    @FXML
+    private Label lblTotal;
+    @FXML
+    private Button btnAceptar;
+    @FXML
+    private Button btnCancelar;
 
     /**
      * Initializes the controller class.

@@ -79,12 +79,6 @@ public class Empleado_LoginController implements Initializable {
     
     //
     Alert alertInfo = new Alert(AlertType.INFORMATION);
-    @FXML
-    private Button btnMasa1;
-    @FXML
-    private Button btnMasa3;
-    @FXML
-    private Button btnMasa4;
 
     /**
      * Initializes the controller class.
@@ -366,14 +360,6 @@ public class Empleado_LoginController implements Initializable {
             e.printStackTrace();
             e.getMessage();
         }
-    }
-
-    @FXML
-    private void Acaptar(ActionEvent event) {
-    }
-
-    @FXML
-    private void aceptar(ActionEvent event) {
     }
 
     
