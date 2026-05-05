@@ -17,102 +17,120 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.Empleado_LoginController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="-4.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="907.0">
+      <AnchorPane id="AnchorPane" layoutX="-4.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="906.0" style="-fx-background-color: #2E8B57;">
          <children>
-            <Pane prefHeight="606.0" prefWidth="907.0" style="-fx-background-color: #2E8B57;">
+            <Pane layoutX="3.0" layoutY="3.0" prefHeight="89.0" prefWidth="903.0" style="-fx-background-color: #3D2B1F;">
                <children>
-                  <Pane prefHeight="89.0" prefWidth="907.0" style="-fx-background-color: #3D2B1F;">
-                     <children>
-                        <Button fx:id="btnLogout" layoutX="771.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="107.0" text="Cerrar Sesión">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                        <ImageView fitHeight="170.0" fitWidth="168.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../Imagenes/Logo.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="#e0e0e0">
-                           <font>
-                              <Font name="Arial" size="40.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <GridPane layoutX="14.0" layoutY="172.0" prefHeight="366.0" prefWidth="121.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #009688;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                        <Button fx:id="btnPago" mnemonicParsing="false" onAction="#pagar" prefHeight="40.0" prefWidth="100.0" text="Pagar" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font></Button>
-                     </children>
-                  </GridPane>
-                  <Separator layoutX="133.0" layoutY="101.0" orientation="VERTICAL" prefHeight="486.0" prefWidth="21.0" />
-                  <TableView fx:id="productos" layoutX="154.0" layoutY="173.0" prefHeight="399.0" prefWidth="430.0">
-                     <columns>
-                        <TableColumn fx:id="productoNom" prefWidth="147.0" text="Poducto" />
-                        <TableColumn fx:id="precioProd" prefWidth="94.0" style="-fx-alignment: CENTER;" text="Precio" />
-                        <TableColumn fx:id="cantidadProd" prefWidth="82.0" style="-fx-alignment: center;" text="Inventario" />
-                        <TableColumn fx:id="accionesProd" prefWidth="106.0" text="Acciones" />
-                     </columns>
-                  </TableView>
-                  <Separator layoutX="586.0" layoutY="101.0" orientation="VERTICAL" prefHeight="486.0" prefWidth="21.0" />
-                  <TableView fx:id="tablaProdCuenta" layoutX="614.0" layoutY="173.0" prefHeight="305.0" prefWidth="274.0">
-                    <columns>
-                      <TableColumn fx:id="prodCuenta" prefWidth="127.99993896484375" text="Productos" />
-                      <TableColumn fx:id="subTotalCuenta" prefWidth="77.60003662109375" style="-fx-alignment: center;" text="Totales" />
-                        <TableColumn fx:id="accionesCuenta" prefWidth="68.0" text="Acciones" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="639.0" layoutY="111.0" text="Resumen de cuenta" textFill="#e0e0e0">
+                  <Button fx:id="btnLogout" layoutX="771.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="107.0" text="Cerrar Sesión">
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
-                  </Label>
-                  <TextField fx:id="totalCuenta" layoutX="750.0" layoutY="512.0" prefHeight="53.0" prefWidth="121.0" style="-fx-alignment: center;">
+                  </Button>
+                  <ImageView fitHeight="187.0" fitWidth="180.0" layoutX="-12.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Imagenes/Logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="#e0e0e0">
                      <font>
-                        <Font size="24.0" />
-                     </font></TextField>
-                  <Label layoutX="625.0" layoutY="518.0" text="Total: $" textFill="#e0e0e0">
-                     <font>
-                        <Font name="Arial" size="36.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="243.0" layoutY="107.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
-                  <Label layoutX="154.0" layoutY="111.0" text="Buscar:" textFill="#e0e0e0">
-                     <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="40.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
          </children>
       </AnchorPane>
+      <GridPane layoutY="90.0" prefHeight="510.0" prefWidth="889.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="127.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="462.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="563.0" minWidth="10.0" prefWidth="283.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="579.0" minHeight="10.0" prefHeight="536.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <GridPane prefHeight="471.0" prefWidth="182.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="btnMasa1" mnemonicParsing="false" onAction="#Acaptar" prefHeight="40.0" prefWidth="100.0" text="Mesa 1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #009688;" text="Mesa 2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnMasa3" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Mesa 3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnMasa4" mnemonicParsing="false" onAction="#aceptar" prefHeight="40.0" prefWidth="100.0" text="Mesa 4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnPago" mnemonicParsing="false" onAction="#pagar" prefHeight="40.0" prefWidth="100.0" text="Pagar" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <Separator orientation="VERTICAL" prefHeight="510.0" prefWidth="0.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <TableView fx:id="productos" layoutX="153.0" layoutY="183.0" prefHeight="399.0" prefWidth="441.0">
+         <columns>
+            <TableColumn fx:id="productoNom" prefWidth="147.0" text="Poducto" />
+            <TableColumn fx:id="precioProd" prefWidth="94.0" style="-fx-alignment: CENTER;" text="Precio" />
+            <TableColumn fx:id="cantidadProd" prefWidth="82.0" style="-fx-alignment: center;" text="Inventario" />
+            <TableColumn fx:id="accionesProd" prefWidth="106.0" text="Acciones" />
+         </columns>
+      </TableView>
+      <TextField layoutX="253.0" layoutY="117.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
+      <Label layoutX="164.0" layoutY="121.0" text="Buscar:" textFill="#e0e0e0">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaProdCuenta" layoutX="611.0" layoutY="183.0" prefHeight="305.0" prefWidth="279.0">
+         <columns>
+            <TableColumn fx:id="prodCuenta" prefWidth="127.99993896484375" text="Productos" />
+            <TableColumn fx:id="subTotalCuenta" prefWidth="77.60003662109375" style="-fx-alignment: center;" text="Totales" />
+            <TableColumn fx:id="accionesCuenta" prefWidth="68.0" text="Acciones" />
+         </columns>
+      </TableView>
+      <Label layoutX="649.0" layoutY="121.0" text="Resumen de cuenta" textFill="#e0e0e0">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="totalCuenta" layoutX="760.0" layoutY="522.0" prefHeight="53.0" prefWidth="121.0" style="-fx-alignment: center;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="635.0" layoutY="528.0" text="Total: $" textFill="#e0e0e0">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
+      <Separator layoutX="596.0" layoutY="111.0" orientation="VERTICAL" prefHeight="486.0" prefWidth="21.0" />
    </children>
 </AnchorPane>

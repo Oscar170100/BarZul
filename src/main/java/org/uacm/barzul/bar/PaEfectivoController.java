@@ -22,16 +22,11 @@ import javafx.stage.Stage;
  */
 public class PaEfectivoController implements Initializable {
 
-    @FXML
-    private Label lblTotal;
-    @FXML
-    private TextField txtEfectivoRecibido;
-    @FXML
-    private Label lblCambio;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
+    @FXML  private Label lblTotal;
+    @FXML  private TextField txtEfectivoRecibido;
+    @FXML  private Label lblCambio;
+    @FXML  private Button btnAceptar;
+    @FXML  private Button btnCancelar;
 
     /**
      * Initializes the controller class.
@@ -42,6 +37,7 @@ public class PaEfectivoController implements Initializable {
         btnAceptar.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Ticket.fxml");
         });
+        
     }    
 
 

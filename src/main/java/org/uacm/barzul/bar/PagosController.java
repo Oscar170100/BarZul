@@ -22,14 +22,10 @@ import javafx.stage.Stage;
  */
 public class PagosController implements Initializable {
 
-    @FXML
-    private Button btnEfectivo;
-    @FXML
-    private Button btnTarjeta;
-    
+    @FXML private Button btnEfectivo;
+    @FXML private Button btnTarjeta;
     private float total;
-    @FXML
-    private Button btnRegresar;
+    @FXML private Button btnRegresar;
 
     /**
      * Initializes the controller class.
