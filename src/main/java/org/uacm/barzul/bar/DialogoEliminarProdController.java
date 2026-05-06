@@ -55,7 +55,7 @@ public class DialogoEliminarProdController implements Initializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
         
-        txtNomProd.setText(producto.getNombre());
+        txtNomProd.setText(" " + producto.getNombre() + " ?");
     } // Fin setProducto
     
     private void eliminarProd() {
