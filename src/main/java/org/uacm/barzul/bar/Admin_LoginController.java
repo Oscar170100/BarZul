@@ -20,8 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import modelo.Inventario;
 import modelo.Producto;
 
 /**
@@ -31,35 +31,23 @@ import modelo.Producto;
  */
 public class Admin_LoginController implements Initializable {
 
-    @FXML
-    private Button btnInventario;
-    @FXML
-    private Button btnEmpleados;
-    @FXML
-    private Button btnLogout;
-    @FXML
-    private Button btnAddProd;
+    @FXML private Button btnInventario;
+    @FXML private Button btnEmpleados;
+    @FXML private Button btnLogout;
+    @FXML private Button btnAddProd;
     
-    @FXML
-    private Button btnEliminar;
-    @FXML
-    private Button btnVentas;
-    @FXML
-    private Button btnEditarProd;
-    @FXML
-    private TableColumn<Producto, String> nomProd;
-    @FXML
-    private TableColumn<Producto, String> tipoProd;
-    @FXML
-    private TableColumn<Producto, Float> precioProd;
-    @FXML
-    private TableColumn<Producto, Integer> cantidadProd;
-    @FXML
-    private TableView<Producto> tbProductos;
+    @FXML private Button btnEliminar;
+    @FXML private Button btnVentas;
+    @FXML private Button btnEditarProd;
+    @FXML private TableColumn<Producto, String> nomProd;
+    @FXML private TableColumn<Producto, String> tipoProd;
+    @FXML private TableColumn<Producto, Float> precioProd;
+    @FXML private TableColumn<Producto, Integer> cantidadProd;
+    @FXML private TableView<Producto> tbProductos;
     
     private Producto producto = null;
     private ObservableList<Producto> prodObs = FXCollections.observableArrayList();
-
+ 
     /**
      * Initializes the controller class.
      */
@@ -88,14 +76,17 @@ public class Admin_LoginController implements Initializable {
         precioProd.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getPrecio() ).asObject());
         cantidadProd.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getCantidad() ).asObject() );
         
+        Inventario.getInstancia().cargarProductosTxt();
+        
         //cargarDatos();
-        tbProductos.setItems(ProductoController.getConexion().getListaProductos());
+        tbProductos.setItems(Inventario.getInstancia().getProductos());
+        
         // Listener cuando se selecciona un producto
         tbProductos.getSelectionModel().selectedItemProperty().addListener(
-            (Observable, oldValue, newValue) -> {
-                producto = newValue;
-                btnEditarProd.setDisable(newValue == null);
-                btnEliminar.setDisable(newValue == null);
+            (obs, anterior, seleccionado) -> {
+                producto = seleccionado;
+                btnEditarProd.setDisable(seleccionado == null);
+                btnEliminar.setDisable(seleccionado == null);
             }
         );
         
@@ -113,7 +104,7 @@ public class Admin_LoginController implements Initializable {
             stage.showAndWait();
             
             // Recargar los datos de la tabla 
-            tbProductos.setItems(ProductoController.getConexion().getListaProductos());
+            tbProductos.setItems(Inventario.getInstancia().getProductos());
             
         } catch (Exception e) {
             e.printStackTrace();

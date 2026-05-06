@@ -12,8 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modelo.Inventario;
 import modelo.Producto;
 
 /**
@@ -25,8 +27,7 @@ public class DialogoAddPRodController implements Initializable {
 
     @FXML
     private TextField txtNombre;
-    @FXML
-    private TextField txtTipo;
+
     @FXML
     private TextField txtPrecio;
     @FXML
@@ -37,6 +38,8 @@ public class DialogoAddPRodController implements Initializable {
     private TextField txtCantidad;
 
     Alert alertInfo = new Alert(AlertType.CONFIRMATION);
+    @FXML
+    private ChoiceBox<String> chBox;
     
     
     /**
@@ -44,38 +47,57 @@ public class DialogoAddPRodController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
-    }   
-    
-    @FXML
-    private void cerrarDialogo(ActionEvent event) {
-        ((Stage) btnCancelar.getScene().getWindow()).close();
-    }    
+        
+        btnCancelar.setOnAction(eh -> {
+            Stage stage = (Stage) btnCancelar.getScene().getWindow();
+            stage.close();
+            
+        });
+        
+        
+        chBox.getItems().add("Botana");
+        chBox.getItems().add("Bebida");
+        chBox.getItems().add("Comida");
+        
+        
+        
+    }     
 
     @FXML
     private void addProd(ActionEvent event) {
         try {
             
-            String nombreProd = txtNombre.getText();
-            String tipoProd = txtTipo.getText();
-            float precio = Float.parseFloat(txtPrecio.getText());
-            int cantidad = Integer.parseInt(txtCantidad.getText());
+            String nombreProd = txtNombre.getText().trim();
+            String tipoProd = chBox.getValue().trim();
+            float precio = Float.parseFloat(txtPrecio.getText().trim());
+            int cantidad = Integer.parseInt(txtCantidad.getText().trim());
             
             Producto productoCreado = new Producto(nombreProd, tipoProd, precio, cantidad);
             
-            ProductoController.getConexion().getListaProductos().add(productoCreado);
+            Inventario.getInstancia().agregarProducto(productoCreado);
             
             alertInfo.setTitle("Exito");
             alertInfo.setHeaderText("Producto Agregado");
             alertInfo.setContentText("El Producto ha sido agregado con Exito!");
             alertInfo.showAndWait();
+
+            limpiarCampos();
             
             ((Stage) btnAceptar.getScene().getWindow()).close();
-            
+           
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
         }
+    } // addProd
+    
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtPrecio.clear();
+        txtCantidad.clear();
+        
     }
         
 }

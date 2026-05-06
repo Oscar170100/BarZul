@@ -4,9 +4,6 @@
  */
 package org.uacm.barzul.bar;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleFloatProperty;
@@ -30,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import modelo.Inventario;
 import modelo.Producto;
 
 /**
@@ -94,20 +92,32 @@ public class Empleado_LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        // Da valores a las colimnas, nombre, precio, cantidad
-        productoNom.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNombre())
+        btnLogout.setOnAction(eh ->  {
+            SceneManager.cambiarVentana(eh, "Login.fxml");
+        });
+        
+        // Da valores a las columnas, nombre, precio, cantidad
+        productoNom.setCellValueFactory(data -> 
+                new SimpleStringProperty(data.getValue().getNombre())
         );
         
-        precioProd.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getPrecio()).asObject()
+        precioProd.setCellValueFactory(data -> 
+                new SimpleFloatProperty(data.getValue().getPrecio()).asObject()
         );
         
-        cantidadProd.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCantidad()).asObject()
+        cantidadProd.setCellValueFactory(data -> 
+                new SimpleIntegerProperty(data.getValue().getCantidad()).asObject()
         );
+        
+        // Instancia la clase Inventario y carga los datos del Inventario
+        Inventario.getInstancia().cargarProductosTxt();
+        
+        productos.setItems(Inventario.getInstancia().getProductos());
         
         // Llena la lista de la cuenta en la tabla
         tablaProdCuenta.setItems(listaCuenta);
         
-        // Llena los valores de la tabla cuenta con: nombre y subTotal (precio * cantidad)
+        // Llena los valores de la tabla CUENTA con: nombre y subTotal (precio * cantidad)
         prodCuenta.setCellValueFactory(data -> {
            // Se crea una variable de tipo producto 
            Producto prod = data.getValue();
@@ -140,9 +150,7 @@ public class Empleado_LoginController implements Initializable {
                     // Si la celda tiene algo
                     // Accion del boton +
                     // Asignas eventos aquí
-                    btnPlus.setOnAction( event -> 
-                            agregarAlPedido( getTableView().getItems().get(getIndex()) )
-                    );
+                    btnPlus.setOnAction( event -> agregarAlPedido(producto));
 
                     // Se deshabilita el boton de + Si no hay inventario
                     btnPlus.setDisable(producto.getCantidad() <= 0);
@@ -168,11 +176,13 @@ public class Empleado_LoginController implements Initializable {
                 
                 super.updateItem(item, empty);
                 
-                if (empty) {
+                if (empty || getTableRow().getItem() == null) {
+                    
                     setGraphic(null);
+                    
                 } else {
-                    btnMinus.setOnAction(event -> {
-                        Producto producto = getTableRow().getItem();
+                    Producto producto = getTableRow().getItem();
+                    btnMinus.setOnAction(event -> { 
                         quitarDelPedido(producto);
                     });
                     
@@ -186,14 +196,15 @@ public class Empleado_LoginController implements Initializable {
             
         });
         
-        // Llamando al archivo para llenar la tabla productos
-        //cargarDatos();
-        productos.setItems(ProductoController.getConexion().getListaProductos());
-    }    
-    
+    }  // Fin Inicialize  
     
     // Agrega Producto a la cuenta 
     private void agregarAlPedido(Producto producto) {
+        
+        // Si la cantidad es 0 o menor, no hagas nada
+        if (producto.getCantidad() <= 0) {
+            return;
+        }
         
         // Disminuimos en 1 la cantidad del inventario en la tabla productos
         producto.setCantidad(producto.getCantidad() - 1);
@@ -216,17 +227,25 @@ public class Empleado_LoginController implements Initializable {
         
         // Si no existe el producto en la cuenta
         // Agrega producto y con cantidad 1
-        listaCuenta.add(new Producto(producto.getNombre(), producto.getTipo(), producto.getPrecio(), 1));
+        listaCuenta.add(new Producto(
+                producto.getNombre(), 
+                producto.getTipo(), 
+                producto.getPrecio(), 
+                1
+        ));
         
         // Refresca la tabla
         tablaProdCuenta.refresh();
         // Recalcula el subtotal
         actualizarTotal();
         
-    }
+    } // Fin agregarAlPedido
     
     // Quitar de la cuenta
     private void quitarDelPedido(Producto producto) {
+        
+        // Crea una nuevo productoDel de tipo Producto
+        Producto productoDel = null;
         
         // Recorre la lista de la cuenta
         for(Producto p: listaCuenta) {
@@ -244,7 +263,6 @@ public class Empleado_LoginController implements Initializable {
                         productos.refresh();
                         break;
                     }
-                    
                 }
                 
                 // Si hay mas de 1 producto, resta del la cuenta
@@ -253,19 +271,22 @@ public class Empleado_LoginController implements Initializable {
                     
                 } else {
                     // Si solo hay uno, elimina el producto
-                    listaCuenta.remove(p);
+                    productoDel = p;
                     
-                }
-                
-                // Refresca la tabla
-                tablaProdCuenta.refresh();
-                // Recalcula el subtotal
-                actualizarTotal();
-                
+                }                
+                break;
+       
             }
         }
-    }
-    
+        
+        if (productoDel != null) {
+            listaCuenta.remove(productoDel);
+        }
+        // Refresca la tabla
+        tablaProdCuenta.refresh();
+        // Recalcula el subtotal
+        actualizarTotal();
+    } // Fin quitarDelPedido
     
     // Calcula el Total de la cuenta
     private void actualizarTotal() {
@@ -280,59 +301,8 @@ public class Empleado_LoginController implements Initializable {
         
         // Muestra el total en formato con 2 decimales
         totalCuenta.setText(String.format("%.2f", total));
-    }
+    } // Fin actualizarTotal
     
-    
-    // QUITAR PARA EVITAR REGAÑOS DEL PROFE, POR NO SABER QUE HACE
-    // Metodo para cargar los productos desde el archivo
-    private void cargarDatos() {
-        
-        // Lista temporar de los productos
-        ObservableList<Producto> lista = FXCollections.observableArrayList();
-        
-        // Intenta ejecutar este bloque de codigo 
-        try {
-            
-            // Manda llamar y abre el archivo "productos.txt"
-            InputStream is = getClass().getResourceAsStream("/productos.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            
-            String linea;
-            
-            // Lee linea por linea
-            while((linea = br.readLine()) != null) {
-                
-                // Divide los datos separados por una ","
-                String[] partes = linea.split(",");
-                
-                // Extrae los valores para las variables 
-                String nombre = partes[0];
-                String tipo = partes[1];
-                float precio = Float.parseFloat(partes[2]);
-                int cantidad = Integer.parseInt(partes[3]);
-                
-                // Crea un objeto de typo Producto con los valores y lo agrega a la lista temporal
-                lista.add(new Producto(nombre, tipo, precio, cantidad));
-                
-            }
-            
-            // Agrega la lista a la tabla principal de productos
-            productos.setItems(lista);
-            
-            
-        } catch (Exception e) {
-            // Si ocurre algun error al intentar abrir el archivo, lo caputra y muestra el StackTrace
-            e.printStackTrace();
-        }
-        
-        
-    }
-
-    @FXML
-    private void logout(ActionEvent event) {
-        SceneManager.cambiarVentana(event, "Login.fxml");
-    }
-
     @FXML
     private void pagar(ActionEvent event) {
         
@@ -362,12 +332,24 @@ public class Empleado_LoginController implements Initializable {
             stage.setTitle("Metodo de Pago");
             
             stage.showAndWait();
+            listaCuenta.clear();
+            totalCuenta.clear();
             
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
         }
+    } // Fin pagar
+    
+    // Bottar Datos de la cuenta
+
+    @FXML
+    private void logout(ActionEvent event) {
     }
+    
+    
+    
+    
 
     
-}
+} // Fin class Empleado_LoginController

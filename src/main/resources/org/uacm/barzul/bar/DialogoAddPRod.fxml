@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,19 +15,19 @@
          </font>
       </Label>
       <TextField fx:id="txtNombre" layoutX="135.0" layoutY="32.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="35.0" layoutY="84.0" text="Marca:">
+      <Label layoutX="28.0" layoutY="84.0" text="Tipo:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTipo" layoutX="135.0" layoutY="82.0" prefHeight="25.0" prefWidth="250.0" />
+      <ChoiceBox fx:id="chBox" layoutX="135.0" layoutY="82.0" prefHeight="25.0" prefWidth="250.0" />
       <Label layoutX="28.0" layoutY="134.0" textFill="#e4e4e4">
          <font>
             <Font name="Cambria" size="14.0" />
          </font>
       </Label>
       <TextField fx:id="txtPrecio" layoutX="135.0" layoutY="130.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="24.0" layoutY="181.0" text="Cantidad:">
+      <Label layoutX="28.0" layoutY="181.0" text="Cantidad:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -37,12 +38,12 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="284.0" layoutY="230.0" mnemonicParsing="false" onAction="#cerrarDialogo" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
+      <Button fx:id="btnCancelar" layoutX="284.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="30.0" layoutY="132.0" prefHeight="22.0" prefWidth="65.0" text="Precio:">
+      <Label layoutX="28.0" layoutY="132.0" prefHeight="22.0" prefWidth="65.0" text="Precio:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

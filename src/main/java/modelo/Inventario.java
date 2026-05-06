@@ -1,42 +1,111 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package modelo;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ *
+ * @author oscar
+ */
 public class Inventario {
-    private List<Producto> productos = new ArrayList<>();
-    private final String archivo = "productos.dat"; 
-
-    // Constructor: declara excepciones
-    public Inventario() throws IOException, ClassNotFoundException {
-        cargarProductos();
+    
+    private static Inventario instancia;
+    private ObservableList<Producto> productos;
+    
+    // Crea una ruta del Archivo de texto
+    private final Path rutaArchivo = Paths.get("src/main/resources/productos.txt");
+    
+    private Inventario() {
+        productos = FXCollections.observableArrayList();
     }
-
-    // Agregar producto y guardar automáticamente
-    public void agregarProducto(Producto p) throws IOException {
-        productos.add(p);
-        guardarProductos();
-    }
-
-    // lista de productos
-    public List<Producto> getProductos() {
+    
+    // Crea la instancia de la clase Inventario
+    public static Inventario getInstancia() {
+        
+        if (instancia == null) {
+            instancia = new Inventario();
+        }
+        return instancia;
+    } // Fin getInstancia
+    
+    public ObservableList<Producto> getProductos() {
         return productos;
     }
-
-    // Guardar productos en archivo (sin try-catch)
-    private void guardarProductos() throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo));
-        oos.writeObject(productos);
-        oos.close();
-    }
-
-    // Cargar productos desde archivo (sin try-catch)
-    private void cargarProductos() throws IOException, ClassNotFoundException {
-        File archivoProductos = new File(archivo);
-        if (archivoProductos.exists()) {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-            productos = (List<Producto>) ois.readObject();
-            ois.close();
+    
+    // Carga los datos desde el Archivo .txt
+    public void cargarProductosTxt() {
+        productos.clear();
+        
+        try (BufferedReader lector = Files.newBufferedReader(rutaArchivo)){
+            
+            String linea;
+            // Recorre el archivo de datos hasta encontrar un NULL
+            while ((linea = lector.readLine()) != null) {
+                String[] datos = linea.split(",");
+                
+                // Verifica que existan valores en el archivo para asignarlos
+                if (datos.length == 4) {
+                    String nombre = datos[0].trim();
+                    String tipo = datos[1].trim();
+                    float precio = Float.parseFloat(datos[2].trim());
+                    int cantidad = Integer.parseInt(datos[3].trim());
+                    
+                    // Crea y Agrega un nuevo objeto de tipo Producto y le da los valores
+                    productos.add(new Producto(nombre, tipo, precio, cantidad));
+                }
+            }
+            
+        } catch (Exception e) {
+            // Imprime en pantalla el mensaje si ocurre algun error
+            System.out.println("Error al cargar productos: " + e.getMessage());
         }
-    }
+    } // Fin CargarDatos
+    
+    // Guarda los Productos en el archivo de texto
+    public void guardarProductosTxt() {
+        
+        try (BufferedWriter escritor = Files.newBufferedWriter(rutaArchivo)){
+            
+            for (Producto p: productos) {
+                escritor.write(
+                    p.getNombre() + "," +
+                    p.getTipo() + "," +
+                    p.getPrecio() + "," +
+                    p.getCantidad()
+                );
+                escritor.newLine();
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error al guardar producos: " + e.getMessage());
+        }
+                
+    } // Fin guardarProductos
+    
+    // Agregar Producto
+    public void agregarProducto(Producto producto) {
+        
+        productos.add(producto);
+        guardarProductosTxt();
+        
+    } // Fin agregarProducto
+        
+    public void eliminarProducto(Producto producto) {
+        
+        productos.remove(producto);
+        guardarProductosTxt();
+        
+    } // Fin eliminarProducto
+    
+    
+    
 }
