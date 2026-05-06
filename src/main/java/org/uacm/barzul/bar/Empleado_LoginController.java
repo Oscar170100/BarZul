@@ -27,6 +27,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import modelo.Producto;
@@ -79,6 +80,12 @@ public class Empleado_LoginController implements Initializable {
     
     //
     Alert alertInfo = new Alert(AlertType.INFORMATION);
+    @FXML
+    private Pane Pene1;
+    @FXML
+    private Pane pane2;
+    @FXML
+    private Pane pane3;
 
     /**
      * Initializes the controller class.
