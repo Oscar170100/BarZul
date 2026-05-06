@@ -7,4 +7,3 @@ Sabritas,Botana,18.0,20
 Agua,Bebida,15.0,30
 Corona Cero,Bebida,28.0,12
 Papas,Botana,20.0,15
-Boing,Bebida,35.0,20

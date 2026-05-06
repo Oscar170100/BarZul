@@ -27,7 +27,6 @@ public class DialogoAddPRodController implements Initializable {
 
     @FXML
     private TextField txtNombre;
-
     @FXML
     private TextField txtPrecio;
     @FXML

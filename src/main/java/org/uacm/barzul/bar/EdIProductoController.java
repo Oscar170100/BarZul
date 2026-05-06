@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Producto;
@@ -24,8 +25,6 @@ public class EdIProductoController implements Initializable {
 
     @FXML
     private TextField txtNombre;
-    @FXML
-    private TextField txtTipo;
     @FXML
     private TextField txtPrecio;
     @FXML
@@ -41,6 +40,8 @@ public class EdIProductoController implements Initializable {
     
     //
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
+    @FXML
+    private ChoiceBox<String> chBox;
     
     /**
      * Initializes the controller class.
@@ -48,10 +49,20 @@ public class EdIProductoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        chBox.getItems().add("Botana");
+        chBox.getItems().add("Bebida");
+        chBox.getItems().add("Comida");
+        
         btnAceptar.setOnAction(event -> {
             guardarCambios();
             
             Stage stage = (Stage) btnAceptar.getScene().getWindow();
+            stage.close();
+        });
+        
+        btnCancelar.setOnAction(eh -> {
+            Stage stage = (Stage) btnCancelar.getScene().getWindow();
             stage.close();
         });
         
@@ -70,7 +81,7 @@ public class EdIProductoController implements Initializable {
         if (producto != null) {
             
             txtNombre.setText(producto.getNombre());
-            txtTipo.setText(producto.getTipo());
+            chBox.setValue(producto.getTipo());
             // Se utiliza valueOf porque el precio es float y el setText es un String
             txtPrecio.setText(String.valueOf(producto.getPrecio()));
             txtCantidad.setText(String.valueOf(producto.getCantidad()));
@@ -82,7 +93,7 @@ public class EdIProductoController implements Initializable {
     // Guarda los cambios si al editar el producto seleccionado
     public void guardarCambios() {
         String nombre = txtNombre.getText().trim();
-        String tipo = txtTipo.getText().trim();
+        String tipo = chBox.getValue().trim();
         float precio;
         int cantidad;
         
@@ -128,12 +139,6 @@ public class EdIProductoController implements Initializable {
         alertaInfo.setHeaderText(titulo);
         alertaInfo.setContentText(mensaje);
         alertaInfo.showAndWait();
-    }
-    
-    @FXML
-    private void cerrarDialogo(ActionEvent event) {
-        Stage stage = (Stage) btnCancelar.getScene().getWindow();
-        stage.close();
     }
     
 }

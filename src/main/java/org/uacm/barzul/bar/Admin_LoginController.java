@@ -4,9 +4,6 @@
  */
 package org.uacm.barzul.bar;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -47,7 +44,7 @@ public class Admin_LoginController implements Initializable {
     
     private Producto producto = null;
     private ObservableList<Producto> prodObs = FXCollections.observableArrayList();
- 
+    private int opcion = 0;
     /**
      * Initializes the controller class.
      */
@@ -128,7 +125,7 @@ public class Admin_LoginController implements Initializable {
                 stage.showAndWait();
                 
                 // Recarga la lista una vez realizada la acción
-                tbProductos.setItems(ProductoController.getConexion().getListaProductos());
+                tbProductos.setItems(Inventario.getInstancia().getProductos());
 
                 tbProductos.refresh();
                 } catch (Exception e) {
@@ -144,61 +141,27 @@ public class Admin_LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEliminarProd.fxml"));
             Parent root = loader.load();
+            
+            DialogoEliminarProdController controllerEl = loader.getController();
+            controllerEl.setProducto(producto);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Eliminar Producto");
             stage.showAndWait();
             
+            tbProductos.setItems(Inventario.getInstancia().getProductos());
+            
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
         }
+    } // fin eliminarProd
+    
+    public void setOp(int opcion) {
+        this.opcion = opcion;
     }
     
-    // Metodo para cargar los productos desde el archivo
-    private void cargarDatos() {
-        
-        // Lista temporar de los productos
-        ObservableList<Producto> lista = FXCollections.observableArrayList();
-        
-        // Intenta ejecutar este bloque de codigo 
-        try {
-            
-            // Manda llamar y abre el archivo "productos.txt"
-            InputStream is = getClass().getResourceAsStream("/productos.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            
-            String linea;
-            
-            // Lee linea por linea
-            while((linea = br.readLine()) != null) {
-                
-                // Divide los datos separados por una ","
-                String[] partes = linea.split(",");
-                
-                // Extrae los valores para las variables 
-                String nombre = partes[0];
-                String tipo = partes[1];
-                float precio = Float.parseFloat(partes[2]);
-                int cantidad = Integer.parseInt(partes[3]);
-                
-                // Crea un objeto de typo Producto con los valores y lo agrega a la lista temporal
-                lista.add(new Producto(nombre, tipo, precio, cantidad));
-                
-            }
-            
-            // Agrega la lista a la tabla principal de productos
-            tbProductos.setItems(lista);
-            
-        } catch (Exception e) {
-            // Si ocurre algun error al intentar abrir el archivo, lo caputra y muestra el StackTrace
-            //e.printStackTrace();
-            e.getMessage();
-        }
-        
-        
-    }
 
     
 }

@@ -12,20 +12,25 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="22.0" text="¿Estas seguro de eliminar el siguiente producto &quot;Chettos&quot;?" textFill="WHITE">
+      <Label layoutX="30.0" layoutY="22.0" text="¿Estas seguro de eliminar el siguiente producto?" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="163.0" layoutY="56.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" style="-fx-background-color: #4CAF50;" text="Aceptar" textFill="WHITE">
+      <Button fx:id="btnEliminar" defaultButton="true" layoutX="163.0" layoutY="56.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" style="-fx-background-color: #4CAF50;" text="Aceptar" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="286.0" layoutY="56.0" mnemonicParsing="false" onAction="#cerrarDialogo" prefHeight="35.0" prefWidth="102.0" style="-fx-background-color: #9E9E9E;" text="Cancelar" textFill="WHITE">
+      <Button fx:id="btnCancelar" layoutX="286.0" layoutY="56.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" style="-fx-background-color: #9E9E9E;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
+      <Label fx:id="txtNomProd" layoutX="421.0" layoutY="22.0" prefHeight="21.0" prefWidth="102.0" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
