@@ -73,7 +73,7 @@
                   <TableColumn fx:id="NumEmpleado" prefWidth="95.0" text="Num. Empleado" />
                   <TableColumn fx:id="Nombre" prefWidth="256.0" text="Nombre" />
                   <TableColumn fx:id="edad" prefWidth="138.0" text="Edad" />
-                  <TableColumn fx:id="Experienza" prefWidth="137.0" text="Experiencia" />
+                  <TableColumn fx:id="NumTelefono" prefWidth="137.0" text="Num.Telefono" />
                </columns>
             </TableView>
             <Button fx:id="btnAgreEmple" alignment="CENTER" layoutX="230.0" layoutY="513.0" mnemonicParsing="false" onAction="#agregarEmpleado" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #b8d567;" text="Agregar Empleado" textAlignment="CENTER">

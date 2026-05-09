@@ -68,7 +68,7 @@ public class Admin_LoginController implements Initializable {
         });
         
         // Para ver los datos en la tabla despues de agregar un Nuevo prod
-        nomProd.setCellValueFactory( data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombre() ) );
+        nomProd.setCellValueFactory( data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombre()) );
         tipoProd.setCellValueFactory( data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTipo() ) );
         precioProd.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getPrecio() ).asObject());
         cantidadProd.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getCantidad() ).asObject() );
