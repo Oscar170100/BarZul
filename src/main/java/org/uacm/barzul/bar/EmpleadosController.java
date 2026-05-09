@@ -62,44 +62,46 @@ public class EmpleadosController implements Initializable {
         btnVentas.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Ventas.fxml");
         });
-            NumEmpleado.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getNumEmpleado()).asObject());
-            Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
-            edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
-            NumTelefono.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumTelefono()).asObject() );
+        
+        NumEmpleado.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getNumEmpleado()).asObject());
+        Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
+        edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
+        NumTelefono.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumTelefono()).asObject() );
        
-            Registro.getInstancia().cargarEmpleadoTxt();
+        Registro.getInstancia().cargarEmpleadoTxt();
         
         //cargarDatos();
-        //tbEmpleados.setItems(Registro.getInstancia().getEmpleado());
+        tbEmpleados.setItems(Registro.getInstancia().getEmpleado());
         
         // Listener cuando se selecciona un empleado
-        /**tbEmpleados.getSelectionModel().selectedItemProperty().addListener(
+        tbEmpleados.getSelectionModel().selectedItemProperty().addListener(
             (obs, anterior, seleccionado) -> {
-               empleado = seleccionado;
-               btnAgreEmple.setDisable(seleccionado==null);
+                empleado = seleccionado;
                 btnEditarInfo.setDisable(seleccionado == null);
                 btnEliminar.setDisable(seleccionado == null);
             }
-        );*/
+        );
         
     }        
     
     @FXML
     private void agregarEmpleado(ActionEvent event) {
-     
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoAddEmp.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Agregar Producto");
+            stage.setTitle("Agregar Empleado");
             stage.showAndWait();
 
             //Regarcar los datos de la tabla
+            tbEmpleados.setItems(Registro.getInstancia().getEmpleado());
 
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
+            System.out.println("Problema en el codigo" + e.getMessage());
         }
     }
 
@@ -110,7 +112,7 @@ public class EmpleadosController implements Initializable {
             Parent root = loader.load();
             
             DialogoEmpElimController controllerEl = loader.getController();
-            //controllerEl.setEmpleado(empleado);
+            controllerEl.setEmpleado(empleado);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -132,8 +134,8 @@ public class EmpleadosController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEdiEmp.fxml"));
                 Parent root = loader.load();
 
-                EdIProductoController controllerEd = loader.getController();
-                //controllerEd.setEmpleado(empleado);
+                DialodoEmpEdiController controllerEd = loader.getController();
+                controllerEd.setEmpleado(empleado);
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
@@ -152,7 +154,9 @@ public class EmpleadosController implements Initializable {
         }
         
     }
-      public void setOp(int opcion) {
+    
+    public void setOp(int opcion) {
         this.opcion = opcion;
     }
+     
 }

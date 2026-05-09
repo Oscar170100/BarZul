@@ -42,9 +42,11 @@ public class DialogoAddEmpController implements Initializable {
             
         });
     }
+    
+    @FXML
     private void addEmp(ActionEvent event) {
         
-             /**   try {
+        try {
             
             String nombreEmp = txtNombre.getText().trim();
             float NumEmpleado = Float.parseFloat(txtNoEmpleado.getText().trim());
@@ -68,16 +70,13 @@ public class DialogoAddEmpController implements Initializable {
             e.printStackTrace();
             e.getMessage();
         }
-    } // addProd*/
+    } // addProd
     
-    /**private void limpiarCampos() {
+    private void limpiarCampos() {
         txtNombre.clear();
         txtEdad.clear();
         txtNoEmpleado.clear();
-        txtTelefono.clear();*/
-        
+        txtTelefono.clear();
     }
     
-    
-    
-    }
+}
