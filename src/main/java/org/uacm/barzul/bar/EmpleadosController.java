@@ -32,7 +32,7 @@ public class EmpleadosController implements Initializable {
     @FXML private Button btnEmpleados;
     @FXML private Button btnVentas;
     @FXML private TableView<Empleado> tbEmpleados;
-    @FXML private TableColumn<Empleado, Float> NumEmpleado;
+    @FXML private TableColumn<Empleado, Integer> NumEmpleado;
     @FXML private TableColumn< Empleado, String > Nombre;
     @FXML private TableColumn<Empleado, Integer> edad;
     @FXML private TableColumn<Empleado, Integer>NumTelefono;
@@ -62,8 +62,7 @@ public class EmpleadosController implements Initializable {
         btnVentas.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Ventas.fxml");
         });
-        
-        NumEmpleado.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getNumEmpleado()).asObject());
+        NumEmpleado.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumEmpleado()).asObject() );
         Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
         edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
         NumTelefono.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumTelefono()).asObject() );
@@ -131,7 +130,7 @@ public class EmpleadosController implements Initializable {
     private void editarInfo(ActionEvent event) {
          if (empleado != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEdiEmp.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("DialodoEmpEdi.fxml"));
                 Parent root = loader.load();
 
                 DialodoEmpEdiController controllerEd = loader.getController();

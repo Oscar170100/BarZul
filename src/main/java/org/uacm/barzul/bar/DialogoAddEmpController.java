@@ -49,11 +49,11 @@ public class DialogoAddEmpController implements Initializable {
         try {
             
             String nombreEmp = txtNombre.getText().trim();
-            float NumEmpleado = Float.parseFloat(txtNoEmpleado.getText().trim());
+            int numEmpleado = Integer.parseInt(txtNoEmpleado.getText().trim());
             int edad = Integer.parseInt(txtEdad.getText().trim());
             int NumTelefono = Integer.parseInt(txtTelefono.getText().trim());
             
-            Empleado empleadoCreado = new Empleado(nombreEmp, NumEmpleado, edad, NumTelefono);
+            Empleado empleadoCreado = new Empleado(nombreEmp, numEmpleado, edad, NumTelefono);
             
             Registro.getInstancia().agregarEmpleado(empleadoCreado);
             

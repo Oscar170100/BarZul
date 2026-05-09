@@ -60,15 +60,15 @@ public class DialodoEmpEdiController implements Initializable {
             
             txtNombre.setText(empleado.getNombreEmp());
             // Se utiliza valueOf porque el precio es float y el setText es un String
-            txtNoEmpleado.setText(String.valueOf(empleado.getNumEmpleado()));
-            txtEdad.setText(String.valueOf((char) empleado.getEdad()));
+            txtNoEmpleado.setText(String.valueOf(empleado.getNombreEmp()));
+            txtEdad.setText(String.valueOf( empleado.getEdad()));
             txtTelefono.setText(String.valueOf(empleado.getNumTelefono()));
             
         }
     }
      public void guardarCambios() {
         String nombre = txtNombre.getText().trim();
-        float NumEmpleado;
+        int NumEmpleado;
         int Edad;
         int NumTelefono;
         
@@ -78,14 +78,14 @@ public class DialodoEmpEdiController implements Initializable {
         }
         try {
             // asignamos el valor del campo txtPrecio(String) convirtiendolo en flotante (Float)
-            NumEmpleado = Float.parseFloat(txtNoEmpleado.getText());
+            NumEmpleado =Integer.parseInt(txtNoEmpleado.getText());
             Edad = Integer.parseInt(txtEdad.getText());
             NumTelefono = Integer.parseInt(txtTelefono.getText());
             
             // Actualizando los valore
             empleado.setNombreEmp(nombre);
-            empleado.setEdad(Edad);
             empleado.setNumEmpleado(NumEmpleado);
+            empleado.setEdad(Edad);
             empleado.setNumTelefono(NumTelefono);
 
             // Alerta de Exito
@@ -95,7 +95,7 @@ public class DialodoEmpEdiController implements Initializable {
             e.printStackTrace();
             e.getMessage();
             // si ingresa otra cosa que no sea un numero, manda esta alerta
-            alerta("Error", "El precio o la cantidad no son numeros validos");
+            //alerta("Error", "El precio o la cantidad no son numeros validos");
         }
         
     }

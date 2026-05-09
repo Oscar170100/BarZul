@@ -8,4 +8,3 @@ Agua,Bebida,15.0,30
 Corona Cero,Bebida,28.0,12
 Papas,Botana,20.0,15
 Cacahuates,Botana,20.0,15
-4124143,Bebida,1.2341242E8,124123412

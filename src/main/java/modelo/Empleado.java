@@ -11,15 +11,15 @@ package modelo;
 public class Empleado {
     
     private String nombreEmp;
-    private float NumEmpleado;
-    private int Edad;
+    private int numEmpleado;
+    private int edad;
     private int NumTelefono;
     
     // Metodo Constructor
-    public Empleado(String nombreEmp, float NumEmpleado, int Edad, int NumTelefono) {
+    public Empleado(String nombreEmp, int numEmpleado, int edad, int NumTelefono) {
         this.nombreEmp = nombreEmp;
-        this.NumEmpleado = NumEmpleado;
-        this.Edad= Edad;
+        this.numEmpleado = numEmpleado;
+        this.edad= edad;
         this.NumTelefono=NumTelefono;
     }
     
@@ -33,20 +33,20 @@ public class Empleado {
         this.nombreEmp = nombre;
     }
 
-    public float getNumEmpleado() {
-        return NumEmpleado;
+    public int getNumEmpleado() {
+        return numEmpleado;
     }
 
-    public void setNumEmpleado(float NumEmpleado) {
-        this.NumEmpleado = NumEmpleado;
+    public void setNumEmpleado(int numEmpleado) {
+        this.numEmpleado = numEmpleado;
     }
 
     public int getEdad() {
-        return Edad;
+        return edad;
     }
 
-    public void setEdad(int Edad) {
-        this.Edad = Edad;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public int getNumTelefono() {
