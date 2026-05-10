@@ -54,7 +54,7 @@ public class Registro {
                 // Verifica que existan valores en el archivo para asignarlos
                 if (datos.length == 4) {
                     String nombre = datos[0].trim();
-                     int numEmpleado = Integer.parseInt(datos[3].trim());
+                     int numEmpleado = Integer.parseInt(datos[1].trim());
                      int Edad= Integer.parseInt(datos[2].trim());
                      int NumTelefono = Integer.parseInt(datos[3].trim());
     

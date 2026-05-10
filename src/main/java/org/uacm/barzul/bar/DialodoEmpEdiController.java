@@ -42,16 +42,51 @@ public class DialodoEmpEdiController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         btnAceptar.setOnAction(event -> {
-            guardarCambios();
-            
-            Stage stage = (Stage) btnAceptar.getScene().getWindow();
-            stage.close();
-        });
-        
+
+        boolean guardado = guardarCambios();
+
+        if (guardado) {
+        Stage stage = (Stage) btnAceptar.getScene().getWindow();
+        stage.close();
+    }
+    });
+      
         btnCancelar.setOnAction(eh -> {
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
             stage.close();
         });
+          // NoEmpleado  -> solo recibe numeros
+         txtNoEmpleado.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("\\d*")) {
+                  txtNoEmpleado.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+    });
+
+             // Edad -> solo recibe numeros
+        txtEdad.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("\\d*")) {
+                  txtEdad.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+    });
+
+             // Teléfono -> solo recibe numeros
+        txtTelefono.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("\\d*")) {
+                txtTelefono.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+              if (txtTelefono.getText().length() > 10) {
+        txtTelefono.setText(txtTelefono.getText().substring(0, 10));
+    }
+    });
+
+        // Nombre -> solo  recibira letras, espacios y acentos
+         txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
+              if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                 txtNombre.setText(
+                newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+                );
+             }
+     });
     }    
      public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
@@ -60,13 +95,13 @@ public class DialodoEmpEdiController implements Initializable {
             
             txtNombre.setText(empleado.getNombreEmp());
             // Se utiliza valueOf porque el precio es float y el setText es un String
-            txtNoEmpleado.setText(String.valueOf(empleado.getNombreEmp()));
+            txtNoEmpleado.setText(String.valueOf(empleado.getNumEmpleado()));
             txtEdad.setText(String.valueOf( empleado.getEdad()));
             txtTelefono.setText(String.valueOf(empleado.getNumTelefono()));
             
         }
     }
-     public void guardarCambios() {
+     public boolean guardarCambios() {
         String nombre = txtNombre.getText().trim();
         int NumEmpleado;
         int Edad;
@@ -76,7 +111,18 @@ public class DialodoEmpEdiController implements Initializable {
         if (nombre.isEmpty()) {
             alerta("Error", "El nombre no puede estar vacio");
         }
+        
         try {
+            
+        if (txtTelefono.getText().trim().length() != 10) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Teléfono inválido");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El número telefónico debe tener exactamente 10 dígitos");
+            alerta.showAndWait();
+            return false;
+        }
+            
             // asignamos el valor del campo txtPrecio(String) convirtiendolo en flotante (Float)
             NumEmpleado =Integer.parseInt(txtNoEmpleado.getText());
             Edad = Integer.parseInt(txtEdad.getText());
@@ -90,12 +136,12 @@ public class DialodoEmpEdiController implements Initializable {
 
             // Alerta de Exito
             alerta("Exito", "Valores actualizados correctamente");
+            return true;
             
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
-            // si ingresa otra cosa que no sea un numero, manda esta alerta
-            //alerta("Error", "El precio o la cantidad no son numeros validos");
+            return false;
         }
         
     }

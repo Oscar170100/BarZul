@@ -60,6 +60,32 @@ public class DialogoAddPRodController implements Initializable {
         chBox.getItems().add("Bebida");
         chBox.getItems().add("Comida");
         
+        // Nombre -> solo permite letras y espacios
+         txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                 txtNombre.setText(
+                      newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+            );
+         }
+        });
+
+    // Cantidad -> solo permite numeros
+        txtCantidad.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("\\d*")) {
+                 txtCantidad.setText(
+                     newValue.replaceAll("[^\\d]", "")
+             );
+        }
+    });
+
+    // Precio -> numeros con decimal
+         txtPrecio.textProperty().addListener((obs, oldValue, newValue) -> {
+
+        
+        if (!newValue.matches("\\d*(\\.\\d*)?")) {
+            txtPrecio.setText(oldValue);
+        }
+    });
         
         
     }     
@@ -68,11 +94,34 @@ public class DialogoAddPRodController implements Initializable {
     private void addProd(ActionEvent event) {
         try {
             
+        
             String nombreProd = txtNombre.getText().trim();
             String tipoProd = chBox.getValue().trim();
             float precio = Float.parseFloat(txtPrecio.getText().trim());
-            int cantidad = Integer.parseInt(txtCantidad.getText().trim());
             
+            // el presio no tiene que ser negativo
+             if (precio <= 0) {
+
+            Alert alerta = new Alert(AlertType.WARNING);
+            alerta.setTitle("Precio inválido");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El precio debe ser mayor a 0");
+            alerta.showAndWait();
+
+            return;
+        }
+            int cantidad = Integer.parseInt(txtCantidad.getText().trim());
+            // la cantidad deve ser mayor a 0
+            if (cantidad < 0) {
+
+            Alert alerta = new Alert(AlertType.WARNING);
+            alerta.setTitle("Cantidad inválida");
+            alerta.setHeaderText(null);
+            alerta.setContentText("La cantidad no puede ser negativa");
+            alerta.showAndWait();
+
+            return;
+        }
             Producto productoCreado = new Producto(nombreProd, tipoProd, precio, cantidad);
             
             Inventario.getInstancia().agregarProducto(productoCreado);

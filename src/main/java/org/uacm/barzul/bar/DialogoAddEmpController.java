@@ -38,16 +38,60 @@ public class DialogoAddEmpController implements Initializable {
         
         btnCancelar.setOnAction(eh -> {
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
-            stage.close();
-            
+            stage.close();    
         });
+        
+
+    // NoEmpleado  -> solo recibe numeros
+    txtNoEmpleado.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtNoEmpleado.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
+
+    // Edad -> solo recibe numeros
+    txtEdad.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtEdad.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
+
+    // Teléfono -> solo recibe numeros
+    txtTelefono.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtTelefono.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+         if (txtTelefono.getText().length() > 10) {
+        txtTelefono.setText(txtTelefono.getText().substring(0, 10));
+    }
+    });
+
+    // Nombre -> solo  recibira letras, espacios y acentos
+    txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+            txtNombre.setText(
+                newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+            );
+        }
+    });
     }
     
     @FXML
     private void addEmp(ActionEvent event) {
         
         try {
-            
+
+     
+            if (txtTelefono.getText().trim().length() != 10) {
+
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Teléfono inválido");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El número telefónico debe tener exactamente 10 dígitos");
+            alerta.showAndWait();
+            return;
+        }
+        
             String nombreEmp = txtNombre.getText().trim();
             int numEmpleado = Integer.parseInt(txtNoEmpleado.getText().trim());
             int edad = Integer.parseInt(txtEdad.getText().trim());

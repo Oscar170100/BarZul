@@ -13,10 +13,10 @@ public class Empleado {
     private String nombreEmp;
     private int numEmpleado;
     private int edad;
-    private int NumTelefono;
+    private long NumTelefono;
     
     // Metodo Constructor
-    public Empleado(String nombreEmp, int numEmpleado, int edad, int NumTelefono) {
+    public Empleado(String nombreEmp, int numEmpleado, int edad, long NumTelefono) {
         this.nombreEmp = nombreEmp;
         this.numEmpleado = numEmpleado;
         this.edad= edad;
@@ -49,11 +49,11 @@ public class Empleado {
         this.edad = edad;
     }
 
-    public int getNumTelefono() {
+    public long getNumTelefono() {
         return NumTelefono;
     }
 
-    public void setNumTelefono(int NumTelefono) {
+    public void setNumTelefono(long NumTelefono) {
         this.NumTelefono = NumTelefono;
     }
    

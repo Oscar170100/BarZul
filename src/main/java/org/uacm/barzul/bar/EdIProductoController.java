@@ -65,7 +65,31 @@ public class EdIProductoController implements Initializable {
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
             stage.close();
         });
-        
+        // Nombre -> solo permite letras y espacios
+    txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+            txtNombre.setText(
+                newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+            );
+        }
+    });
+
+    // Cantidad -> solo permite numeros
+    txtCantidad.textProperty().addListener((obs, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtCantidad.setText(
+                newValue.replaceAll("[^\\d]", "")
+            );
+        }
+    });
+
+    // Precio -> recibe  numeros con decimal
+    txtPrecio.textProperty().addListener((obs, oldValue, newValue) -> {
+
+        if (!newValue.matches("\\d*(\\.\\d*)?")) {
+            txtPrecio.setText(oldValue);
+        }
+    });
     }  
     
     // llena los valores de los campos

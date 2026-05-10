@@ -35,7 +35,7 @@ public class EmpleadosController implements Initializable {
     @FXML private TableColumn<Empleado, Integer> NumEmpleado;
     @FXML private TableColumn< Empleado, String > Nombre;
     @FXML private TableColumn<Empleado, Integer> edad;
-    @FXML private TableColumn<Empleado, Integer>NumTelefono;
+    @FXML private TableColumn<Empleado, Long>NumTelefono;
     @FXML private Button btnAgreEmple;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditarInfo;
@@ -65,8 +65,7 @@ public class EmpleadosController implements Initializable {
         NumEmpleado.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumEmpleado()).asObject() );
         Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
         edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
-        NumTelefono.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getNumTelefono()).asObject() );
-       
+        NumTelefono.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getNumTelefono() ).asObject());      
         Registro.getInstancia().cargarEmpleadoTxt();
         
         //cargarDatos();
