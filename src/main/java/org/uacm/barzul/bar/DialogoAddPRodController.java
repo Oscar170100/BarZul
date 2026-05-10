@@ -87,7 +87,6 @@ public class DialogoAddPRodController implements Initializable {
         }
     });
         
-        
     }     
 
     @FXML
