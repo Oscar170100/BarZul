@@ -20,12 +20,12 @@
          <children>
             <Pane prefHeight="91.0" prefWidth="908.0" style="-fx-background-color: #3D2B1F;">
                <children>
-                  <Label layoutX="281.0" layoutY="19.0" text="Control  de inventario" textFill="#fcfcfc">
+                  <Label layoutX="286.0" layoutY="19.0" text="Control de inventario" textFill="#fcfcfc">
                      <font>
                         <Font name="Nirmala UI" size="36.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="170.0" fitWidth="168.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="182.0" fitWidth="205.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Imagenes/Logo.png" />
                      </image>
@@ -63,7 +63,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="tbProductos" layoutX="218.0" layoutY="125.0" prefHeight="359.0" prefWidth="583.0">
+            <TableView fx:id="tbProductos" layoutX="220.0" layoutY="124.0" prefHeight="359.0" prefWidth="585.0">
                <columns>
                   <TableColumn fx:id="nomProd" prefWidth="198.0" text="Producto " />
                   <TableColumn fx:id="tipoProd" prefWidth="136.0" text="Tipo" />

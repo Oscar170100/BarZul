@@ -22,7 +22,7 @@
                <children>
                   <Pane prefHeight="98.0" prefWidth="919.0" style="-fx-background-color: #3D2B1F;">
                      <children>
-                        <Label layoutX="306.0" layoutY="24.0" text="Control de Ventas " textFill="#e0e0e0">
+                        <Label layoutX="312.0" layoutY="25.0" text="Control de Ventas " textFill="#e0e0e0">
                            <font>
                               <Font name="Nirmala UI" size="36.0" />
                            </font>

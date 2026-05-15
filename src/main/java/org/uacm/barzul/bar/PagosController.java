@@ -4,6 +4,7 @@
  */
 package org.uacm.barzul.bar;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,15 +23,14 @@ import javafx.stage.Stage;
  */
 public class PagosController implements Initializable {
 
-    @FXML
-    private Button btnEfectivo;
-    @FXML
-    private Button btnTarjeta;
+    @FXML private Button btnEfectivo;
+    @FXML private Button btnTarjeta;
+    @FXML private Button btnRegresar;
     
     private float total;
-    @FXML
-    private Button btnRegresar;
-
+    private String detallesPedido;
+    private boolean pagoExitoso = false;
+    
     /**
      * Initializes the controller class.
      */
@@ -47,12 +47,50 @@ public class PagosController implements Initializable {
 
     @FXML
     private void manejarPagoEfectivo(ActionEvent event) {
-        SceneManager.cambiarVentana(event, "PaEfectivo.fxml");
+          try  {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PaEfectivo.fxml"));
+            Parent root = loader.load();
+            
+            PaEfectivoController controller = loader.getController();
+            controller.setDatos(total);
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pago en Efectivo");
+            stage.showAndWait();
+            
+            if (stage.getUserData() != null && (boolean) stage.getUserData()) {
+                setPagoExitoso(true);
+            }
+            
+            cerrarVentana();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void manejarPagoTarjeta(ActionEvent event) {
-        SceneManager.cambiarVentana(event, "PaTarjeta.fxml");
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PaTarjeta.fxml"));
+            Parent root = loader.load();
+            
+            PaTarjetaController controller = loader.getController();
+            controller.setDatos(total);
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pago con Tarjeta");
+            stage.showAndWait();
+            
+            if (stage.getUserData() != null && (boolean) stage.getUserData()) {
+                setPagoExitoso(true);
+            }
+            
+            cerrarVentana();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     
@@ -61,7 +99,15 @@ public class PagosController implements Initializable {
         this.total = total;
   
     }
+     public boolean isPagoExitoso() {
+        return pagoExitoso;
+    }
 
+    public void setPagoExitoso(boolean estado) {
+        this.pagoExitoso = estado;
+    }
 
-    
+    private void cerrarVentana() {
+        ((Stage) btnEfectivo.getScene().getWindow()).close();
+    }
 }

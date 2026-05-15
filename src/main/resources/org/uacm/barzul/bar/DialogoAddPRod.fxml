@@ -15,7 +15,7 @@
          </font>
       </Label>
       <TextField fx:id="txtNombre" layoutX="135.0" layoutY="32.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="28.0" layoutY="84.0" text="Tipo:">
+      <Label layoutX="40.0" layoutY="84.0" text="Tipo:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -38,12 +38,12 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="284.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
+      <Button fx:id="btnCancelar" layoutX="270.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="28.0" layoutY="132.0" prefHeight="22.0" prefWidth="65.0" text="Precio:">
+      <Label layoutX="34.0" layoutY="132.0" prefHeight="22.0" prefWidth="65.0" text="Precio:">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

@@ -1,11 +1,11 @@
 Cerveza,Bebida,80.0,2
 Hamburguesa,Comida,120.0,1
-Chetos,Botana,20.0,5
+Chettos,Botana,20.0,5
 Modelo,Bebida,25.0,4
 Coca Cola,Bebida,25.0,10
-Sabritas,Botana,18.0,20
 Agua,Bebida,15.0,30
 Corona Cero,Bebida,28.0,12
 Papas,Botana,20.0,15
 Cacahuates,Botana,20.0,15
 Victoria,Bebida,25.0,15
+Tequila,Bebida,78.0,8
