@@ -9,3 +9,4 @@ Papas,Botana,20.0,15
 Cacahuates,Botana,20.0,15
 Victoria,Bebida,25.0,15
 Tequila,Bebida,78.0,8
+solecito,Botana,18.0,5

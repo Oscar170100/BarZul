@@ -24,6 +24,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -38,30 +39,19 @@ import modelo.Producto;
 public class Empleado_LoginController implements Initializable {
 
     // Columnas Tabla Productos en Inventario
-    @FXML
-    private TableColumn<Producto, String> productoNom;
-    @FXML
-    private TableColumn<Producto, Float> precioProd;
-    @FXML
-    private TableColumn<Producto, Integer> cantidadProd;
+    @FXML private TableColumn<Producto, String> productoNom;
+    @FXML private TableColumn<Producto, Float> precioProd;
+    @FXML private TableColumn<Producto, Integer> cantidadProd;
     // Tabla Productos
-    @FXML
-    private TableView<Producto> productos;
+    @FXML private TableView<Producto> productos;
+    @FXML private Button btnLogout;
+    @FXML // Botone en la tabla Produtos
+  private TableColumn<Producto, Void> accionesProd;
     
-    @FXML
-    private Button btnLogout;
-    @FXML
-    
-    // Botone en la tabla Produtos
-    private TableColumn<Producto, Void> accionesProd;
-    
-    // Columnas Tabla Cuenta
-    @FXML
-    private TableColumn<Producto, String> prodCuenta;
-    @FXML
-    private TableColumn<Producto, Float> subTotalCuenta;
-    @FXML
-    private TextField totalCuenta;
+  // Columnas Tabla Cuenta
+    @FXML private TableColumn<Producto, String> prodCuenta;
+    @FXML private TableColumn<Producto, Float> subTotalCuenta;
+    @FXML private TextField totalCuenta;
     // Tabla principal de cuenta
     @FXML
     private TableView<Producto> tablaProdCuenta;
@@ -71,19 +61,21 @@ public class Empleado_LoginController implements Initializable {
     ObservableList<Producto> listaCuenta = FXCollections.observableArrayList();
     
     // Celda aciones tabla cuenta
-    @FXML
-    private TableColumn<Producto, Void> accionesCuenta;
-    @FXML
-    private Button btnPago;
+    @FXML private TableColumn<Producto, Void> accionesCuenta;
+    @FXML private Button btnPago;
     
     //
     Alert alertInfo = new Alert(AlertType.INFORMATION);
+    @FXML private Pane pane2;
+    @FXML private Pane pane3;
+    @FXML private Button btnMesa1;
+    @FXML private Button btnMesa2;
+    @FXML private Button btnMesa3;
+    @FXML private Button btnMesa4;
     @FXML
-    private Pane Pene1;
+    private TextField lblBusqueda;
     @FXML
-    private Pane pane2;
-    @FXML
-    private Pane pane3;
+    private Pane pane1;
 
     /**
      * Initializes the controller class.
@@ -92,7 +84,15 @@ public class Empleado_LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        btnLogout.setOnAction(eh ->  {
+    pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
+    pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());
+    pedidosPorMesa.put("Mesa 3", FXCollections.observableArrayList());
+    pedidosPorMesa.put("Mesa 4", FXCollections.observableArrayList());
+
+    seleccionarMesa("Mesa 1");
+}
+        
+        btnLogout.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
         
@@ -196,7 +196,7 @@ public class Empleado_LoginController implements Initializable {
             
         });
         
-    }  // Fin Inicialize  
+    } // Fin Inicialize  
     
     // Agrega Producto a la cuenta 
     private void agregarAlPedido(Producto producto) {
@@ -346,10 +346,21 @@ public class Empleado_LoginController implements Initializable {
     @FXML
     private void logout(ActionEvent event) {
     }
-    
-    
-    
-    
 
+    @FXML
+    private void showPane1(ActionEvent event) {
+        this.pane1. setOpacity(1);
+        this.pane2.setOpacity(1);
+        this.pane3.setOpacity(1);
+        this.pane3.toFront();
+    }
+
+    @FXML
+    private void showPane2(MouseEvent event) {
+    }
+
+    @FXML
+    private void showPane3(MouseEvent event) {
+    }
     
 } // Fin class Empleado_LoginController

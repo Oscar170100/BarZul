@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button; 
 import javafx.scene.control.Label;
@@ -63,8 +64,9 @@ public class PaEfectivoController implements Initializable {
 
     @FXML
     private void manejarAceptar(ActionEvent event) {
+        
          try { 
-            float efectivo = Float.parseFloat(txtEfectivoRecibido.getText());
+            double efectivo = Double.parseDouble(txtEfectivoRecibido.getText());
         // valida que la cantidad ingresada sea igual o mayor ala del pago 
         if(efectivo < total ){
             Alert alerta = new Alert(Alert.AlertType.ERROR);
@@ -74,20 +76,28 @@ public class PaEfectivoController implements Initializable {
                
             alerta.showAndWait();
                     return;
-            }
+        }
         // Calcular cambio y lo muestra 
-        float cambio = efectivo - total;
+        double cambio = efectivo - total;
+        try {
          lblCambio.setText("$"+String.format("%.2f", cambio));
             
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Pago realizado");
                 alerta.setHeaderText(null);
                 alerta.setContentText("El pago fue realizado correctamente\n"+ "Cambio: $"+ String.format("%.2f", cambio));
-                 
+                  
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setUserData(true);
                 alerta.showAndWait();
-
-                cerrarVentana();
+   
         } catch (Exception e) {
+
+                e.printStackTrace();
+                e.getMessage();
+                 
+            }
+    }catch (Exception e) {
 
                 e.printStackTrace();
                 e.getMessage();
@@ -99,6 +109,5 @@ public class PaEfectivoController implements Initializable {
 
                 alerta.showAndWait();
             }
-          SceneManager.cambiarVentana(event, "Ticket.fxml");
     }
 }
