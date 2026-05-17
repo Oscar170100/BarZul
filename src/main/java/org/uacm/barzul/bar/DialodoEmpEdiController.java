@@ -74,6 +74,7 @@ public class DialodoEmpEdiController implements Initializable {
              if (!newValue.matches("\\d*")) {
                 txtTelefono.setText(newValue.replaceAll("[^\\d]", ""));
             }
+             // ----------------------------------------------------------------------------------
               if (txtTelefono.getText().length() > 10) {
         txtTelefono.setText(txtTelefono.getText().substring(0, 10));
     }
@@ -105,7 +106,7 @@ public class DialodoEmpEdiController implements Initializable {
         String nombre = txtNombre.getText().trim();
         int NumEmpleado;
         int Edad;
-        int NumTelefono;
+        long NumTelefono;
         
         
         if (nombre.isEmpty()) {
@@ -126,7 +127,7 @@ public class DialodoEmpEdiController implements Initializable {
             // asignamos el valor del campo txtPrecio(String) convirtiendolo en flotante (Float)
             NumEmpleado =Integer.parseInt(txtNoEmpleado.getText());
             Edad = Integer.parseInt(txtEdad.getText());
-            NumTelefono = Integer.parseInt(txtTelefono.getText());
+            NumTelefono = Long.parseLong(txtTelefono.getText());
             
             // Actualizando los valore
             empleado.setNombreEmp(nombre);

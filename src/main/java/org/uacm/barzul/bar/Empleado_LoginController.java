@@ -5,6 +5,8 @@
 package org.uacm.barzul.bar;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -27,9 +29,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import modelo.Inventario;
 import modelo.Producto;
+
 
 /**
  * FXML Controller class
@@ -58,8 +60,9 @@ public class Empleado_LoginController implements Initializable {
     
     // Lista observable para almacenar los productos de la cuenta
     // Se crea una instancia vacia de la lista observable usando la clase FXCOllections
-    ObservableList<Producto> listaCuenta = FXCollections.observableArrayList();
-    
+    //ObservableList<Producto> listaCuenta = FXCollections.observableArrayList();
+    // se usa para consultar los productos
+    private ObservableList<Producto> listaCuenta;
     // Celda aciones tabla cuenta
     @FXML private TableColumn<Producto, Void> accionesCuenta;
     @FXML private Button btnPago;
@@ -68,15 +71,15 @@ public class Empleado_LoginController implements Initializable {
     Alert alertInfo = new Alert(AlertType.INFORMATION);
     @FXML private Pane pane2;
     @FXML private Pane pane3;
-    @FXML private Button btnMesa1;
+    @FXML
+    private Button btnMesa1;
     @FXML private Button btnMesa2;
     @FXML private Button btnMesa3;
     @FXML private Button btnMesa4;
-    @FXML
-    private TextField lblBusqueda;
-    @FXML
     private Pane pane1;
-
+private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
+    @FXML
+    private Pane Pene1;
     /**
      * Initializes the controller class.
      */
@@ -90,7 +93,11 @@ public class Empleado_LoginController implements Initializable {
     pedidosPorMesa.put("Mesa 4", FXCollections.observableArrayList());
 
     seleccionarMesa("Mesa 1");
-}
+   // conección de botones para darles funcionalidad 
+    btnMesa1.setOnAction(e -> seleccionarMesa("Mesa 1"));
+    btnMesa2.setOnAction(e -> seleccionarMesa("Mesa 2"));
+    btnMesa3.setOnAction(e -> seleccionarMesa("Mesa 3"));
+    btnMesa4.setOnAction(e -> seleccionarMesa("Mesa 4"));
         
         btnLogout.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Login.fxml");
@@ -115,7 +122,7 @@ public class Empleado_LoginController implements Initializable {
         productos.setItems(Inventario.getInstancia().getProductos());
         
         // Llena la lista de la cuenta en la tabla
-        tablaProdCuenta.setItems(listaCuenta);
+        //tablaProdCuenta.setItems(listaCuenta);
         
         // Llena los valores de la tabla CUENTA con: nombre y subTotal (precio * cantidad)
         prodCuenta.setCellValueFactory(data -> {
@@ -196,7 +203,7 @@ public class Empleado_LoginController implements Initializable {
             
         });
         
-    } // Fin Inicialize  
+        } // Fin Inicialize  
     
     // Agrega Producto a la cuenta 
     private void agregarAlPedido(Producto producto) {
@@ -310,17 +317,19 @@ public class Empleado_LoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Pagos.fxml"));
             Parent root = loader.load();
             
-            // Enviando datos hacia la ventada d
+            // Enviando datos hacia la ventada de pagos
             PagosController controller = loader.getController();
             
             // Evaluamos que el total no sea 0 o este vacio
             String text = totalCuenta.getText();
             if (text == null || text.isEmpty()) {
-                // Si el total de la cuenta es 0 o esta vacio, lanza la alerta
-                alertInfo.setHeaderText("Advertencia");
-                alertInfo.setTitle("Advertencia");
-                alertInfo.setContentText("Campo Vacio");
-                alertInfo.showAndWait();
+
+                 alertInfo.setHeaderText("Advertencia");
+                 alertInfo.setTitle("Advertencia");
+                 alertInfo.setContentText("Campo Vacío");
+                 alertInfo.showAndWait();
+
+                  return;
             }
             
             float totalPago = Float.parseFloat(text);
@@ -332,8 +341,9 @@ public class Empleado_LoginController implements Initializable {
             stage.setTitle("Metodo de Pago");
             
             stage.showAndWait();
-            listaCuenta.clear();
-            totalCuenta.clear();
+            pedidosPorMesa.get(mesaActual).clear();
+            //istaCuenta.clear();
+            //totalCuenta.clear();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -347,7 +357,6 @@ public class Empleado_LoginController implements Initializable {
     private void logout(ActionEvent event) {
     }
 
-    @FXML
     private void showPane1(ActionEvent event) {
         this.pane1. setOpacity(1);
         this.pane2.setOpacity(1);
@@ -355,12 +364,14 @@ public class Empleado_LoginController implements Initializable {
         this.pane3.toFront();
     }
 
-    @FXML
-    private void showPane2(MouseEvent event) {
-    }
+    private String mesaActual;
 
-    @FXML
-    private void showPane3(MouseEvent event) {
-    }
-    
+    private void seleccionarMesa(String mesa) {
+
+      mesaActual = mesa;
+     listaCuenta = pedidosPorMesa.get(mesa);
+    tablaProdCuenta.setItems(listaCuenta);
+    actualizarTotal();
+}
+
 } // Fin class Empleado_LoginController

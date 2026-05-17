@@ -37,11 +37,11 @@ public class PagosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        btnRegresar.setOnAction(eh -> {
+       /** btnRegresar.setOnAction(eh -> {
             ((Stage) btnRegresar.getScene().getWindow()).close();
         });
         
-        // Recibe los valores del total a pagar de la cuenta
+        // Recibe los valores del total a pagar de la cuenta*/
         
     }    
 
@@ -58,11 +58,10 @@ public class PagosController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Pago en Efectivo");
             stage.showAndWait();
-            
             if (stage.getUserData() != null && (boolean) stage.getUserData()) {
                 setPagoExitoso(true);
             }
-            
+             SceneManager.cambiarVentana(event, "Ticket.fxml");
             cerrarVentana();
         } catch (IOException e) {
             e.printStackTrace();

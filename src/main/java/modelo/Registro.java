@@ -56,7 +56,7 @@ public class Registro {
                     String nombre = datos[0].trim();
                      int numEmpleado = Integer.parseInt(datos[1].trim());
                      int Edad= Integer.parseInt(datos[2].trim());
-                     int NumTelefono = Integer.parseInt(datos[3].trim());
+                     long NumTelefono = Long.parseLong(datos[3].trim());
     
                      // Crea y Agrega un nuevo objeto de tipo Empleado y le da los valores
                      empleados.add(new Empleado(nombre, numEmpleado, Edad, NumTelefono));
@@ -106,3 +106,4 @@ public class Registro {
     } // Fin eliminarEmpleado
     
 }
+    
