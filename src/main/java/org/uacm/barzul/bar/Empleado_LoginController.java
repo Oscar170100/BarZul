@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +27,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.Inventario;
@@ -77,9 +77,10 @@ public class Empleado_LoginController implements Initializable {
     @FXML private Button btnMesa3;
     @FXML private Button btnMesa4;
     private Pane pane1;
-private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
-    @FXML
-    private Pane Pene1;
+    private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
+    @FXML private Pane Pene1;
+    @FXML private TextField lblBuscar;
+    
     /**
      * Initializes the controller class.
      */
@@ -87,17 +88,17 @@ private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-    pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
-    pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());
-    pedidosPorMesa.put("Mesa 3", FXCollections.observableArrayList());
-    pedidosPorMesa.put("Mesa 4", FXCollections.observableArrayList());
+        pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
+        pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());
+        pedidosPorMesa.put("Mesa 3", FXCollections.observableArrayList());
+        pedidosPorMesa.put("Mesa 4", FXCollections.observableArrayList());
 
-    seleccionarMesa("Mesa 1");
-   // conección de botones para darles funcionalidad 
-    btnMesa1.setOnAction(e -> seleccionarMesa("Mesa 1"));
-    btnMesa2.setOnAction(e -> seleccionarMesa("Mesa 2"));
-    btnMesa3.setOnAction(e -> seleccionarMesa("Mesa 3"));
-    btnMesa4.setOnAction(e -> seleccionarMesa("Mesa 4"));
+        seleccionarMesa("Mesa 1");
+       // conección de botones para darles funcionalidad 
+        btnMesa1.setOnAction(e -> seleccionarMesa("Mesa 1"));
+        btnMesa2.setOnAction(e -> seleccionarMesa("Mesa 2"));
+        btnMesa3.setOnAction(e -> seleccionarMesa("Mesa 3"));
+        btnMesa4.setOnAction(e -> seleccionarMesa("Mesa 4"));
         
         btnLogout.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Login.fxml");
@@ -121,9 +122,57 @@ private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
         
         productos.setItems(Inventario.getInstancia().getProductos());
         
-        // Llena la lista de la cuenta en la tabla
-        //tablaProdCuenta.setItems(listaCuenta);
+        // Busqueda de productos
+        /* 
+        FilteredList es un tipo de lista especial para filtrar datos que actualiza la tabla automaticamante
+        y muestra solo algunos elementos
+        */
+        FilteredList<Producto> filtro = new FilteredList<>(
+                // Esta es la lista original de productos en inventario
+                // p -> true : significa que al inicio muestra todos los productos
+                Inventario.getInstancia().getProductos(), p -> true
+        );
         
+        /* 
+        lblBuscar es el nombre que se le da al campo de buscar
+        El Listener detecta (escucha) cuando se escribe en el campo
+        Anterior = ag
+        Nuevo =agu 
+        y asi sucesivamente 
+        */
+        lblBuscar.textProperty().addListener((obs, anterior, nuevo) -> {
+            
+            // Definiendo las reglas del filtro
+            filtro.setPredicate(producto -> {
+                // Si el campo lblBuscar esta vacio, mostrar todos los elementos
+                if (nuevo == null || nuevo.isEmpty()) {
+                    // true: Si, muestralo en la tabla
+                    return true;
+                }
+                
+                // convierte el texto buscado a minusculas
+                String texto = nuevo.toLowerCase();
+                
+                // Buscar por nombre
+                // si el nombre del producto (en minusculas) contiene el texto ingresado a buscar
+                if (producto.getNombre().toLowerCase().contains(texto)) {
+                    return true;
+                }
+                
+                // Buscar por Tipo
+                // Si el Tipo de producto (en minusculas) contiene el texto ingresado
+                if (producto.getTipo().toLowerCase().contains(texto)) {
+                    return true;
+                }
+                
+                // Si no encuentra coincidencia en tipo o producto
+                return false;
+            });
+            
+        });
+        // Mostrar el producto buscado por tipo o por nombre en la tabla productos
+        productos.setItems(filtro);
+                
         // Llena los valores de la tabla CUENTA con: nombre y subTotal (precio * cantidad)
         prodCuenta.setCellValueFactory(data -> {
            // Se crea una variable de tipo producto 

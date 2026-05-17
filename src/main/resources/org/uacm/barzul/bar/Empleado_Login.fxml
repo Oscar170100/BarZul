@@ -91,7 +91,7 @@
                </columns>
             </TableView>
             <Separator layoutX="596.0" layoutY="95.0" orientation="VERTICAL" prefHeight="502.0" prefWidth="21.0" />
-            <TextField layoutX="253.0" layoutY="117.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
+            <TextField fx:id="lblBuscar" layoutX="253.0" layoutY="117.0" prefHeight="35.0" prefWidth="330.0" promptText="Busqueda" />
             <Label layoutX="164.0" layoutY="121.0" text="Buscar:" textFill="#e0e0e0">
                <font>
                   <Font name="Arial" size="24.0" />
