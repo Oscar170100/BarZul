@@ -52,7 +52,7 @@ public class EdIProductoController implements Initializable {
         
         chBox.getItems().add("Botana");
         chBox.getItems().add("Bebida");
-        chBox.getItems().add("Comida");
+        chBox.getItems().add("Bebida Alcoholica");
         
         btnAceptar.setOnAction(event -> {
             guardarCambios();

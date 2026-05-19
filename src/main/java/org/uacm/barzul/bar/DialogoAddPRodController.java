@@ -58,7 +58,7 @@ public class DialogoAddPRodController implements Initializable {
         
         chBox.getItems().add("Botana");
         chBox.getItems().add("Bebida");
-        chBox.getItems().add("Comida");
+        chBox.getItems().add("Bebia Alcoholica");
         
         // Nombre -> solo permite letras y espacios
          txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {

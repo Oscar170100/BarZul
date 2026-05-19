@@ -31,8 +31,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.Producto;
-import modelo.RegistroVenta;
-import modelo.Venta;
 
 
 /**
