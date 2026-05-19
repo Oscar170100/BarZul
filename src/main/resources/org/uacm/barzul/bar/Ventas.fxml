@@ -70,14 +70,14 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <TableView layoutX="189.0" layoutY="121.0" prefHeight="432.0" prefWidth="692.0">
+                  <TableView fx:id="tbVentas" layoutX="189.0" layoutY="121.0" prefHeight="432.0" prefWidth="692.0">
                      <columns>
-                        <TableColumn prefWidth="79.0" text="Mesa " />
-                        <TableColumn prefWidth="152.0" text="Empleado" />
-                        <TableColumn prefWidth="108.0" text="#Empleado " />
-                        <TableColumn prefWidth="133.0" text="Total del Consumo " />
-                        <TableColumn prefWidth="91.0" text="Tipo de Pago" />
-                        <TableColumn prefWidth="98.0" text="Fecha" />
+                        <TableColumn fx:id="colMesa" prefWidth="79.0" text="Mesa " />
+                        <TableColumn fx:id="colEmp" prefWidth="152.0" text="Empleado" />
+                        <TableColumn fx:id="colNumEmp" prefWidth="108.0" text="#Empleado " />
+                        <TableColumn fx:id="colTotal" prefWidth="133.0" text="Total del Consumo " />
+                        <TableColumn fx:id="colTipoPago" prefWidth="91.0" text="Tipo de Pago" />
+                        <TableColumn fx:id="colFecha" prefWidth="98.0" text="Fecha" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

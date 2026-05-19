@@ -1,0 +1,9 @@
+1,Fulanito,124,350.0,Efectivo,18/05/2026
+2,Oscar,120,350.0,Efectivo,18/05/2026
+3,Marisa Castillo,123,350.0,Efectivo,18/05/2026
+4,Oscar,120,240.0,Efectivo,18/05/2026
+5,Fulanito,124,300.0,Tarjeta,18/05/2026
+6,Oscar,120,350.0,Efectivo,18/05/2026
+7,Marisa Castillo,123,550.0,Tarjeta,18/05/2026
+
+

@@ -31,6 +31,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.Producto;
+import modelo.RegistroVenta;
+import modelo.Venta;
 
 
 /**
@@ -81,6 +83,8 @@ public class Empleado_LoginController implements Initializable {
     @FXML private Pane Pene1;
     @FXML private TextField lblBuscar;
     
+    private Button mesaSeleccionada;
+    
     /**
      * Initializes the controller class.
      */
@@ -88,17 +92,30 @@ public class Empleado_LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
+        // Registrando una venta
+        /*
+        Venta venta = new Venta(
+            1,
+            "Carlos",
+            1001,
+            350,
+            "Efectivo",
+            "18/05/2026"
+        );
+        RegistroVenta.getInstancia().agregarVenta(venta);
+        */
+        
         pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
         pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());
         pedidosPorMesa.put("Mesa 3", FXCollections.observableArrayList());
         pedidosPorMesa.put("Mesa 4", FXCollections.observableArrayList());
 
-        seleccionarMesa("Mesa 1");
+        seleccionarMesa(btnMesa1, "Mesa 1");
        // conección de botones para darles funcionalidad 
-        btnMesa1.setOnAction(e -> seleccionarMesa("Mesa 1"));
-        btnMesa2.setOnAction(e -> seleccionarMesa("Mesa 2"));
-        btnMesa3.setOnAction(e -> seleccionarMesa("Mesa 3"));
-        btnMesa4.setOnAction(e -> seleccionarMesa("Mesa 4"));
+        btnMesa1.setOnAction(e -> seleccionarMesa(btnMesa1, "Mesa 1"));
+        btnMesa2.setOnAction(e -> seleccionarMesa(btnMesa2, "Mesa 2"));
+        btnMesa3.setOnAction(e -> seleccionarMesa(btnMesa3, "Mesa 3"));
+        btnMesa4.setOnAction(e -> seleccionarMesa(btnMesa4, "Mesa 4"));
         
         btnLogout.setOnAction(eh -> {
             SceneManager.cambiarVentana(eh, "Login.fxml");
@@ -415,12 +432,29 @@ public class Empleado_LoginController implements Initializable {
 
     private String mesaActual;
 
-    private void seleccionarMesa(String mesa) {
+    private void seleccionarMesa(Button boton, String mesa) {
 
-      mesaActual = mesa;
-     listaCuenta = pedidosPorMesa.get(mesa);
-    tablaProdCuenta.setItems(listaCuenta);
-    actualizarTotal();
-}
-
+        mesaActual = mesa;
+        listaCuenta = pedidosPorMesa.get(mesa);
+        tablaProdCuenta.setItems(listaCuenta);
+        actualizarTotal();
+        
+        if (mesaSeleccionada != null) {
+            mesaSeleccionada.setStyle("");
+        }
+        
+        // Guardar nuevo boton seleccionado
+        mesaSeleccionada = boton;
+        
+        // Remarcar boton seleccionado
+        boton.setStyle(
+            "-fx-background-color: #009688;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 14px;"
+        );
+        
+        //System.out.println("Mesa seleccionada: " + mesa);
+    }
+    
 } // Fin class Empleado_LoginController
