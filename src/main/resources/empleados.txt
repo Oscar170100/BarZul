@@ -1,3 +1,4 @@
-Oscar,120,21,1412412433
-Marissa Castillo,123,23,1239485768
-Fulanito,124,43,1122334455
+Oscar,120,21,1412412433,¿Cuál es el nombre de tu mascota?,Stwie
+Marissa Castillo,123,23,1239485768,¿Cuál es tu lugar de nacimiento?,Iztapalapa
+Fulanito,124,43,1122334455,¿Cuál fue tu primer trabajo?,Promotor
+Elizabeht,124,20,5678903283,¿Cuál es tu bebida favorita?,Cerveza

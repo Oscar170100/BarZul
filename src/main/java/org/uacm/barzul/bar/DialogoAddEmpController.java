@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Empleado;
@@ -30,11 +31,20 @@ public class DialogoAddEmpController implements Initializable {
     @FXML private Button btnCancelar;
     @FXML private TextField txtTelefono;
     Alert alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
+    @FXML
+    private ComboBox<String> cbPregunta;
+    @FXML
+    private TextField txtResp;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        cbPregunta.getItems().add("¿Cuál es el nombre de tu mascota?");
+        cbPregunta.getItems().add("¿Cuál es tu lugar de nacimiento?");
+        cbPregunta.getItems().add("¿Cuál es tu bebida favorita?");
+        cbPregunta.getItems().add("¿Cuál fue tu primer trabajo?");
         
         btnCancelar.setOnAction(eh -> {
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
@@ -74,10 +84,28 @@ public class DialogoAddEmpController implements Initializable {
             );
         }
     });
+    
+    // Respuesta 
+    /*
+    txtResp.textProperty().addListener((obs, oldValue, newValue) -> {
+        txtResp.setText(txtResp.getText());
+    });
+    */
+    
     }
+    
     
     @FXML
     private void addEmp(ActionEvent event) {
+        
+        if (cbPregunta.getValue() == null) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Pregunta");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Selecciona una pregunta de seguridad");
+            alerta.showAndWait();
+            return;
+        }
         
         try {
 
@@ -96,8 +124,10 @@ public class DialogoAddEmpController implements Initializable {
             int numEmpleado = Integer.parseInt(txtNoEmpleado.getText().trim());
             int edad = Integer.parseInt(txtEdad.getText().trim());
             int NumTelefono = Integer.parseInt(txtTelefono.getText().trim());
+            String pregunta = cbPregunta.getValue();
+            String resp = txtResp.getText().trim();
             
-            Empleado empleadoCreado = new Empleado(nombreEmp, numEmpleado, edad, NumTelefono);
+            Empleado empleadoCreado = new Empleado(nombreEmp, numEmpleado, edad, NumTelefono, pregunta, resp);
             
             Registro.getInstancia().agregarEmpleado(empleadoCreado);
             

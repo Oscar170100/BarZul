@@ -52,14 +52,16 @@ public class Registro {
                 String[] datos = linea.split(",");
                 
                 // Verifica que existan valores en el archivo para asignarlos
-                if (datos.length == 4) {
+                if (datos.length == 6) {
                     String nombre = datos[0].trim();
-                     int numEmpleado = Integer.parseInt(datos[1].trim());
-                     int Edad= Integer.parseInt(datos[2].trim());
-                     long NumTelefono = Long.parseLong(datos[3].trim());
+                    int numEmpleado = Integer.parseInt(datos[1].trim());
+                    int Edad= Integer.parseInt(datos[2].trim());
+                    long NumTelefono = Long.parseLong(datos[3].trim());
+                    String pregunta = datos[4].trim();
+                    String resp = datos[5].trim();
     
                      // Crea y Agrega un nuevo objeto de tipo Empleado y le da los valores
-                     empleados.add(new Empleado(nombre, numEmpleado, Edad, NumTelefono));
+                     empleados.add(new Empleado(nombre, numEmpleado, Edad, NumTelefono, pregunta, resp));
                 }
             }
             
@@ -79,7 +81,9 @@ public class Registro {
                     e.getNombreEmp() + "," +
                     e.getNumEmpleado() + "," +
                     e.getEdad() + "," +
-                    e.getNumTelefono()
+                    e.getNumTelefono() + "," +
+                    e.getPregunta() + "," +
+                    e.getResp()
                 );
                 escritor.newLine();
             }

@@ -10,9 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Empleado;
+import modelo.Registro;
 
 /**
  * FXML Controller class
@@ -37,9 +39,18 @@ public class DialodoEmpEdiController implements Initializable {
     private Empleado empleado;
     
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
+    @FXML
+    private ComboBox<String> cbPregunta;
+    @FXML
+    private TextField txtResp;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        cbPregunta.getItems().add("¿Cuál es el nombre de tu mascota?");
+        cbPregunta.getItems().add("¿Cuál es tu lugar de nacimiento?");
+        cbPregunta.getItems().add("¿Cuál es tu bebida favorita?");
+        cbPregunta.getItems().add("¿Cuál fue tu primer trabajo?");
         
         btnAceptar.setOnAction(event -> {
 
@@ -60,14 +71,14 @@ public class DialodoEmpEdiController implements Initializable {
              if (!newValue.matches("\\d*")) {
                   txtNoEmpleado.setText(newValue.replaceAll("[^\\d]", ""));
             }
-    });
+        });
 
              // Edad -> solo recibe numeros
         txtEdad.textProperty().addListener((obs, oldValue, newValue) -> {
              if (!newValue.matches("\\d*")) {
                   txtEdad.setText(newValue.replaceAll("[^\\d]", ""));
             }
-    });
+        });
 
              // Teléfono -> solo recibe numeros
         txtTelefono.textProperty().addListener((obs, oldValue, newValue) -> {
@@ -76,9 +87,18 @@ public class DialodoEmpEdiController implements Initializable {
             }
              // ----------------------------------------------------------------------------------
               if (txtTelefono.getText().length() > 10) {
-        txtTelefono.setText(txtTelefono.getText().substring(0, 10));
-    }
-    });
+                txtTelefono.setText(txtTelefono.getText().substring(0, 10));
+            }
+        });
+        
+        txtResp.textProperty().addListener((obs, oldValue, newValue) -> {
+             if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                 txtResp.setText(
+                newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+                );
+             }
+            
+        });
 
         // Nombre -> solo  recibira letras, espacios y acentos
          txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
@@ -87,7 +107,7 @@ public class DialodoEmpEdiController implements Initializable {
                 newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
                 );
              }
-     });
+        });
     }    
      public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
@@ -99,6 +119,8 @@ public class DialodoEmpEdiController implements Initializable {
             txtNoEmpleado.setText(String.valueOf(empleado.getNumEmpleado()));
             txtEdad.setText(String.valueOf( empleado.getEdad()));
             txtTelefono.setText(String.valueOf(empleado.getNumTelefono()));
+            cbPregunta.setValue(empleado.getPregunta());
+            txtResp.setText(empleado.getResp());
             
         }
     }
@@ -107,6 +129,8 @@ public class DialodoEmpEdiController implements Initializable {
         int NumEmpleado;
         int Edad;
         long NumTelefono;
+        String pregunta = cbPregunta.getValue();
+        String resp = txtResp.getText().trim();
         
         
         if (nombre.isEmpty()) {
@@ -129,12 +153,17 @@ public class DialodoEmpEdiController implements Initializable {
             Edad = Integer.parseInt(txtEdad.getText());
             NumTelefono = Long.parseLong(txtTelefono.getText());
             
-            // Actualizando los valore
+            // Actualizando los valores
             empleado.setNombreEmp(nombre);
             empleado.setNumEmpleado(NumEmpleado);
             empleado.setEdad(Edad);
             empleado.setNumTelefono(NumTelefono);
+            empleado.setPregunta(pregunta);
+            empleado.setResp(resp);
 
+            // Guardar TXT
+            Registro.getInstancia().guardarempleadosTxt();
+            
             // Alerta de Exito
             alerta("Exito", "Valores actualizados correctamente");
             return true;

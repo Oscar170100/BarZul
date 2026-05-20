@@ -44,6 +44,8 @@ public class EmpleadosController implements Initializable {
     private Empleado empleado = null;
     private ObservableList<Empleado> empObs= FXCollections.observableArrayList();
     private int opcion = 0;
+    @FXML
+    private TableColumn<Empleado, String> respSeg;
     /**
      * Initializes the controller class.
      */
@@ -66,6 +68,8 @@ public class EmpleadosController implements Initializable {
         Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
         edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
         NumTelefono.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getNumTelefono() ).asObject());      
+        respSeg.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getResp()));
+        
         Registro.getInstancia().cargarEmpleadoTxt();
         
         //cargarDatos();
