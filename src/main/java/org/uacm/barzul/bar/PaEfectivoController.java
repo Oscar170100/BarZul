@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import modelo.MisExcepcionesBar.CantidadIncorrectaException;
 
 /**
  * FXML Controller class
@@ -65,49 +66,40 @@ public class PaEfectivoController implements Initializable {
     @FXML
     private void manejarAceptar(ActionEvent event) {
         
-         try { 
-            double efectivo = Double.parseDouble(txtEfectivoRecibido.getText());
-        // valida que la cantidad ingresada sea igual o mayor ala del pago 
-        if(efectivo < total ){
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Pago insuficiente");
-            alerta.setHeaderText(null);
-            alerta.setContentText("El efectivo recibido no cubre el total");
-               
-            alerta.showAndWait();
-                    return;
-        }
+         try {  
+             double efectivo = Double.parseDouble(txtEfectivoRecibido.getText());
+             if(efectivo < total ){
+            throw new CantidadIncorrectaException("El efectivo recibido no cubre el total", efectivo);
+             
+             }
         // Calcular cambio y lo muestra 
-        double cambio = efectivo - total;
-        try {
-         lblCambio.setText("$"+String.format("%.2f", cambio));
-            
+            double cambio = efectivo - total;
+             lblCambio.setText("$"+String.format("%.2f", cambio));
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setUserData(true);
+                
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Pago realizado");
                 alerta.setHeaderText(null);
                 alerta.setContentText("El pago fue realizado correctamente\n"+ "Cambio: $"+ String.format("%.2f", cambio));
-                  
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setUserData(true);
                 alerta.showAndWait();
-   
-        } catch (Exception e) {
-
-                e.printStackTrace();
-                e.getMessage();
-                 
-            }
-    }catch (Exception e) {
-
-                e.printStackTrace();
-                e.getMessage();
-
-                Alert alerta = new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("Error");
+              
+                cerrarVentana();
+        } catch (CantidadIncorrectaException e) {
+                  Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Pago insuficiente");
                 alerta.setHeaderText(null);
-                alerta.setContentText("Ingrese un valor válido");
-
+                alerta.setContentText(e.getMessage() + "\n" +"Cantidad ingresada: $" + String.format("%.2f", e.getcantidadIngresada()) + "\n" + "Total a pagar: $" + String.format("%.2f", total));
                 alerta.showAndWait();
-            }
+        }
+            
     }
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+    
 }

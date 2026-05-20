@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -58,13 +59,19 @@ public class PagosController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Pago en Efectivo");
             stage.showAndWait();
+            
             if (stage.getUserData() != null && (boolean) stage.getUserData()) {
                 setPagoExitoso(true);
+                cerrarVentana();
+                SceneManager.cambiarVentana(event, "Ticket.fxml");
             }
-             SceneManager.cambiarVentana(event, "Ticket.fxml");
-            cerrarVentana();
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error al cargar la ventana de pago");
+            alerta.showAndWait();
         }
     }
 
@@ -84,11 +91,18 @@ public class PagosController implements Initializable {
             
             if (stage.getUserData() != null && (boolean) stage.getUserData()) {
                 setPagoExitoso(true);
+                cerrarVentana();
+                SceneManager.cambiarVentana(event, "Ticket.fmx");
             }
             
             cerrarVentana();
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Error al cargar la ventana de pago");
+            alerta.showAndWait();
         }
     }
 

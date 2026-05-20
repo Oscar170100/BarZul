@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import modelo.MisExcepcionesBar.ContraseñaIncorrectaException;
 
 /**
  * FXML Controller class
@@ -51,6 +52,7 @@ public class LoginController implements Initializable {
         
         Alert alertInfo = new Alert(AlertType.INFORMATION);
         
+        try {
         if (usuario.equals("Admin") && password.equals("123456")) {
             // Ingreso como ADMINISTRADOR
             SceneManager.cambiarVentana(event, "Admin_Login.fxml");
@@ -58,19 +60,32 @@ public class LoginController implements Initializable {
         } else if (usuario.equals("emp") && password.equals("123")) {
             // Ingreso como EMPLEADO
             SceneManager.cambiarVentana(event, "Empleado_Login.fxml");
-            
-        } else {
-            alertInfo.setTitle("Error");
-            alertInfo.setHeaderText("Atencion!");
-            alertInfo.setContentText("Usuario o Contraseña incorrectos");
-            alertInfo.showAndWait();
-        }
         
+        } 
+        
+        else{
+            throw new ContraseñaIncorrectaException("Contraseña incorrecta ",password);
+        }
+        }catch(ContraseñaIncorrectaException e){
+            mostrarError("Error en contraseña ", 
+            e.getMessage());
+             txtContraseña.clear();
+            txtContraseña.requestFocus();
+        
+               
+        }
     }
 
     @FXML
     private void olvidePass(ActionEvent event) {
         SceneManager.cambiarVentana(event, "Olvide_Contraseña.fxml");
     }
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     
+}
 }
