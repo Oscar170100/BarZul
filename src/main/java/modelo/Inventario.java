@@ -6,11 +6,13 @@ package modelo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import modelo.MisExcepcionesBar.CargarProductoException;
 
 /**
  *
@@ -42,32 +44,41 @@ public class Inventario {
     }
     
     // Carga los datos desde el Archivo .txt
-    public void cargarProductosTxt() {
+    public void cargarProductosTxt() throws CargarProductoException {
         productos.clear();
         
         try (BufferedReader lector = Files.newBufferedReader(rutaArchivo)){
             
             String linea;
-            // Recorre el archivo de datos hasta encontrar un NULL
-            while ((linea = lector.readLine()) != null) {
-                String[] datos = linea.split(",");
-                
-                // Verifica que existan valores en el archivo para asignarlos
-                if (datos.length == 4) {
-                    String nombre = datos[0].trim();
-                    String tipo = datos[1].trim();
-                    float precio = Float.parseFloat(datos[2].trim());
-                    int cantidad = Integer.parseInt(datos[3].trim());
+            int numeroLinea=0;
+      
+                // Recorre el archivo de datos hasta encontrar un NULL
+                while ((linea = lector.readLine()) != null) {
+                    String[] datos = linea.split(",");
                     
-                    // Crea y Agrega un nuevo objeto de tipo Producto y le da los valores
-                    productos.add(new Producto(nombre, tipo, precio, cantidad));
+                    // Verifica que existan valores en el archivo para asignarlos
+                    if (datos.length == 4) {
+                        try{
+                        String nombre = datos[0].trim();
+                        String tipo = datos[1].trim();
+                        float precio = Float.parseFloat(datos[2].trim());
+                        int cantidad = Integer.parseInt(datos[3].trim());
+                        
+                        // Crea y Agrega un nuevo objeto de tipo Producto y le da los valores
+                        productos.add(new Producto(nombre, tipo, precio, cantidad));
+                    } catch (NumberFormatException e) {
+                        throw new CargarProductoException("Error de formato en línea " + numeroLinea + ": " + e.getMessage(), e);
+                    }
+                } else {
+                    throw new CargarProductoException("Línea " + numeroLinea + " tiene formato incorrecto. Se esperaban 4 campos.", null);
                 }
             }
-            
+        } catch (CargarProductoException e) {
+            throw e;
         } catch (Exception e) {
-            // Imprime en pantalla el mensaje si ocurre algun error
-            System.out.println("Error al cargar productos: " + e.getMessage());
+            throw new CargarProductoException("Error al leer el archivo de productos: " + e.getMessage(), e);
         }
+
     } // Fin CargarDatos
     
     // Guarda los Productos en el archivo de texto

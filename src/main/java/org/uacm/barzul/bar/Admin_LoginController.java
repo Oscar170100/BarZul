@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package org.uacm.barzul.bar;
-
+import modelo.MisExcepcionesBar.CargarProductoException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -32,7 +32,6 @@ public class Admin_LoginController implements Initializable {
     @FXML private Button btnEmpleados;
     @FXML private Button btnLogout;
     @FXML private Button btnAddProd;
-    
     @FXML private Button btnEliminar;
     @FXML private Button btnVentas;
     @FXML private Button btnEditarProd;
@@ -73,7 +72,20 @@ public class Admin_LoginController implements Initializable {
         precioProd.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getPrecio() ).asObject());
         cantidadProd.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getCantidad() ).asObject() );
         
+        try {
         Inventario.getInstancia().cargarProductosTxt();
+    } catch (modelo.MisExcepcionesBar.CargarProductoException e) {
+        System.err.println("Error al cargar productos: " + e.getMessage());
+        e.printStackTrace();
+        
+        // Mostrar alerta al usuario
+        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alerta.setTitle("Error de carga");
+        alerta.setHeaderText("No se pudieron cargar los productos");
+        alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique el archivo productos.txt");
+        alerta.showAndWait();
+    }
+        //Inventario.getInstancia().cargarProductosTxt();
         
         //cargarDatos();
         tbProductos.setItems(Inventario.getInstancia().getProductos());

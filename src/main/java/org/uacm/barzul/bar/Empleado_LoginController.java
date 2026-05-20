@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package org.uacm.barzul.bar;
-
+import modelo.MisExcepcionesBar.CargarProductoException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +78,6 @@ public class Empleado_LoginController implements Initializable {
     @FXML private Button btnMesa4;
     private Pane pane1;
     private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
-    @FXML private Pane Pene1;
     @FXML private TextField lblBuscar;
     
     private Button mesaSeleccionada;
@@ -133,8 +132,20 @@ public class Empleado_LoginController implements Initializable {
         );
         
         // Instancia la clase Inventario y carga los datos del Inventario
+        //Inventario.getInstancia().cargarProductosTxt();
+        try {
         Inventario.getInstancia().cargarProductosTxt();
+    } catch (modelo.MisExcepcionesBar.CargarProductoException e) {
+        System.err.println("Error al cargar productos: " + e.getMessage());
+        e.printStackTrace();
         
+        // Mostrar alerta al usuario
+        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alerta.setTitle("Error de carga");
+        alerta.setHeaderText("No se pudieron cargar los productos");
+        alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique el archivo productos.txt");
+        alerta.showAndWait();
+    }
         productos.setItems(Inventario.getInstancia().getProductos());
         
         // Busqueda de productos
@@ -397,6 +408,15 @@ public class Empleado_LoginController implements Initializable {
             }
             
             float totalPago = Float.parseFloat(text);
+            
+            if (totalPago <= 0) {
+            alertInfo.setHeaderText("Advertencia");
+            alertInfo.setTitle("Advertencia");
+            alertInfo.setContentText("El total debe ser mayor a 0");
+            alertInfo.showAndWait();
+            return;
+        }
+            
             controller.setDatos(totalPago);
             
             // Crear una nueva ventana
@@ -406,8 +426,8 @@ public class Empleado_LoginController implements Initializable {
             
             stage.showAndWait();
             pedidosPorMesa.get(mesaActual).clear();
-            //istaCuenta.clear();
-            //totalCuenta.clear();
+            listaCuenta.clear();
+            totalCuenta.clear();
             
         } catch (Exception e) {
             e.printStackTrace();

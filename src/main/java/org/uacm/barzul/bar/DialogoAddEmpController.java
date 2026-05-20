@@ -15,8 +15,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Empleado;
+import modelo.MisExcepcionesBar.EdadInvalidaException;
+import modelo.MisExcepcionesBar.TelefonoInvalidoException;
 import modelo.Registro;
-
 /**
  * FXML Controller class
  *
@@ -108,22 +109,24 @@ public class DialogoAddEmpController implements Initializable {
         }
         
         try {
-
-     
-            if (txtTelefono.getText().trim().length() != 10) {
-
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Teléfono inválido");
-            alerta.setHeaderText(null);
-            alerta.setContentText("El número telefónico debe tener exactamente 10 dígitos");
-            alerta.showAndWait();
-            return;
-        }
-        
+           // excepcion para la edad 
+            String edadStr= txtEdad.getText().trim();
+                    if (edadStr.isEmpty()){
+                    throw new EdadInvalidaException("La edad no puede encontrarse vacia",0);
+                    }
+            int Edad = Integer.parseInt(edadStr);
+                    if (Edad < 18){
+                    throw new EdadInvalidaException("El empleado debe de ser mayor de 18 años",Edad);
+                    }
+            // excepcion para el numero de telefono 
+            if(txtTelefono.getText().trim().length()!=10){
+                    throw new TelefonoInvalidoException("El numero debe de contener exactamente 10 digitos",txtTelefono.getText().trim());
+                }
+            
             String nombreEmp = txtNombre.getText().trim();
             int numEmpleado = Integer.parseInt(txtNoEmpleado.getText().trim());
             int edad = Integer.parseInt(txtEdad.getText().trim());
-            int NumTelefono = Integer.parseInt(txtTelefono.getText().trim());
+            long NumTelefono = Long.parseLong(txtTelefono.getText().trim());
             String pregunta = cbPregunta.getValue();
             String resp = txtResp.getText().trim();
             
@@ -139,7 +142,17 @@ public class DialogoAddEmpController implements Initializable {
             limpiarCampos();
             
             ((Stage) btnAceptar.getScene().getWindow()).close();
-           
+        } catch (EdadInvalidaException e) {
+            mostrarError("Error - Edad Incorrecta", 
+                e.getMessage() + "\nEdad ingresada: " + e.getEdadIngresada() + " años");
+            txtEdad.requestFocus();
+            txtEdad.selectAll();
+            
+        }catch (TelefonoInvalidoException e) {
+            mostrarError("Error - Teléfono Inválido", 
+                e.getMessage() + "\nTeléfono ingresado: " + e.getTelefonoIngresado());
+            txtTelefono.requestFocus();
+            txtTelefono.selectAll();   
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
@@ -152,5 +165,11 @@ public class DialogoAddEmpController implements Initializable {
         txtNoEmpleado.clear();
         txtTelefono.clear();
     }
-    
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 }
