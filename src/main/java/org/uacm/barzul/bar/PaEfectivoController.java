@@ -14,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button; 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import modelo.MisExcepcionesBar.CantidadIncorrectaException;
 
@@ -31,7 +30,7 @@ public class PaEfectivoController implements Initializable {
     @FXML private Button btnAceptar;
     @FXML private Button btnCancelar;
     // donde se guardara el total de la cuenta 
-    private float total;
+    private double total;
 
     /**
      * ializes the controller class.
@@ -49,7 +48,7 @@ public class PaEfectivoController implements Initializable {
         });
     }
     // recibe el total de el pago
-    public void setDatos(float total) {
+    public void setDatos(double total) {
         this.total = total;
         lblTotal.setText("$"+ String.format("%.2f",total));
     }

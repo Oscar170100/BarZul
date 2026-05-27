@@ -10,20 +10,28 @@ package modelo;
  */
 public class Producto implements java.io.Serializable  {
     
+    private int idProducto;
     private String nombre;
-    private String tipo;
-    private float precio;
+    private int tipoId;
+    private double precio;
     private int cantidad;
     
     // Metodo Constructor
-    public Producto(String nombre, String tipo, float precio, int cantidad) {
+    public Producto(String nombre, int tipoId, double precio, int cantidad) {
         this.nombre = nombre;
-        this.tipo = tipo;
+        this.tipoId = tipoId;
         this.precio = precio;
         this.cantidad = cantidad;
     }
     
     // Setters y Getters
+    public int getIdProducto() {
+        return idProducto;
+    }
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -31,17 +39,17 @@ public class Producto implements java.io.Serializable  {
         this.nombre = nombre;
     }
     
-    public String getTipo() {
-        return tipo;
+    public int getTipoId() {
+        return tipoId;
     }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoId(int tipoId) {
+        this.tipoId = tipoId;
     }
     
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     

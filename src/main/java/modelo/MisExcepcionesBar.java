@@ -64,18 +64,15 @@ public class MisExcepcionesBar {
      } 
      // excepcion para cargar Producto 
       
-     public static class CargarProductoException extends Exception {
-        private String cargarProducto;
-    
-        public CargarProductoException(String mensaje, Throwable causa) {
-            super(mensaje,causa);
-            this.cargarProducto = cargarProducto;
-    }
-    
-        public String getCargarProducto() {
-            return cargarProducto;
-    }
+    public static class CargarProductoException extends Exception {
         
+        public CargarProductoException(String mensaje) {
+            super(mensaje);
+        }   
+        
+        public CargarProductoException(String mensaje, Throwable causa) {
+            super(mensaje, causa);
+        }
     
     }
 

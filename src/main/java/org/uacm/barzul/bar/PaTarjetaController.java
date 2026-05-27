@@ -31,7 +31,7 @@ public class PaTarjetaController implements Initializable {
     @FXML private Button btnAceptar;
     @FXML private Button btnCancelar;
     
-    private float total;
+    private double total;
     /**
      * Initializes the controller class.
      */
@@ -85,7 +85,7 @@ public class PaTarjetaController implements Initializable {
         }
     }    
   // recibe el total de el pago
-    public void setDatos(float total) {
+    public void setDatos(double total) {
         this.total = total;
         lblTotal.setText("$"+ String.format("%.2f",total));
     }

@@ -4,9 +4,9 @@
  */
 package org.uacm.barzul.bar;
 
+import dao.ProductosDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -14,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modelo.Inventario;
 import modelo.Producto;
+import modelo.TipoProducto;
 
 /**
  * FXML Controller class
@@ -23,25 +25,17 @@ import modelo.Producto;
  */
 public class EdIProductoController implements Initializable {
 
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtPrecio;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
-    @FXML
-    private TextField txtCantidad;
- 
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtPrecio;
+    @FXML private Button btnAceptar;
+    @FXML private Button btnCancelar;
+    @FXML private TextField txtCantidad;
+    @FXML private ChoiceBox<TipoProducto> chBox;
+    
     //
     private Producto producto;
-    
-    
     //
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
-    @FXML
-    private ChoiceBox<String> chBox;
     
     /**
      * Initializes the controller class.
@@ -50,9 +44,8 @@ public class EdIProductoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        chBox.getItems().add("Botana");
-        chBox.getItems().add("Bebida");
-        chBox.getItems().add("Bebida Alcoholica");
+        ProductosDAO dao = new ProductosDAO();
+        chBox.getItems().addAll(dao.obtenerTiposProducto());
         
         btnAceptar.setOnAction(event -> {
             guardarCambios();
@@ -105,7 +98,12 @@ public class EdIProductoController implements Initializable {
         if (producto != null) {
             
             txtNombre.setText(producto.getNombre());
-            chBox.setValue(producto.getTipo());
+            for (TipoProducto tipo: chBox.getItems()) {
+                if (tipo.getIdTipo() == producto.getTipoId()) {
+                    chBox.setValue(tipo);
+                    break;
+                }
+            }
             // Se utiliza valueOf porque el precio es float y el setText es un String
             txtPrecio.setText(String.valueOf(producto.getPrecio()));
             txtCantidad.setText(String.valueOf(producto.getCantidad()));
@@ -116,21 +114,24 @@ public class EdIProductoController implements Initializable {
     
     // Guarda los cambios si al editar el producto seleccionado
     public void guardarCambios() {
+        
         String nombre = txtNombre.getText().trim();
-        String tipo = chBox.getValue().trim();
-        float precio;
+        TipoProducto tipoSeleccionado = chBox.getValue();
+        double precio;
         int cantidad;
         
         if (nombre.isEmpty()) {
             alerta("Error", "El nombre no puede estar vacio");
+            return;
         }
-        if (tipo.isEmpty()) {
+        if (tipoSeleccionado == null){
             alerta("Error", "El Tipo no puede estar vacio");
+            return;
         }
         
         try {
             // asignamos el valor del campo txtPrecio(String) convirtiendolo en flotante (Float)
-            precio = Float.parseFloat(txtPrecio.getText());
+            precio = Double.parseDouble(txtPrecio.getText());
             cantidad = Integer.parseInt(txtCantidad.getText());
             
             // Evaluamos que no haya escrito 0 o menor
@@ -141,10 +142,13 @@ public class EdIProductoController implements Initializable {
 
             // Actualizando los valores
             producto.setNombre(nombre);
-            producto.setTipo(tipo);
+            producto.setTipoId(tipoSeleccionado.getIdTipo());
             producto.setPrecio(precio);
             producto.setCantidad(cantidad);
 
+            // Actualizar en la BD
+            Inventario.getInstancia().actualizarProducto(producto);
+            
             // Alerta de Exito
             alerta("Exito", "Valores actualizados correctamente");
             

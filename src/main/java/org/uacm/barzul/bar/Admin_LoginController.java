@@ -36,8 +36,8 @@ public class Admin_LoginController implements Initializable {
     @FXML private Button btnVentas;
     @FXML private Button btnEditarProd;
     @FXML private TableColumn<Producto, String> nomProd;
-    @FXML private TableColumn<Producto, String> tipoProd;
-    @FXML private TableColumn<Producto, Float> precioProd;
+    @FXML private TableColumn<Producto, Integer> tipoProd;
+    @FXML private TableColumn<Producto, Double> precioProd;
     @FXML private TableColumn<Producto, Integer> cantidadProd;
     @FXML private TableView<Producto> tbProductos;
     
@@ -68,23 +68,26 @@ public class Admin_LoginController implements Initializable {
         
         // Para ver los datos en la tabla despues de agregar un Nuevo prod
         nomProd.setCellValueFactory( data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombre()) );
-        tipoProd.setCellValueFactory( data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTipo() ) );
-        precioProd.setCellValueFactory( data -> new javafx.beans.property.SimpleFloatProperty( data.getValue().getPrecio() ).asObject());
+        tipoProd.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getTipoId() ).asObject());
+        precioProd.setCellValueFactory( data -> new javafx.beans.property.SimpleDoubleProperty( data.getValue().getPrecio() ).asObject());
         cantidadProd.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getCantidad() ).asObject() );
         
         try {
-        Inventario.getInstancia().cargarProductosTxt();
-    } catch (modelo.MisExcepcionesBar.CargarProductoException e) {
-        System.err.println("Error al cargar productos: " + e.getMessage());
-        e.printStackTrace();
         
-        // Mostrar alerta al usuario
-        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alerta.setTitle("Error de carga");
-        alerta.setHeaderText("No se pudieron cargar los productos");
-        alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique el archivo productos.txt");
-        alerta.showAndWait();
-    }
+            Inventario.getInstancia().cargarProductosBD();
+        
+        } catch (CargarProductoException e) {
+        
+            System.err.println("Error al cargar productos: " + e.getMessage());
+            e.printStackTrace();
+        
+            // Mostrar alerta al usuario
+            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alerta.setTitle("Error de carga");
+            alerta.setHeaderText("No se pudieron cargar los productos");
+            alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique el archivo productos.txt");
+            alerta.showAndWait();
+        }
         //Inventario.getInstancia().cargarProductosTxt();
         
         //cargarDatos();
@@ -99,9 +102,9 @@ public class Admin_LoginController implements Initializable {
             }
         );
         
-    }    
+    } // Fin initialize    
     
-    @FXML
+    @FXML 
     private void agregarProducto(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoAddPRod.fxml"));
@@ -119,11 +122,13 @@ public class Admin_LoginController implements Initializable {
             e.printStackTrace();
             e.getMessage();
         }
-    }
+    } // Fin agregarProducto
     
-    @FXML
+    @FXML 
     private void editarProd(ActionEvent event) {
+    
         if (producto != null) {
+        
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("EdIProducto.fxml"));
                 Parent root = loader.load();
@@ -140,17 +145,19 @@ public class Admin_LoginController implements Initializable {
                 tbProductos.setItems(Inventario.getInstancia().getProductos());
 
                 tbProductos.refresh();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    e.getMessage();
-                }
-
-        }
-    }
+            
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getMessage();
+            }
+        } // fin if
+    } // Fin editarProd
 
     @FXML
     private void eliminarProd(ActionEvent event) {
+        
         try {
+        
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DialogoEliminarProd.fxml"));
             Parent root = loader.load();
             

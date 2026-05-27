@@ -4,12 +4,8 @@
  */
 package modelo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import dao.ProductosDAO;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import modelo.MisExcepcionesBar.CargarProductoException;
@@ -23,12 +19,24 @@ public class Inventario {
     private static Inventario instancia;
     private ObservableList<Producto> productos;
     
-    // Crea una ruta del Archivo de texto
-    private final Path rutaArchivo = Paths.get("src/main/resources/productos.txt");
+    // ProductosDAO
+    private ProductosDAO productosDao;
     
+    // 
     private Inventario() {
+        
         productos = FXCollections.observableArrayList();
-    }
+        productosDao = new ProductosDAO();
+        
+        try {
+            
+            cargarProductosBD();
+            
+        } catch (CargarProductoException e) {
+            System.out.println("Error al incializar inventario: " + e.getMessage());
+        }
+        
+    } // Fin Inventario
     
     // Crea la instancia de la clase Inventario
     public static Inventario getInstancia() {
@@ -36,84 +44,61 @@ public class Inventario {
         if (instancia == null) {
             instancia = new Inventario();
         }
+        
         return instancia;
     } // Fin getInstancia
     
+    // 
     public ObservableList<Producto> getProductos() {
         return productos;
     }
     
-    // Carga los datos desde el Archivo .txt
-    public void cargarProductosTxt() throws CargarProductoException {
-        productos.clear();
+    // Carga los datos desde la BD
+    public void cargarProductosBD() throws CargarProductoException {
         
-        try (BufferedReader lector = Files.newBufferedReader(rutaArchivo)){
+        try {
+        
+            productos.clear();
             
-            String linea;
-            int numeroLinea=0;
-      
-                // Recorre el archivo de datos hasta encontrar un NULL
-                while ((linea = lector.readLine()) != null) {
-                    String[] datos = linea.split(",");
-                    
-                    // Verifica que existan valores en el archivo para asignarlos
-                    if (datos.length == 4) {
-                        try{
-                        String nombre = datos[0].trim();
-                        String tipo = datos[1].trim();
-                        float precio = Float.parseFloat(datos[2].trim());
-                        int cantidad = Integer.parseInt(datos[3].trim());
-                        
-                        // Crea y Agrega un nuevo objeto de tipo Producto y le da los valores
-                        productos.add(new Producto(nombre, tipo, precio, cantidad));
-                    } catch (NumberFormatException e) {
-                        throw new CargarProductoException("Error de formato en línea " + numeroLinea + ": " + e.getMessage(), e);
-                    }
-                } else {
-                    throw new CargarProductoException("Línea " + numeroLinea + " tiene formato incorrecto. Se esperaban 4 campos.", null);
-                }
-            }
-        } catch (CargarProductoException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new CargarProductoException("Error al leer el archivo de productos: " + e.getMessage(), e);
+            List<Producto> lista = productosDao.obtenerTodosProductos();
+            
+            productos.addAll(lista);
+           
+        }catch (Exception e) {
+            throw new CargarProductoException("Error al cargar productos de la base de datos: " + e.getMessage(), e);
         }
 
     } // Fin CargarDatos
     
-    // Guarda los Productos en el archivo de texto
-    public void guardarProductosTxt() {
-        
-        try (BufferedWriter escritor = Files.newBufferedWriter(rutaArchivo)){
-            
-            for (Producto p: productos) {
-                escritor.write(
-                    p.getNombre() + "," +
-                    p.getTipo() + "," +
-                    p.getPrecio() + "," +
-                    p.getCantidad()
-                );
-                escritor.newLine();
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Error al guardar producos: " + e.getMessage());
-        }
-                
-    } // Fin guardarProductos
-    
     // Agregar Producto
-    public void agregarProducto(Producto producto) {
+    public boolean agregarProducto(Producto producto) {
         
-        productos.add(producto);
-        guardarProductosTxt();
+        boolean agregado = productosDao.agregarProducto(producto);
+        
+        if (agregado) {
+            productos.add(producto);
+        }
+        
+        return agregado;
         
     } // Fin agregarProducto
+    
+    public boolean actualizarProducto(Producto producto) {
         
-    public void eliminarProducto(Producto producto) {
+        return productosDao.actualizarProducto(producto);
+    }
         
-        productos.remove(producto);
-        guardarProductosTxt();
+    public boolean eliminarProducto(Producto producto) {
+        
+        boolean eliminado = productosDao.eliminarProducto(producto.getIdProducto());
+        
+        if (eliminado) {
+            
+            productos.remove(producto);
+            
+        }
+        
+        return eliminado;
         
     } // Fin eliminarProducto
     

@@ -44,7 +44,7 @@ public class ProductoController {
     }    
     
     // Actualiza producto
-    public void actualizarProd(String nombre, String tipo, float precio, int cantidad) {
+    public void actualizarProd(String nombre, int tipo, float precio, int cantidad) {
         
         // Lista de productos
         for (Producto producto : listaProductos) {
@@ -53,7 +53,7 @@ public class ProductoController {
             if (producto.getNombre().equals(nombre)) {
                 
                 producto.setNombre(nombre);
-                producto.setTipo(tipo);
+                producto.setTipoId(tipo);
                 producto.setCantidad(cantidad);
                 producto.setPrecio(precio);
                 

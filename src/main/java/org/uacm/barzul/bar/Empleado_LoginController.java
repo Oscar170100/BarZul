@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package org.uacm.barzul.bar;
-import modelo.MisExcepcionesBar.CargarProductoException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,8 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.Inventario;
+import modelo.MisExcepcionesBar.CargarProductoException;
 import modelo.Producto;
-
 
 /**
  * FXML Controller class
@@ -40,24 +39,24 @@ import modelo.Producto;
  */
 public class Empleado_LoginController implements Initializable {
 
-    // Columnas Tabla Productos en Inventario
-    @FXML private TableColumn<Producto, String> productoNom;
-    @FXML private TableColumn<Producto, Float> precioProd;
-    @FXML private TableColumn<Producto, Integer> cantidadProd;
     // Tabla Productos
     @FXML private TableView<Producto> productos;
-    @FXML private Button btnLogout;
-    @FXML // Botone en la tabla Produtos
-  private TableColumn<Producto, Void> accionesProd;
+    // Columnas Tabla Productos en Inventario
+    @FXML private TableColumn<Producto, String> productoNom;
+    @FXML private TableColumn<Producto, Double> precioProd;
+    @FXML private TableColumn<Producto, Integer> cantidadProd;    
+    // Botone en la tabla Produtos
+    @FXML private TableColumn<Producto, Void> accionesProd;
     
-  // Columnas Tabla Cuenta
-    @FXML private TableColumn<Producto, String> prodCuenta;
-    @FXML private TableColumn<Producto, Float> subTotalCuenta;
-    @FXML private TextField totalCuenta;
     // Tabla principal de cuenta
-    @FXML
-    private TableView<Producto> tablaProdCuenta;
+    @FXML private TableView<Producto> tablaProdCuenta;
+    // Columnas Tabla Cuenta
+    @FXML private TableColumn<Producto, String> prodCuenta;
+    @FXML private TableColumn<Producto, Double> subTotalCuenta;
+    @FXML private TextField totalCuenta;
     
+    @FXML private Button btnLogout;
+
     // Lista observable para almacenar los productos de la cuenta
     // Se crea una instancia vacia de la lista observable usando la clase FXCOllections
     //ObservableList<Producto> listaCuenta = FXCollections.observableArrayList();
@@ -67,40 +66,31 @@ public class Empleado_LoginController implements Initializable {
     @FXML private TableColumn<Producto, Void> accionesCuenta;
     @FXML private Button btnPago;
     
-    //
-    Alert alertInfo = new Alert(AlertType.INFORMATION);
     @FXML private Pane pane2;
     @FXML private Pane pane3;
-    @FXML
-    private Button btnMesa1;
+    
+    @FXML private Button btnMesa1;
     @FXML private Button btnMesa2;
     @FXML private Button btnMesa3;
     @FXML private Button btnMesa4;
+    
     private Pane pane1;
     private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
+    
     @FXML private TextField lblBuscar;
     
     private Button mesaSeleccionada;
     
+    //
+    Alert alertInfo = new Alert(AlertType.INFORMATION);
+    
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        // Registrando una venta
-        /*
-        Venta venta = new Venta(
-            1,
-            "Carlos",
-            1001,
-            350,
-            "Efectivo",
-            "18/05/2026"
-        );
-        RegistroVenta.getInstancia().agregarVenta(venta);
-        */
         
         pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
         pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());
@@ -124,7 +114,7 @@ public class Empleado_LoginController implements Initializable {
         );
         
         precioProd.setCellValueFactory(data -> 
-                new SimpleFloatProperty(data.getValue().getPrecio()).asObject()
+                new SimpleDoubleProperty(data.getValue().getPrecio()).asObject()
         );
         
         cantidadProd.setCellValueFactory(data -> 
@@ -134,18 +124,22 @@ public class Empleado_LoginController implements Initializable {
         // Instancia la clase Inventario y carga los datos del Inventario
         //Inventario.getInstancia().cargarProductosTxt();
         try {
-        Inventario.getInstancia().cargarProductosTxt();
-    } catch (modelo.MisExcepcionesBar.CargarProductoException e) {
-        System.err.println("Error al cargar productos: " + e.getMessage());
-        e.printStackTrace();
+            
+            Inventario.getInstancia().cargarProductosBD();
+    
+        } catch (CargarProductoException e) {
         
-        // Mostrar alerta al usuario
-        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alerta.setTitle("Error de carga");
-        alerta.setHeaderText("No se pudieron cargar los productos");
-        alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique el archivo productos.txt");
-        alerta.showAndWait();
-    }
+            System.err.println("Error al cargar productos: " + e.getMessage());
+            e.printStackTrace();
+        
+            // Mostrar alerta al usuario
+            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alerta.setTitle("Error de carga");
+            alerta.setHeaderText("No se pudieron cargar los productos");
+            alerta.setContentText("Error: " + e.getMessage() + "\n\nVerifique la conexion a la BD");
+            alerta.showAndWait();
+        }
+        
         productos.setItems(Inventario.getInstancia().getProductos());
         
         // Busqueda de productos
@@ -156,7 +150,7 @@ public class Empleado_LoginController implements Initializable {
         FilteredList<Producto> filtro = new FilteredList<>(
                 // Esta es la lista original de productos en inventario
                 // p -> true : significa que al inicio muestra todos los productos
-                Inventario.getInstancia().getProductos(), p -> true
+            Inventario.getInstancia().getProductos(), p -> true
         );
         
         /* 
@@ -185,17 +179,12 @@ public class Empleado_LoginController implements Initializable {
                     return true;
                 }
                 
-                // Buscar por Tipo
-                // Si el Tipo de producto (en minusculas) contiene el texto ingresado
-                if (producto.getTipo().toLowerCase().contains(texto)) {
-                    return true;
-                }
-                
                 // Si no encuentra coincidencia en tipo o producto
                 return false;
-            });
+            }); // Fin filtro.setPredicate(Producto -> {
             
-        });
+        }); // Fin lblBuscar.textProperty().addListener((obs, anterior, nuevo) -> {
+        
         // Mostrar el producto buscado por tipo o por nombre en la tabla productos
         productos.setItems(filtro);
                 
@@ -208,8 +197,8 @@ public class Empleado_LoginController implements Initializable {
         });
         
         subTotalCuenta.setCellValueFactory(data -> {
-            float subTotal = data.getValue().getCantidad() * data.getValue().getPrecio();
-            return new SimpleFloatProperty(subTotal).asObject();
+            double subTotal = data.getValue().getCantidad() * data.getValue().getPrecio();
+            return new SimpleDoubleProperty(subTotal).asObject();
         });
         
         // Crea el boton dentro de la tabla Productos
@@ -272,13 +261,13 @@ public class Empleado_LoginController implements Initializable {
                     box.setStyle("-fx-alignment: center;");
                     setGraphic(box);
                     
-                }
+                } // Fin if
                 
-            }
+            } // Fin updateItem
             
-        });
+        }); // Fin accionesCuenta
         
-        } // Fin Inicialize  
+    } // Fin Inicialize  
     
     // Agrega Producto a la cuenta 
     private void agregarAlPedido(Producto producto) {
@@ -290,6 +279,10 @@ public class Empleado_LoginController implements Initializable {
         
         // Disminuimos en 1 la cantidad del inventario en la tabla productos
         producto.setCantidad(producto.getCantidad() - 1);
+        
+        // Actualizando en la BD
+        Inventario.getInstancia().actualizarProducto(producto);
+        
         // Recargamos la tabla principal para ver el stock actual
         productos.refresh();
         
@@ -311,7 +304,7 @@ public class Empleado_LoginController implements Initializable {
         // Agrega producto y con cantidad 1
         listaCuenta.add(new Producto(
                 producto.getNombre(), 
-                producto.getTipo(), 
+                producto.getTipoId(), 
                 producto.getPrecio(), 
                 1
         ));
@@ -341,6 +334,10 @@ public class Empleado_LoginController implements Initializable {
                     if (enInventario.getNombre().equals(producto.getNombre())) {
                         // incrementa la cantidad en 1 al producto en inventario
                         enInventario.setCantidad(enInventario.getCantidad() + 1);
+                        
+                        // Actualizando en la BD
+                        Inventario.getInstancia().actualizarProducto(enInventario);
+                        
                         // Recargando la tabla de los productos
                         productos.refresh();
                         break;
@@ -373,7 +370,7 @@ public class Empleado_LoginController implements Initializable {
     // Calcula el Total de la cuenta
     private void actualizarTotal() {
         
-        float total = 0;
+        double total = 0;
         
         // Recorre la lista de productos en la cuenta
         for(Producto p: listaCuenta) {
@@ -399,15 +396,15 @@ public class Empleado_LoginController implements Initializable {
             String text = totalCuenta.getText();
             if (text == null || text.isEmpty()) {
 
-                 alertInfo.setHeaderText("Advertencia");
-                 alertInfo.setTitle("Advertencia");
-                 alertInfo.setContentText("Campo Vacío");
-                 alertInfo.showAndWait();
+                alertInfo.setHeaderText("Advertencia");
+                alertInfo.setTitle("Advertencia");
+                alertInfo.setContentText("Campo Vacío");
+                alertInfo.showAndWait();
 
-                  return;
+                return;
             }
             
-            float totalPago = Float.parseFloat(text);
+            double totalPago = Double.parseDouble(text);
             
             if (totalPago <= 0) {
             alertInfo.setHeaderText("Advertencia");

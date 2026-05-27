@@ -4,6 +4,7 @@
  */
 package org.uacm.barzul.bar;
 
+import dao.ProductosDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.Producto;
+import modelo.TipoProducto;
 
 /**
  * FXML Controller class
@@ -25,22 +27,15 @@ import modelo.Producto;
  */
 public class DialogoAddPRodController implements Initializable {
 
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtPrecio;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
-    @FXML
-    private TextField txtCantidad;
-
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtPrecio;
+    @FXML private Button btnAceptar;
+    @FXML private Button btnCancelar;
+    @FXML private TextField txtCantidad;
+    @FXML private ChoiceBox<TipoProducto> chBox;
+    
     Alert alertInfo = new Alert(AlertType.CONFIRMATION);
-    @FXML
-    private ChoiceBox<String> chBox;
-    
-    
+
     /**
      * Initializes the controller class.
      */
@@ -55,72 +50,77 @@ public class DialogoAddPRodController implements Initializable {
             
         });
         
-        
-        chBox.getItems().add("Botana");
-        chBox.getItems().add("Bebida");
-        chBox.getItems().add("Bebia Alcoholica");
+        // Selector de tipos de producto
+        ProductosDAO dao = new ProductosDAO();
+        chBox.getItems().addAll(dao.obtenerTiposProducto());
         
         // Nombre -> solo permite letras y espacios
-         txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
-             if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
-                 txtNombre.setText(
-                      newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
-            );
-         }
+        txtNombre.textProperty().addListener((obs, oldValue, newValue) -> {
+            
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                 
+                txtNombre.setText(
+                    newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
+                );
+            }
         });
 
-    // Cantidad -> solo permite numeros
+        // Cantidad -> solo permite numeros
         txtCantidad.textProperty().addListener((obs, oldValue, newValue) -> {
-             if (!newValue.matches("\\d*")) {
-                 txtCantidad.setText(
-                     newValue.replaceAll("[^\\d]", "")
-             );
-        }
-    });
+            if (!newValue.matches("\\d*")) {
+                txtCantidad.setText(
+                    newValue.replaceAll("[^\\d]", "")
+                );
+            }
+        });
 
-    // Precio -> numeros con decimal
-         txtPrecio.textProperty().addListener((obs, oldValue, newValue) -> {
+        // Precio -> numeros con decimal
+        txtPrecio.textProperty().addListener((obs, oldValue, newValue) -> {
 
         
-        if (!newValue.matches("\\d*(\\.\\d*)?")) {
-            txtPrecio.setText(oldValue);
-        }
-    });
+            if (!newValue.matches("\\d*(\\.\\d*)?")) {
+                txtPrecio.setText(oldValue);
+            }
+        });
         
-    }     
+    } // Fin Initialize     
 
     @FXML
     private void addProd(ActionEvent event) {
+        
         try {
-            
         
             String nombreProd = txtNombre.getText().trim();
-            String tipoProd = chBox.getValue().trim();
-            float precio = Float.parseFloat(txtPrecio.getText().trim());
+            TipoProducto tipoSeleccionado = chBox.getValue();
+            int tipoProd = tipoSeleccionado.getIdTipo();
+            double precio = Double.parseDouble(txtPrecio.getText().trim());
             
             // el presio no tiene que ser negativo
              if (precio <= 0) {
 
-            Alert alerta = new Alert(AlertType.WARNING);
-            alerta.setTitle("Precio inválido");
-            alerta.setHeaderText(null);
-            alerta.setContentText("El precio debe ser mayor a 0");
-            alerta.showAndWait();
+                Alert alerta = new Alert(AlertType.WARNING);
+                alerta.setTitle("Precio inválido");
+                alerta.setHeaderText(null);
+                alerta.setContentText("El precio debe ser mayor a 0");
+                alerta.showAndWait();
 
-            return;
-        }
+                return;
+            }
+    
             int cantidad = Integer.parseInt(txtCantidad.getText().trim());
+            
             // la cantidad deve ser mayor a 0
             if (cantidad < 0) {
 
-            Alert alerta = new Alert(AlertType.WARNING);
-            alerta.setTitle("Cantidad inválida");
-            alerta.setHeaderText(null);
-            alerta.setContentText("La cantidad no puede ser negativa");
-            alerta.showAndWait();
+                Alert alerta = new Alert(AlertType.WARNING);
+                alerta.setTitle("Cantidad inválida");
+                alerta.setHeaderText(null);
+                alerta.setContentText("La cantidad no puede ser negativa");
+                alerta.showAndWait();
 
-            return;
-        }
+                return;
+            }
+            
             Producto productoCreado = new Producto(nombreProd, tipoProd, precio, cantidad);
             
             Inventario.getInstancia().agregarProducto(productoCreado);
@@ -135,12 +135,15 @@ public class DialogoAddPRodController implements Initializable {
             ((Stage) btnAceptar.getScene().getWindow()).close();
            
         } catch (Exception e) {
-            e.printStackTrace();
+        
             e.getMessage();
+            e.printStackTrace();
+        
         }
     } // addProd
     
     private void limpiarCampos() {
+        
         txtNombre.clear();
         txtPrecio.clear();
         txtCantidad.clear();

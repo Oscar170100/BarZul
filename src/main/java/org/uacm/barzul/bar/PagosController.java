@@ -28,7 +28,7 @@ public class PagosController implements Initializable {
     @FXML private Button btnTarjeta;
     @FXML private Button btnRegresar;
     
-    private float total;
+    private double total;
     private String detallesPedido;
     private boolean pagoExitoso = false;
     
@@ -107,7 +107,7 @@ public class PagosController implements Initializable {
     }
 
     
-    public void setDatos(float total) {
+    public void setDatos(double total) {
         // Manda los totales 
         this.total = total;
   
