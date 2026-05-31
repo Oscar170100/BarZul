@@ -166,7 +166,7 @@ public class DialodoEmpEdiController implements Initializable {
             empleado.setResp(resp);
 
             // Guardar TXT
-            Registro.getInstancia().guardarempleadosTxt();
+            Registro.getInstancia().cargarEmpleadoBD();
             
             // Alerta de Exito
             alerta("Exito", "La inaformación fue actualizada correctamente");

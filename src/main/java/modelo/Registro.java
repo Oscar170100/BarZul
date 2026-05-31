@@ -4,13 +4,16 @@
  */
 package modelo;
 
+import dao.EmpleadosDAO;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import modelo.MisExcepcionesBar.CargarProductoException;
 
 /**
  *
@@ -20,13 +23,22 @@ public class Registro {
     private static Registro instancia;
     private ObservableList<Empleado> empleados;
     
-    // Crea una ruta del Archivo de texto
-    private final Path rutaArchivo = Paths.get("src/main/resources/empleados.txt");
+    // EmpleadosDAO
+    private EmpleadosDAO empleadosDao;
+    
     
     private Registro() {
         empleados = FXCollections.observableArrayList();
-    }
+        empleadosDao = new EmpleadosDAO();
     
+    try{
+        
+    
+        cargarEmpleadoBD();
+    }catch (CargarProductoException e){
+    System.out.println("Error al incializar inventario: " + e.getMessage());
+        }
+    } // fin de Registro
     // Crea la instancia de la clase Inventario
     public static Registro getInstancia() {
         
@@ -40,72 +52,47 @@ public class Registro {
         return empleados;
     }
     
-    // Carga los datos desde el Archivo .txt
-    public void cargarEmpleadoTxt() {
-        empleados.clear();
+    // Carga los datos desde la BD
+    public void cargarEmpleadoBD() throws CargarProductoException{
         
-        try (BufferedReader lector = Files.newBufferedReader(rutaArchivo)){
-            
-            String linea;
-            // Recorre el archivo de datos hasta encontrar un NULL
-            while ((linea = lector.readLine()) != null) {
-                String[] datos = linea.split(",");
-                
-                // Verifica que existan valores en el archivo para asignarlos
-                if (datos.length == 6) {
-                    String nombre = datos[0].trim();
-                    int numEmpleado = Integer.parseInt(datos[1].trim());
-                    int Edad= Integer.parseInt(datos[2].trim());
-                    String NumTelefono = datos[3].trim();
-                    String pregunta = datos[4].trim();
-                    String resp = datos[5].trim();
-    
-                     // Crea y Agrega un nuevo objeto de tipo Empleado y le da los valores
-                     empleados.add(new Empleado(numEmpleado,nombre,Edad, NumTelefono, pregunta, resp));
-                }
-            }
-            
+        try {
+             empleados.clear();
+             
+            List<Empleado> lista = empleadosDao.obtenerTodosEmpleados();
+          
+            empleados.addAll(lista);
         } catch (Exception e) {
-            // Imprime en pantalla el mensaje si ocurre algun error
-            System.out.println("Error al cargar empleados: " + e.getMessage());
+           throw new CargarProductoException("Error al cargar empleados de la base de datos: " + e.getMessage(), e);
         }
     } // Fin CargarDatos
     
-    // Guarda los Productos en el archivo de texto
-    public void guardarempleadosTxt() {
-        
-        try (BufferedWriter escritor = Files.newBufferedWriter(rutaArchivo)){
-            
-            for (Empleado e: empleados) {
-                escritor.write(
-                    e.getNombreEmp() + "," +
-                    e.getNumEmpleado() + "," +
-                    e.getEdad() + "," +
-                    e.getNumTelefono() + "," +
-                    e.getPregunta() + "," +
-                    e.getResp()
-                );
-                escritor.newLine();
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Error al guardar empleado: " + e.getMessage());
-        }
-                
-    } // Fin guardarEmpleados
-    
     // Agregar Empleados
-    public void agregarEmpleado(Empleado empleado) {
+    public boolean agregarEmpleado(Empleado empleado) {
+      boolean agregado = empleadosDao.agregarEmpleado(empleado);
+      
+      if (agregado) {
+            empleados.add(empleado);
+        }
         
-        empleados.add(empleado);
-        guardarempleadosTxt();
+        return agregado;
         
     } // Fin agregarEmpleado
+    public boolean actualizarEmpleado(Empleado empleado){
+    
+        return empleadosDao.actualizarEmpleado(empleado);
+    }
         
-    public void eliminarEmpleado(Empleado empleado) {
+   public boolean eliminarEmpleado(Empleado empleado) {
         
-        empleados.remove(empleado);
-        guardarempleadosTxt();
+        boolean eliminado = empleadosDao.eliminarEmpleado(empleado.getIdEmpleado());
+        
+        if (eliminado) {
+            
+            empleados.remove(empleado);
+            
+        }
+        
+        return eliminado;
         
     } // Fin eliminarEmpleado
     
