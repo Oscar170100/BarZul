@@ -129,7 +129,7 @@ public class DialodoEmpEdiController implements Initializable {
         String nombre = txtNombre.getText().trim();
         int NumEmpleado;
         int Edad;
-        long NumTelefono;
+        String NumTelefono=txtTelefono.getText().trim();
         String pregunta = cbPregunta.getValue();
         String resp = txtResp.getText().trim();
         
@@ -155,7 +155,7 @@ public class DialodoEmpEdiController implements Initializable {
                     
             NumEmpleado =Integer.parseInt(txtNoEmpleado.getText());
             Edad = Integer.parseInt(txtEdad.getText());
-            NumTelefono = Long.parseLong(txtTelefono.getText());
+            
             
             // Actualizando los valores
             empleado.setNombreEmp(nombre);

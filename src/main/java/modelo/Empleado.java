@@ -9,24 +9,24 @@ package modelo;
  * @author maris
  */
 public class Empleado {
-    
-    private String nombreEmp;
+    private int idEmpleado;
     private int numEmpleado;
+    private String nombreEmp;
     private int edad;
-    private long NumTelefono;
+    private String NumTelefono;
     private String pregunta;
     private String resp;
     
     // Metodo Constructor
-    public Empleado(String nombreEmp, int numEmpleado, int edad, long NumTelefono, String pregunta, String resp) {
-        this.nombreEmp = nombreEmp;
+    public Empleado(  int numEmpleado,String nombreEmp, int edad, String NumTelefono, String pregunta, String resp) {
         this.numEmpleado = numEmpleado;
+        this.nombreEmp = nombreEmp;
         this.edad= edad;
         this.NumTelefono=NumTelefono;
         this.pregunta = pregunta;
         this.resp = resp;
     }
-    
+
     // Setters y Getters
 
     public String getNombreEmp() {
@@ -53,11 +53,11 @@ public class Empleado {
         this.edad = edad;
     }
 
-    public long getNumTelefono() {
+    public String getNumTelefono() {
         return NumTelefono;
     }
 
-    public void setNumTelefono(long NumTelefono) {
+    public void setNumTelefono(String NumTelefono) {
         this.NumTelefono = NumTelefono;
     }
     
@@ -74,11 +74,12 @@ public class Empleado {
     public void setResp(String resp) {
         this.resp = resp;
     }
+   public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
    
-    
-    
- 
-    
-    
-    
 }

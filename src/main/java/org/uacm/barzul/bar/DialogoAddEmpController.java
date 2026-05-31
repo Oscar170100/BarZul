@@ -126,11 +126,11 @@ public class DialogoAddEmpController implements Initializable {
             String nombreEmp = txtNombre.getText().trim();
             int numEmpleado = Integer.parseInt(txtNoEmpleado.getText().trim());
             int edad = Integer.parseInt(txtEdad.getText().trim());
-            long NumTelefono = Long.parseLong(txtTelefono.getText().trim());
+            String NumTelefono = txtTelefono.getText().trim();
             String pregunta = cbPregunta.getValue();
             String resp = txtResp.getText().trim();
             
-            Empleado empleadoCreado = new Empleado(nombreEmp, numEmpleado, edad, NumTelefono, pregunta, resp);
+            Empleado empleadoCreado = new Empleado( numEmpleado,nombreEmp, edad, NumTelefono, pregunta, resp);
             
             Registro.getInstancia().agregarEmpleado(empleadoCreado);
             

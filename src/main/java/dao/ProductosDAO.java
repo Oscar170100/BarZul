@@ -44,7 +44,6 @@ public class ProductosDAO {
         
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT id_producto, nom_prod, tipo_id, precio, cantidad FROM productos";
-
         try (Connection con = Conexion.getConexion();
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()){

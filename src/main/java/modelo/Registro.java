@@ -56,12 +56,12 @@ public class Registro {
                     String nombre = datos[0].trim();
                     int numEmpleado = Integer.parseInt(datos[1].trim());
                     int Edad= Integer.parseInt(datos[2].trim());
-                    long NumTelefono = Long.parseLong(datos[3].trim());
+                    String NumTelefono = datos[3].trim();
                     String pregunta = datos[4].trim();
                     String resp = datos[5].trim();
     
                      // Crea y Agrega un nuevo objeto de tipo Empleado y le da los valores
-                     empleados.add(new Empleado(nombre, numEmpleado, Edad, NumTelefono, pregunta, resp));
+                     empleados.add(new Empleado(numEmpleado,nombre,Edad, NumTelefono, pregunta, resp));
                 }
             }
             
