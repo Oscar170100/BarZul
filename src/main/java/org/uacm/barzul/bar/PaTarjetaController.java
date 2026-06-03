@@ -94,14 +94,17 @@ public class PaTarjetaController implements Initializable {
     @FXML
     private void manejarAceptar(ActionEvent event) {
         if (validarCampos()) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Pago");
-        alert.setHeaderText(null);
-        alert.setContentText("Pago realizado correctamente");
-        alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Pago");
+            alert.setHeaderText(null);
+            alert.setContentText("Pago realizado correctamente");
+            alert.showAndWait();
 
-        cerrarVentana();
-    }
+            Stage stage = (Stage) btnAceptar.getScene().getWindow();
+            stage.setUserData(true);
+            stage.close();
+            
+        }
     }
 
     @FXML

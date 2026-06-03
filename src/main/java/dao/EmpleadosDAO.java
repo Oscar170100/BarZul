@@ -18,7 +18,7 @@ import modelo.Empleado;
  */
 public class EmpleadosDAO {
    public boolean  agregarEmpleado(Empleado empleado){
-       String sql = "INSERT INTO empleados (num_empleado,nombre,edad,telefono,pregunta,respuesta)VALUES (?, ?, ?, ?,?,?)";
+       String sql = "INSERT INTO empleados (num_empleado, nombre, edad, telefono, pregunta, respuesta)VALUES (?, ?, ?, ?, ?, ?)";
        
        try(Connection con = Conexion.getConexion();
           PreparedStatement statement = con.prepareStatement(sql)){
@@ -34,7 +34,7 @@ public class EmpleadosDAO {
 
        }catch (SQLException e){ 
            
-           System.out.println("Error al agregar el empleado:"+ e.getMessage());
+           System.out.println("Error al agregar el empleado: "+ e.getMessage());
            return false;
        }  
    }// fin de agregarEmpleado
@@ -42,28 +42,32 @@ public class EmpleadosDAO {
     public List<Empleado> obtenerTodosEmpleados(){
         
         List<Empleado> empleados = new ArrayList<>();
-        String sql="SELECT id_empleado,num_empleado,nombre,edad,telefono,pregunta,resp FROM empleados";
+        String sql="SELECT id_empleado, num_empleado, nombre, edad, telefono, pregunta, respuesta FROM empleados";
         
         try (Connection con = Conexion.getConexion();
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()){
             
             while (rs.next()) {
-                Empleado e =new Empleado(
+                
+                Empleado e = new Empleado(
                      rs.getInt("num_empleado"),
                      rs.getString("nombre"),
                      rs.getInt("edad"),
                      rs.getString("telefono"),
                      rs.getString("pregunta"),
-                     rs.getString("resp")
+                     rs.getString("respuesta")
                 );
+                
+                // e.setIdEmpleado(rs.getInt("id_empleado"));
                 e.setNumEmpleado(rs.getInt("num_empleado"));
+                
                 empleados.add(e);
             }
         }catch(SQLException e){
                System.out.println("Error: " + e.getMessage());     
                     }
-             return empleados;
+        return empleados;
     }//Fin de obtener todosEmpleados
     
     public boolean actualizarEmpleado(Empleado empleado){

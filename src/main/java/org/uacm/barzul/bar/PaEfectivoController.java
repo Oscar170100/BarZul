@@ -66,24 +66,29 @@ public class PaEfectivoController implements Initializable {
     private void manejarAceptar(ActionEvent event) {
         
          try {  
-             double efectivo = Double.parseDouble(txtEfectivoRecibido.getText());
-             if(efectivo < total ){
-            throw new CantidadIncorrectaException("El efectivo recibido no cubre el total", efectivo);
+            double efectivo = Double.parseDouble(txtEfectivoRecibido.getText());
+            
+            if(efectivo < total ){
+            
+                throw new CantidadIncorrectaException("El efectivo recibido no cubre el total", efectivo);
              
              }
-        // Calcular cambio y lo muestra 
+            // Calcular cambio y lo muestra 
             double cambio = efectivo - total;
-             lblCambio.setText("$"+String.format("%.2f", cambio));
-              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setUserData(true);
+            lblCambio.setText("$"+String.format("%.2f", cambio));
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("Pago realizado");
-                alerta.setHeaderText(null);
-                alerta.setContentText("El pago fue realizado correctamente\n"+ "Cambio: $"+ String.format("%.2f", cambio));
-                alerta.showAndWait();
-              
-                cerrarVentana();
+            stage.setUserData(true);
+
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Pago realizado");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El pago fue realizado correctamente\n"+ "Cambio: $"+ String.format("%.2f", cambio));
+            alerta.showAndWait();
+
+            cerrarVentana();
+            
         } catch (CantidadIncorrectaException e) {
                   Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("Pago insuficiente");

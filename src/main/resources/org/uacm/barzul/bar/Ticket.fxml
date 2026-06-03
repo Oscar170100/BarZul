@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="355.0" style="-fx-background-color: #CEC09B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.TicketController">
+<AnchorPane id="AnchorPane" prefHeight="632.0" prefWidth="355.0" style="-fx-background-color: #CEC09B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.TicketController">
    <children>
       <Label layoutX="99.0" layoutY="43.0" text="Bar zully ">
          <font>
@@ -23,38 +23,38 @@
             <Image url="@../../Imagenes/Logo.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tbTicket" layoutX="13.0" layoutY="177.0" prefHeight="197.0" prefWidth="330.0">
+      <TableView fx:id="tbTicket" layoutX="13.0" layoutY="198.0" prefHeight="291.0" prefWidth="330.0">
         <columns>
           <TableColumn fx:id="celCantidad" prefWidth="74.0" text="Cantidad " />
           <TableColumn fx:id="celDescripcion" prefWidth="145.0" text="Producto " />
             <TableColumn fx:id="celPrecio" prefWidth="110.0" text="Precio " />
         </columns>
       </TableView>
-      <TextField fx:id="txtTotal" layoutX="223.0" layoutY="416.0" prefHeight="25.0" prefWidth="112.0">
+      <TextField fx:id="txtTotal" layoutX="223.0" layoutY="535.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font></TextField>
-      <Label layoutX="24.0" layoutY="421.0" text="TOTAL:">
+      <Label layoutX="24.0" layoutY="540.0" text="TOTAL:">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="12.0" layoutY="368.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
+      <Label layoutX="12.0" layoutY="486.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="12.0" layoutY="144.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
+      <Label layoutX="12.0" layoutY="170.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="9.0" layoutY="130.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
+      <Label layoutX="9.0" layoutY="156.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="11.0" layoutY="382.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
+      <Label layoutX="11.0" layoutY="500.0" prefHeight="17.0" prefWidth="339.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - -">
          <font>
             <Font size="18.0" />
          </font>
@@ -69,11 +69,21 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Text fx:id="lblNumtiket" layoutX="80.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+      <Label layoutX="24.0" layoutY="131.0" text="Mesa: ">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="148.0" text="Pago:">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Text fx:id="lblFecha" layoutX="80.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Text>
-      <Text layoutX="136.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+      <Text fx:id="lblNumtiket" layoutX="136.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Text>
@@ -82,10 +92,20 @@
             <Font name="Nirmala UI" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="145.0" layoutY="466.0" mnemonicParsing="false" text="Imprimir ">
+      <Button layoutX="145.0" layoutY="576.0" mnemonicParsing="false" text="Imprimir ">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
+      <Text fx:id="lblMesa" layoutX="80.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="lblTipoPago" layoutX="80.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="112.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

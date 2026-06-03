@@ -43,7 +43,9 @@ public class ProductosDAO {
     public List<Producto> obtenerTodosProductos(){
         
         List<Producto> productos = new ArrayList<>();
+        
         String sql = "SELECT id_producto, nom_prod, tipo_id, precio, cantidad FROM productos";
+        
         try (Connection con = Conexion.getConexion();
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()){
@@ -51,14 +53,13 @@ public class ProductosDAO {
             while (rs.next()) {
                 
                 Producto p = new Producto(
+                   rs.getInt("id_producto"),
                    rs.getString("nom_prod"),
                    rs.getInt("tipo_id"),
                    rs.getDouble("precio"),
                    rs.getInt("cantidad")
                 );
-                
-                p.setIdProducto(rs.getInt("id_producto"));
-                
+                                
                 productos.add(p);
             }
             
@@ -112,7 +113,7 @@ public class ProductosDAO {
 
     public Producto buscarProducto(int idProducto) {
         
-        String sql = "SELECT nom_prod, tipo_id, precio, cantidad FROM productos WHERE id_producto = ?";
+        String sql = "SELECT id_producto, nom_prod, tipo_id, precio, cantidad FROM productos WHERE id_producto = ?";
         
         try (Connection con = Conexion.getConexion();
             PreparedStatement statement = con.prepareStatement(sql)){
@@ -123,14 +124,13 @@ public class ProductosDAO {
                 
                 if (rs.next()) {
                     Producto producto = new Producto (
+                        rs.getInt("id_producto"),
                         rs.getString("nom_prod"),
                         rs.getInt("tipo_id"),
                         rs.getDouble("precio"),
                         rs.getInt("cantidad")
                     );
-                    
-                    producto.setIdProducto(idProducto);
-                    
+                                        
                     return producto;
                 } // Fin if
                 

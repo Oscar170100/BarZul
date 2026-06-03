@@ -17,6 +17,14 @@ public class Producto implements java.io.Serializable  {
     private int cantidad;
     
     // Metodo Constructor
+    public Producto(int idProducto, String nombre, int tipoId, double precio, int cantidad) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.tipoId = tipoId;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+    
     public Producto(String nombre, int tipoId, double precio, int cantidad) {
         this.nombre = nombre;
         this.tipoId = tipoId;

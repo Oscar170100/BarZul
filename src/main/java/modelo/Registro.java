@@ -5,11 +5,6 @@
 package modelo;
 
 import dao.EmpleadosDAO;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

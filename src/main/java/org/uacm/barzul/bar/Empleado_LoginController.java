@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package org.uacm.barzul.bar;
+import dao.VentasDAO;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.MisExcepcionesBar.CargarProductoException;
 import modelo.Producto;
+import modelo.Venta;
 
 /**
  * FXML Controller class
@@ -303,6 +305,7 @@ public class Empleado_LoginController implements Initializable {
         // Si no existe el producto en la cuenta
         // Agrega producto y con cantidad 1
         listaCuenta.add(new Producto(
+                producto.getIdProducto(),
                 producto.getNombre(), 
                 producto.getTipoId(), 
                 producto.getPrecio(), 
@@ -414,17 +417,56 @@ public class Empleado_LoginController implements Initializable {
             return;
         }
             
-            controller.setDatos(totalPago);
+        controller.setDatos(totalPago);
+
+        // Crear una nueva ventana
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Metodo de Pago");
+
+        stage.showAndWait();
+        
+        // El pago no se proceso correctamente
+        if (!controller.isPagoExitoso()) {
+            return;
+        }
+        
+        String tipoPago = controller.getMetodoPago();
+        
+        // Registrar Venta
+        Venta venta = new Venta(obtenerIdMesa(), 1, totalPago, tipoPago);
+        
+        VentasDAO ventaDao = new VentasDAO();
+        
+        int idVenta =  ventaDao.registrarVenta(venta);
+        
+        if (idVenta > 0) {
             
-            // Crear una nueva ventana
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Metodo de Pago");
+            ventaDao.registrarDetalleVenta(idVenta, listaCuenta);
             
-            stage.showAndWait();
-            pedidosPorMesa.get(mesaActual).clear();
-            listaCuenta.clear();
-            totalCuenta.clear();
+            FXMLLoader loaderTicket = new FXMLLoader(getClass().getResource("Ticket.fxml"));
+            Parent rootTicket = loaderTicket.load();
+            
+            TicketController controllerTicket = loaderTicket.getController();
+            String fecha = java.time.LocalDateTime.now()
+                    .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            
+            // Guarda una copia de la venta para mostrarla en el ticket
+            ObservableList<Producto> copiaTicket = FXCollections.observableArrayList(listaCuenta);
+            
+            // Llevando los valores para el ticket
+            controllerTicket.setDatos(idVenta, copiaTicket, totalPago, fecha, mesaActual, tipoPago);
+            
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(rootTicket));
+            newStage.show();
+            
+        }
+
+        // Limpiar Mesa
+        pedidosPorMesa.get(mesaActual).clear();
+        listaCuenta.clear();
+        totalCuenta.clear();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -471,5 +513,24 @@ public class Empleado_LoginController implements Initializable {
         
         //System.out.println("Mesa seleccionada: " + mesa);
     }
+    
+    private int obtenerIdMesa() {
+
+        switch (mesaActual) {
+
+            case "Mesa 1":
+                return 1;
+            case "Mesa 2":
+                return 2;
+            case "Mesa 3": 
+                return 3;
+            case "Mesa 4":
+                return 4;
+
+            default:
+                return 1;
+        }
+    } // Fin obtenerIdMesa
+    
     
 } // Fin class Empleado_LoginController

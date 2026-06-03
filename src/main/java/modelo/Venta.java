@@ -4,53 +4,84 @@
  */
 package modelo;
 
-import javafx.collections.ObservableList;
-
 /**
  *
  * @author oscar
  */
 public class Venta {
     
-    private int mesa;
-    private String empleado;
+    private int idVenta;
+    private int mesaId;
+    private int empleadoId;
+    private String nombreEmpleado;
     private int numEmpleado;
-    private float total;
+    private double total;
     private String tipoPago;
     private String fecha;
     
-    public Venta(int mesa, String empleado, int numEmpleado, float total, String tipoPago, String fecha) {
+    public Venta(int mesaId, int empleadoId, double total, String tipoPago) {
         
-        this.mesa = mesa;
-        this.empleado = empleado;
-        this.numEmpleado = numEmpleado;
+        this.mesaId = mesaId;
+        this.empleadoId = empleadoId;
         this.total = total;
         this.tipoPago = tipoPago;
-        this.fecha = fecha;
         
     }
     
-    public int getMesa() {
-        return mesa;
+    public int getIdVenta() {
+        return idVenta;
     }
-    public String getEmpleado() {
-        return empleado;
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
     }
+    
+    public int getMesaId() {
+        return mesaId;
+    }
+    public void setMesaId(int mesaId) {
+        this.mesaId = mesaId;
+    }
+    
+    public int getEmpleadoId() {
+        return empleadoId;
+    }
+    public void setEmpleadoId(int empleadoId) {
+        this.empleadoId = empleadoId;
+    }
+    
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+    
     public int getNumEmpleado() {
         return numEmpleado;
     }
-    public float getTotal() {
+    public void setNumEmpleado(int numEmpleado) {
+        this.numEmpleado = numEmpleado;
+    }
+    
+    public double getTotal() {
         return total;
     }
+    public void setTotal(double total) {
+        this.total = total;
+    }
+    
     public String getTipoPago() {
         return tipoPago;
+    }
+    public void setTipoPago(String tipoPago) {
+        this.tipoPago = tipoPago;
     }
     
     public String getFecha() {
         return fecha;
     }
-    
-    
-    
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     
 }

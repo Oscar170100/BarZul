@@ -4,9 +4,10 @@
  */
 package org.uacm.barzul.bar;
 
+import dao.VentasDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import modelo.RegistroVenta;
 import modelo.Venta;
 
 /**
@@ -28,11 +28,15 @@ public class VentasController implements Initializable {
     @FXML private Button btnEmpleados;
     @FXML private Button btnLogout;
     @FXML private Button btnVentas;
+    
     @FXML private TableView<Venta> tbVentas;
+    
     @FXML private TableColumn<Venta, Integer> colMesa;
     @FXML private TableColumn<Venta, String> colEmp;
+    
     @FXML private TableColumn<Venta, Integer> colNumEmp;
-    @FXML private TableColumn<Venta, Float> colTotal;
+    
+    @FXML private TableColumn<Venta, Double> colTotal;
     @FXML private TableColumn<Venta, String> colTipoPago;
     @FXML private TableColumn<Venta, String> colFecha;
 
@@ -58,51 +62,54 @@ public class VentasController implements Initializable {
             SceneManager.cambiarVentana(eh, "Empleados.fxml");
         });
         
-        // Configurar columnas
+        //  -------------- Configurar columnas ---------------------
+        // Mesas
         colMesa.setCellValueFactory(
             data -> new SimpleIntegerProperty(
-                data.getValue().getMesa()
+                data.getValue().getMesaId()
             ).asObject()
         );
         
+        // Empleado
         colEmp.setCellValueFactory(
             data -> new SimpleStringProperty(
-                data.getValue().getEmpleado()
+                data.getValue().getNombreEmpleado()
             )
         );
         
+        // Numbero de Empleado
         colNumEmp.setCellValueFactory(
             data -> new SimpleIntegerProperty(
                 data.getValue().getNumEmpleado()
             ).asObject()
         );
         
+        // Total
         colTotal.setCellValueFactory(
-            data -> new SimpleFloatProperty(
+            data -> new SimpleDoubleProperty(
                 data.getValue().getTotal()
             ).asObject()
         );
 
+        // Tipo de Pago
         colTipoPago.setCellValueFactory(
             data -> new SimpleStringProperty(
                 data.getValue().getTipoPago()
             )
         );
         
+        // Fecha
         colFecha.setCellValueFactory(
             data -> new SimpleStringProperty(
                 data.getValue().getFecha()
             )
         );
         
-        // Cargar Ventas del Txt
-        RegistroVenta.getInstancia().cargarVentasTxt();
+        // Cargar Ventas del BD
+        VentasDAO dao = new VentasDAO();
         
         // Mostrar ventas en la tabla
-        tbVentas.setItems(
-            RegistroVenta.getInstancia().getVentas()
-        );
+        tbVentas.setItems( dao.obtenerVentas() );
     }    
-
-    
+   
 }

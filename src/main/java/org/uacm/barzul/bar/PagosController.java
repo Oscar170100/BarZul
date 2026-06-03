@@ -28,6 +28,7 @@ public class PagosController implements Initializable {
     @FXML private Button btnTarjeta;
     @FXML private Button btnRegresar;
     
+    private String metodoPago;
     private double total;
     private String detallesPedido;
     private boolean pagoExitoso = false;
@@ -45,10 +46,11 @@ public class PagosController implements Initializable {
         // Recibe los valores del total a pagar de la cuenta*/
         
     }    
-
+    
     @FXML
     private void manejarPagoEfectivo(ActionEvent event) {
-          try  {
+        
+        try  {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PaEfectivo.fxml"));
             Parent root = loader.load();
             
@@ -61,9 +63,11 @@ public class PagosController implements Initializable {
             stage.showAndWait();
             
             if (stage.getUserData() != null && (boolean) stage.getUserData()) {
+                
+                metodoPago = "EFECTIVO";
+                
                 setPagoExitoso(true);
                 cerrarVentana();
-                SceneManager.cambiarVentana(event, "Ticket.fxml");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,12 +94,14 @@ public class PagosController implements Initializable {
             stage.showAndWait();
             
             if (stage.getUserData() != null && (boolean) stage.getUserData()) {
+                
+                metodoPago = "TARJETA";
+                
                 setPagoExitoso(true);
                 cerrarVentana();
-                SceneManager.cambiarVentana(event, "Ticket.fmx");
+                
             }
             
-            cerrarVentana();
         } catch (IOException e) {
             e.printStackTrace();
             Alert alerta = new Alert(Alert.AlertType.ERROR);
@@ -110,12 +116,16 @@ public class PagosController implements Initializable {
     public void setDatos(double total) {
         // Manda los totales 
         this.total = total;
-  
     }
+    
      public boolean isPagoExitoso() {
         return pagoExitoso;
     }
 
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+     
     public void setPagoExitoso(boolean estado) {
         this.pagoExitoso = estado;
     }
