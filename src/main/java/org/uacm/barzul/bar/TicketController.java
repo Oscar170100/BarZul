@@ -75,6 +75,8 @@ public class TicketController implements Initializable {
 
         lblFecha.setText(fecha);
         
+        //lblNombreEmpleado.setText(String.valueOf(nombreEmpleado));
+        
         lblNumtiket.setText(String.valueOf(idVenta));
         
         lblMesa.setText(mesa);

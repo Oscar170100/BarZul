@@ -4,7 +4,7 @@
  */
 package org.uacm.barzul.bar;
 
-import org.uacm.barzul.bar.SceneManager;
+import dao.UsuariosDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,11 +14,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import modelo.MisExcepcionesBar.ContraseñaIncorrectaException;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -27,14 +26,10 @@ import modelo.MisExcepcionesBar.ContraseñaIncorrectaException;
  */
 public class LoginController implements Initializable {
 
-    @FXML
-    private TextField txtUser;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private PasswordField txtContraseña;
-    @FXML
-    private Hyperlink txtOlvidePass;
+    @FXML private TextField txtUser;
+    @FXML private Button btnLogin;
+    @FXML private PasswordField txtContraseña;
+    @FXML private Hyperlink txtOlvidePass;
 
     /**
      * Initializes the controller class.
@@ -47,34 +42,40 @@ public class LoginController implements Initializable {
     @FXML
     private void loginUser(ActionEvent event) {
         
-        String usuario = txtUser.getText();
-        String password = txtContraseña.getText();
-        
-        Alert alertInfo = new Alert(AlertType.INFORMATION);
-        
         try {
-        if (usuario.equals("Admin") && password.equals("123456")) {
-            // Ingreso como ADMINISTRADOR
-            SceneManager.cambiarVentana(event, "Admin_Login.fxml");
             
-        } else if (usuario.equals("emp") && password.equals("123")) {
-            // Ingreso como EMPLEADO
-            SceneManager.cambiarVentana(event, "Empleado_Login.fxml");
-        
-        } 
-        
-        else{
-            throw new ContraseñaIncorrectaException("Contraseña incorrecta ",password);
-        }
-        }catch(ContraseñaIncorrectaException e){
-            mostrarError("Error en contraseña ", 
-            e.getMessage());
-             txtContraseña.clear();
+            int numEmpleado = Integer.parseInt(txtUser.getText());
+            String password = txtContraseña.getText();
+            
+            UsuariosDAO dao = new UsuariosDAO();
+            
+            Usuario usuario = dao.login(numEmpleado, password);
+            
+            if (usuario == null) {
+                
+                throw new ContraseñaIncorrectaException("Usuario o contraseña incorrecto", password);
+                
+            }
+            
+            if (usuario.getRol().equals("ADMIN")) {
+                SceneManager.cambiarVentana(event, "Admin_Login.fxml");
+            
+            } else {
+                SceneManager.cambiarVentana(event, "Empleado_Login.fxml");
+            }
+            
+            
+        } catch (NumberFormatException e) {
+            mostrarError("Error", "El número de empleado debe ser numérico");
+            
+        } catch (ContraseñaIncorrectaException e) {
+            mostrarError("Error", e.getMessage());
+            
+            txtContraseña.clear();
             txtContraseña.requestFocus();
-        
-               
         }
-    }
+
+    } // Fin loginUser
 
     @FXML
     private void olvidePass(ActionEvent event) {
