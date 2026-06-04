@@ -30,9 +30,19 @@
                         <Image url="@../../Imagenes/Logo.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="404.0" layoutY="17.0" text="Mesas" textFill="#e0e0e0">
+                  <Label layoutX="395.0" layoutY="9.0" text="Mesas" textFill="#e0e0e0">
                      <font>
                         <Font name="Arial" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="324.0" layoutY="53.0" text="Atendiendo:" textFill="#e0e0e0">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblNomEmp" layoutX="464.0" layoutY="53.0" text="Text" textFill="#e0e0e0">
+                     <font>
+                        <Font name="Arial" size="24.0" />
                      </font>
                   </Label>
                </children>

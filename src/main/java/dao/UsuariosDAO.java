@@ -120,35 +120,51 @@ public class UsuariosDAO {
         return false;
     } // Fin eliminarUsuario
     
-    public List<Usuario> obtemerTodosUsuarios() {
+    public boolean validarRecuperacion(int numEmpleado, String telefono, String pregunta, String respuesta) {
         
-        List<Usuario> usuarios = new ArrayList<>();
-        
-        String sql = "SELECT * FROM usuarios";
+        String sql = 
+            "SELECT * "
+            + "FROM empleados "
+            + "WHERE num_empleado = ? "
+            + "AND telefono = ? AND pregunta = ? AND respuesta =?";
         
         try (Connection con = Conexion.getConexion();
-            PreparedStatement statement = con.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery()){
+            PreparedStatement statement = con.prepareStatement(sql)){
             
-            while(rs.next()) {
-                
-                Usuario usuario = new Usuario();
-                
-                usuario.setId(rs.getInt("id"));
-                usuario.setNumEmp(rs.getInt("num_empleado"));
-                usuario.setPassword(rs.getString("password"));
-                usuario.setRol(rs.getString("rol"));
-                
-                usuarios.add(usuario);
-                
-            }
+            statement.setInt(1, numEmpleado);
+            statement.setString(2, telefono);
+            statement.setString(3, pregunta);
+            statement.setString(4, respuesta);
+            
+            ResultSet rs = statement.executeQuery();
+            
+            return rs.next();
             
         } catch (SQLException e) {
-            e.printStackTrace();
-            
+            e.printStackTrace();;
+            return false;
         }
         
-        return usuarios;
-    }
+    } // Fin validarRecuperacion
+    
+    public boolean actualizarPassword(int numEmpleado, String password) {
+        
+        String sql = "UPDATE usuarios SET password = ? WHERE num_empleado = ?";
+        
+        try (Connection con = Conexion.getConexion();
+            PreparedStatement statement = con.prepareStatement(sql)){
+            
+            statement.setString(1, password);
+            statement.setInt(2, numEmpleado);
+            
+            return statement.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            return false;
+        }
+        
+    } // Fin actualizarPassword
     
 }

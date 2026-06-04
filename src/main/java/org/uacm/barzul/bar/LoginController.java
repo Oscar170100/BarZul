@@ -83,6 +83,7 @@ public class LoginController implements Initializable {
     private void olvidePass(ActionEvent event) {
         SceneManager.cambiarVentana(event, "Olvide_Contraseña.fxml");
     }
+    
     private void mostrarError(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle(titulo);
@@ -90,5 +91,5 @@ public class LoginController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     
-}
+    }
 }

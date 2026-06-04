@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -77,13 +78,15 @@ public class Empleado_LoginController implements Initializable {
     @FXML private Button btnMesa3;
     @FXML private Button btnMesa4;
     
+    @FXML private Label lblNomEmp;
+    @FXML private Pane Pene1;
+    
+    @FXML private TextField lblBuscar;
+
     private Pane pane1;
     private Map<String, ObservableList<Producto>> pedidosPorMesa = new HashMap<>();
     
-    @FXML private TextField lblBuscar;
-    
-    private Button mesaSeleccionada;
-    
+    private Button mesaSeleccionada;    
     //
     Alert alertInfo = new Alert(AlertType.INFORMATION);
     
@@ -94,6 +97,9 @@ public class Empleado_LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        // Nombre de usuario
+        lblNomEmp.setText(Sesion.getUsuarioActual().getNombre());
         
         pedidosPorMesa.put("Mesa 1", FXCollections.observableArrayList());
         pedidosPorMesa.put("Mesa 2", FXCollections.observableArrayList());

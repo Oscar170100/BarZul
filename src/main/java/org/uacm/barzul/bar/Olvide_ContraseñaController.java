@@ -4,6 +4,7 @@
  */
 package org.uacm.barzul.bar;
 
+import dao.UsuariosDAO;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.ResourceBundle;
@@ -62,55 +63,78 @@ public class Olvide_ContraseñaController implements Initializable {
         
         Alert alertInfo = new Alert(AlertType.INFORMATION);
         
-        if (lblUser.getText() == "") {
+        if (lblUser.getText().trim().isEmpty()) {
             alertInfo.setTitle("Alerta");
             alertInfo.setHeaderText("Atención");
             alertInfo.setContentText("El campo de usuario esta vacio");
             alertInfo.showAndWait();
         }
         
-        if (lblTel.getText() == "") {
+        if (lblTel.getText().trim().isEmpty()) {
             alertInfo.setTitle("Alerta");
             alertInfo.setHeaderText("Atención");
             alertInfo.setContentText("El campo de Telefono esta vacio");
             alertInfo.showAndWait();
         }
-        
-        if(respPreg.getText().equals("Hola")) {
-            
-            nuevoPassword = generarPass();
-            
-            alertInfo.setTitle("Exito");
-            alertInfo.setHeaderText("Contraseña Reestablecida");
-            alertInfo.setContentText("Su nueva contraseña es: " + nuevoPassword);
-            alertInfo.showAndWait();
-            
-            
-            
-            SceneManager.cambiarVentana(event, "Login.fxml");
-            
-        } else {
-            alertInfo.setTitle("Error");
-            alertInfo.setHeaderText("Error!!!");
-            alertInfo.setContentText("Respuesta Incorrecta");
-            alertInfo.showAndWait();
 
+        try {
+            
+            int numEmpleado = Integer.parseInt(lblUser.getText());
+            String telefono = lblTel.getText().trim();
+            String pregunta = cBox.getValue();
+            String respuesta = respPreg.getText().trim();
+            
+            UsuariosDAO dao = new UsuariosDAO();
+            
+            boolean valido = dao.validarRecuperacion(numEmpleado, telefono, pregunta, respuesta);
+            
+            if (valido) {
+                
+                String nuevoPassword = generarPass();
+                
+                dao.actualizarPassword(numEmpleado, nuevoPassword);
+            
+                alertInfo.setTitle("Éxito!");
+                alertInfo.setContentText("Su nueva contraseña es: " + nuevoPassword);
+                alertInfo.showAndWait();
+                
+                SceneManager.cambiarVentana(event, "Login.fxml");
+               
+            } else {
+                
+                alertInfo.setTitle("Error");
+                alertInfo.setContentText("Los datos no coinciden");
+                alertInfo.showAndWait();
+            }
+            
+        } catch (NumberFormatException e) {
+            
+            mostrarError("Error", "El número de empleado debe ser valido");
         }
-        
-    }
+                
+    } // Fin recuperarPass
     
-    // Genera un password aleatorio de 8 caracteres
+    // Genera un password aleatorio de 4 caracteres
     private String generarPass() {
         caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*";
         
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder();
         
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 4; i++) {
             int index = random.nextInt(caracteres.length());
             password.append(caracteres.charAt(index));
         }
         return password.toString();
+    }
+    
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    
     }
     
     
