@@ -25,24 +25,17 @@ import modelo.Producto;
  */
 public class TicketController implements Initializable {
 
+    @FXML private TableView<Producto> tbTicket;
+    @FXML private TableColumn<Producto, Integer> celCantidad;
+    @FXML private TableColumn<Producto, String> celDescripcion;
+    @FXML private TableColumn<Producto, Double> celPrecio;
+    @FXML private Text lblNumtiket;
+    @FXML private TextField txtTotal;
+    @FXML private Text lblFecha;
+    @FXML private Text lblMesa;
+    @FXML private Text lblTipoPago;
     @FXML
-    private TableView<Producto> tbTicket;
-    @FXML
-    private TableColumn<Producto, Integer> celCantidad;
-    @FXML
-    private TableColumn<Producto, String> celDescripcion;
-    @FXML
-    private TableColumn<Producto, Double> celPrecio;
-    @FXML
-    private Text lblNumtiket;
-    @FXML
-    private TextField txtTotal;
-    @FXML
-    private Text lblFecha;
-    @FXML
-    private Text lblMesa;
-    @FXML
-    private Text lblTipoPago;
+    private Text lblNomEmp;
 
     /**
      * Initializes the controller class.
@@ -71,7 +64,14 @@ public class TicketController implements Initializable {
         
     } // Fin Initialize
     
-    public void setDatos(int idVenta, ObservableList<Producto> productos, double total, String fecha, String mesa, String tipoPago) {
+    public void setDatos(
+        int idVenta, 
+        ObservableList<Producto> productos, 
+        double total, 
+        String fecha, 
+        String mesa, 
+        String tipoPago, 
+        String nomEmpleado) {
 
         lblFecha.setText(fecha);
         
@@ -82,6 +82,8 @@ public class TicketController implements Initializable {
         lblMesa.setText(mesa);
         
         lblTipoPago.setText(tipoPago);
+        
+        lblNomEmp.setText(nomEmpleado);
         
         tbTicket.setItems(productos);
         

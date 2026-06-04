@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="355.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uacm.barzul.bar.DialodoEmpEdiController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="355.0" prefWidth="486.0" style="-fx-background-color: #cec09b;">
+      <AnchorPane layoutY="1.0" prefHeight="405.0" prefWidth="486.0" style="-fx-background-color: #cec09b;">
          <children>
             <Label layoutX="19.0" layoutY="32.0" prefHeight="27.0" prefWidth="132.0" text="No. Empleado:" textFill="#232323">
                <font>
@@ -47,12 +47,18 @@
                </font>
             </Label>
             <TextField fx:id="txtResp" layoutX="208.0" layoutY="248.0" prefHeight="25.0" prefWidth="250.0" />
-            <Button fx:id="btnAceptar" layoutX="161.0" layoutY="293.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #b8d567;" text="Aceptar" textFill="#232323">
+            <Label layoutX="36.0" layoutY="296.0" prefHeight="35.0" prefWidth="113.0" text="Contraseña:" textFill="#232323">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPassword" layoutX="208.0" layoutY="296.0" prefHeight="25.0" prefWidth="250.0" />
+            <Button fx:id="btnAceptar" layoutX="161.0" layoutY="347.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #b8d567;" text="Aceptar" textFill="#232323">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnCancelar" layoutX="276.0" layoutY="293.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar" textFill="#232323">
+            <Button fx:id="btnCancelar" layoutX="276.0" layoutY="347.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #74c8b9;" text="Cancelar" textFill="#232323">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

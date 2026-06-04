@@ -51,6 +51,7 @@ public class PaEfectivoController implements Initializable {
     public void setDatos(double total) {
         this.total = total;
         lblTotal.setText("$"+ String.format("%.2f",total));
+        
     }
 
     @FXML

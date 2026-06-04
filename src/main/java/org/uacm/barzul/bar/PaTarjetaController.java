@@ -32,6 +32,7 @@ public class PaTarjetaController implements Initializable {
     @FXML private Button btnCancelar;
     
     private double total;
+    
     /**
      * Initializes the controller class.
      */

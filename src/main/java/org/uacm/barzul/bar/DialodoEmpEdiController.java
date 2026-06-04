@@ -26,26 +26,21 @@ import modelo.Registro;
  */
 public class DialodoEmpEdiController implements Initializable {
 
-    @FXML
-    private TextField txtNoEmpleado;
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtEdad;
-    @FXML
-    private TextField txtTelefono;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
+    @FXML private TextField txtNoEmpleado;
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtEdad;
+    @FXML private TextField txtTelefono;
+    @FXML private Button btnAceptar;
+    @FXML private Button btnCancelar;
+    @FXML private ComboBox<String> cbPregunta;
+    @FXML private TextField txtResp;
+    @FXML private TextField txtPassword;
     
     private Empleado empleado;
+    private int numEmpOriginal;
     
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
-    @FXML
-    private ComboBox<String> cbPregunta;
-    @FXML
-    private TextField txtResp;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,11 +53,13 @@ public class DialodoEmpEdiController implements Initializable {
         btnAceptar.setOnAction(event -> {
 
         boolean guardado = guardarCambios();
-        if (guardado) {
-        Stage stage = (Stage) btnAceptar.getScene().getWindow();
-        stage.close();
-    }
-    });
+            
+            if (guardado) {
+            Stage stage = (Stage) btnAceptar.getScene().getWindow();
+            stage.close();
+            }
+            
+        });
       
         btnCancelar.setOnAction(eh -> {
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
@@ -75,14 +72,14 @@ public class DialodoEmpEdiController implements Initializable {
             }
         });
 
-             // Edad solo recibe numeros
+        // Edad solo recibe numeros
         txtEdad.textProperty().addListener((obs, oldValue, newValue) -> {
              if (!newValue.matches("\\d*")) {
                   txtEdad.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
-             // Teléfono solo recibe numeros
+        // Teléfono solo recibe numeros
         txtTelefono.textProperty().addListener((obs, oldValue, newValue) -> {
              if (!newValue.matches("\\d*")) {
                 txtTelefono.setText(newValue.replaceAll("[^\\d]", ""));
@@ -98,7 +95,6 @@ public class DialodoEmpEdiController implements Initializable {
                 newValue.replaceAll("[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]", "")
                 );
              }
-            
         });
 
         // Nombre solo  recibira letras, espacios y acentos
@@ -110,28 +106,43 @@ public class DialodoEmpEdiController implements Initializable {
              }
         });
     }    
-     public void setEmpleado(Empleado empleado) {
+    
+    // Carga los valores que se tienen almacenados en la BD
+    public void setEmpleado(Empleado empleado) {
+    
         this.empleado = empleado;
         
         if (empleado != null) {
             
+            // Guardamos el numero de empleado original
+            numEmpOriginal = empleado.getNumEmpleado();
+            
             txtNombre.setText(empleado.getNombreEmp());
-            // Se utiliza valueOf porque el precio es float y el setText es un String
+            // Se utiliza valueOf porque el precio es double y el setText es un String
             txtNoEmpleado.setText(String.valueOf(empleado.getNumEmpleado()));
             txtEdad.setText(String.valueOf( empleado.getEdad()));
             txtTelefono.setText(String.valueOf(empleado.getNumTelefono()));
             cbPregunta.setValue(empleado.getPregunta());
             txtResp.setText(empleado.getResp());
+            txtPassword.setText(String.valueOf(empleado.getPassword()));
+            
+            // A futuro editar el Rol
+            // Se creara el selector para editar si es Admin o Emp
+            // cbRol.setValue(usuario.getRol());
             
         }
     }
-     public boolean guardarCambios() {
+    
+    // Actualiza la informacion en la BD
+    public boolean guardarCambios() {
+        
         String nombre = txtNombre.getText().trim();
         int NumEmpleado;
         int Edad;
         String NumTelefono=txtTelefono.getText().trim();
         String pregunta = cbPregunta.getValue();
         String resp = txtResp.getText().trim();
+        String password = txtPassword.getText().trim();
         
         
         if (nombre.isEmpty()) {
@@ -156,7 +167,6 @@ public class DialodoEmpEdiController implements Initializable {
             NumEmpleado =Integer.parseInt(txtNoEmpleado.getText());
             Edad = Integer.parseInt(txtEdad.getText());
             
-            
             // Actualizando los valores
             empleado.setNombreEmp(nombre);
             empleado.setNumEmpleado(NumEmpleado);
@@ -164,8 +174,12 @@ public class DialodoEmpEdiController implements Initializable {
             empleado.setNumTelefono(NumTelefono);
             empleado.setPregunta(pregunta);
             empleado.setResp(resp);
+            empleado.setPassword(password);
 
-            // Guardar TXT
+            // Guardar BD
+            Registro.getInstancia().actualizarEmpleado(empleado, numEmpOriginal);
+            
+            // Recargar la Tabla
             Registro.getInstancia().cargarEmpleadoBD();
             
             // Alerta de Exito
@@ -194,14 +208,16 @@ public class DialodoEmpEdiController implements Initializable {
             return false;
         } 
     }
-      private void mostrarError(String titulo, String mensaje) {
+    
+    private void mostrarError(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-      public void alerta(String titulo, String mensaje) {
+    
+    public void alerta(String titulo, String mensaje) {
         alertaInfo.setTitle(titulo);
         alertaInfo.setHeaderText(titulo);
         alertaInfo.setContentText(mensaje);

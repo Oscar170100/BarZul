@@ -42,7 +42,10 @@ public class EmpleadosDAO {
     public List<Empleado> obtenerTodosEmpleados(){
         
         List<Empleado> empleados = new ArrayList<>();
-        String sql="SELECT id_empleado, num_empleado, nombre, edad, telefono, pregunta, respuesta FROM empleados";
+        String sql=
+                "SELECT e.id_empleado, e.num_empleado, e.nombre, e.edad, e.telefono, e.pregunta, e.respuesta, u.password "
+                + "FROM empleados e "
+                + "INNER JOIN usuarios u ON e.num_empleado = u.num_empleado";
         
         try (Connection con = Conexion.getConexion();
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -59,8 +62,13 @@ public class EmpleadosDAO {
                      rs.getString("respuesta")
                 );
                 
-                // e.setIdEmpleado(rs.getInt("id_empleado"));
-                e.setNumEmpleado(rs.getInt("num_empleado"));
+                e.setIdEmpleado(rs.getInt("id_empleado"));
+                e.setPassword(rs.getString("password"));
+                
+                System.out.println(
+                    "ID: " + e.getIdEmpleado()
+                    + " Nombre: " + e.getNombreEmp()
+                );
                 
                 empleados.add(e);
             }

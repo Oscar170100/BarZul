@@ -16,6 +16,7 @@ public class Empleado {
     private String NumTelefono;
     private String pregunta;
     private String resp;
+    private String password;
     
     // Metodo Constructor
     public Empleado(  int numEmpleado,String nombreEmp, int edad, String NumTelefono, String pregunta, String resp) {
@@ -74,12 +75,19 @@ public class Empleado {
     public void setResp(String resp) {
         this.resp = resp;
     }
-   public int getIdEmpleado() {
+    public int getIdEmpleado() {
         return idEmpleado;
     }
 
     public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
    
 }

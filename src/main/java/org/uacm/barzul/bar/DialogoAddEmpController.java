@@ -134,11 +134,6 @@ public class DialogoAddEmpController implements Initializable {
             
             Registro.getInstancia().agregarEmpleado(empleadoCreado);
             
-            alertInfo.setTitle("Exito");
-            alertInfo.setHeaderText("Empleado Agregado");
-            alertInfo.setContentText("El Empleado ha sido agregado con Exito!");
-            alertInfo.showAndWait();
-
             limpiarCampos();
             
             ((Stage) btnAceptar.getScene().getWindow()).close();

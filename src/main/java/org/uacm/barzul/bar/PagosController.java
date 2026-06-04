@@ -113,7 +113,7 @@ public class PagosController implements Initializable {
     }
 
     
-    public void setDatos(double total) {
+    public void setDatos(double total, String nombreEmpleado) {
         // Manda los totales 
         this.total = total;
     }

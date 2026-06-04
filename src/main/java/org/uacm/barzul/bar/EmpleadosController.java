@@ -31,21 +31,25 @@ public class EmpleadosController implements Initializable {
     @FXML private Button btnInventario;
     @FXML private Button btnEmpleados;
     @FXML private Button btnVentas;
+    
     @FXML private TableView<Empleado> tbEmpleados;
+    
     @FXML private TableColumn<Empleado, Integer> NumEmpleado;
     @FXML private TableColumn< Empleado, String > Nombre;
     @FXML private TableColumn<Empleado, Integer> edad;
     @FXML private TableColumn<Empleado, String>NumTelefono;
+    @FXML private TableColumn<Empleado, String> respSeg;
+    @FXML private TableColumn<Empleado, String> password;
+    
     @FXML private Button btnAgreEmple;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditarInfo;
+    
     @FXML private Button btnLogout;
 
     private Empleado empleado = null;
     private ObservableList<Empleado> empObs= FXCollections.observableArrayList();
     private int opcion = 0;
-    @FXML
-    private TableColumn<Empleado, String> respSeg;
     /**
      * Initializes the controller class.
      */
@@ -68,11 +72,8 @@ public class EmpleadosController implements Initializable {
         Nombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getNombreEmp()));
         edad.setCellValueFactory( data -> new javafx.beans.property.SimpleIntegerProperty( data.getValue().getEdad()).asObject() );
         NumTelefono.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNumTelefono()));      
+        password.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty("*****"));
         respSeg.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty( data.getValue().getResp()));
-        
-        //Registro.getInstancia().cargarEmpleadoTxt();
-        
-        //cargarDatos();
         
         tbEmpleados.setItems(Registro.getInstancia().getEmpleado());
         

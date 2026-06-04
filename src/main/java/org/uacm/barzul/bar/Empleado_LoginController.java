@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.MisExcepcionesBar.CargarProductoException;
 import modelo.Producto;
+import modelo.Sesion;
 import modelo.Venta;
 
 /**
@@ -416,8 +417,10 @@ public class Empleado_LoginController implements Initializable {
             alertInfo.showAndWait();
             return;
         }
+        
+        String nombreEmpleado = Sesion.getUsuarioActual().getNombre();
             
-        controller.setDatos(totalPago);
+        controller.setDatos(totalPago, nombreEmpleado);
 
         // Crear una nueva ventana
         Stage stage = new Stage();
@@ -455,7 +458,7 @@ public class Empleado_LoginController implements Initializable {
             ObservableList<Producto> copiaTicket = FXCollections.observableArrayList(listaCuenta);
             
             // Llevando los valores para el ticket
-            controllerTicket.setDatos(idVenta, copiaTicket, totalPago, fecha, mesaActual, tipoPago);
+            controllerTicket.setDatos(idVenta, copiaTicket, totalPago, fecha, mesaActual, tipoPago, nombreEmpleado);
             
             Stage newStage = new Stage();
             newStage.setScene(new Scene(rootTicket));
