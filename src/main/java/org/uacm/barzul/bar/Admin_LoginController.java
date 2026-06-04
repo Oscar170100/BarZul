@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import modelo.Inventario;
 import modelo.Producto;
+import modelo.Sesion;
 
 /**
  * FXML Controller class
@@ -53,6 +54,7 @@ public class Admin_LoginController implements Initializable {
         
         // Boton para Cerrar Sesion
         btnLogout.setOnAction(eh -> {
+            Sesion.cerrarSesion();
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
         

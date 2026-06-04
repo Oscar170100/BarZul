@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import modelo.Sesion;
 import modelo.Venta;
 
 /**
@@ -49,6 +50,7 @@ public class VentasController implements Initializable {
         
         // Boton Logout
         btnLogout.setOnAction(eh ->{
+            Sesion.cerrarSesion();
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
 

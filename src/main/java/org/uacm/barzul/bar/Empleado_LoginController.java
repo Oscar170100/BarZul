@@ -114,6 +114,7 @@ public class Empleado_LoginController implements Initializable {
         btnMesa4.setOnAction(e -> seleccionarMesa(btnMesa4, "Mesa 4"));
         
         btnLogout.setOnAction(eh -> {
+            Sesion.cerrarSesion();
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
         
@@ -442,8 +443,10 @@ public class Empleado_LoginController implements Initializable {
         
         String tipoPago = controller.getMetodoPago();
         
+        int idEmpleado = Sesion.getUsuarioActual().getId();
+        
         // Registrar Venta
-        Venta venta = new Venta(obtenerIdMesa(), 1, totalPago, tipoPago);
+        Venta venta = new Venta(obtenerIdMesa(), idEmpleado, totalPago, tipoPago);
         
         VentasDAO ventaDao = new VentasDAO();
         

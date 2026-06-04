@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import modelo.Empleado;
 import modelo.Registro;
+import modelo.Sesion;
 
 /**
  * FXML Controller class
@@ -58,6 +59,7 @@ public class EmpleadosController implements Initializable {
         // TODO
         
         btnLogout.setOnAction(eh -> {
+            Sesion.cerrarSesion();
             SceneManager.cambiarVentana(eh, "Login.fxml");
         });
         
